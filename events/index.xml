@@ -14,6 +14,177 @@
     
     
     <item>
+      <title>Events: Welcome Gui Cao as new committer</title>
+      <link>https://skywalking.apache.org/events/welcome-gui-cao-as-new-committer/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://skywalking.apache.org/events/welcome-gui-cao-as-new-committer/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Gui Cao begun the code contributions since May 3, 2020.
+In the past 6 months, his 23 pull requests(GitHub, zifeihan[1]) have been accepted, which includes 5k+ lines of codes.&lt;/p&gt;
+&lt;p&gt;Meanwhile, he took part in the tech discussion, and show the interests to contribute more to the project.&lt;/p&gt;
+&lt;p&gt;At Dec. 4th, 2020, the project management committee(PMC) passed the proposal of promoting him as a new committer.
+He has accepted the invitation at the same day.&lt;/p&gt;
+&lt;p&gt;Welcome Gui Cao join the committer team.&lt;/p&gt;
+&lt;p&gt;[1] &lt;a href=&#34;https://github.com/apache/skywalking/commits?author=zifeihan&#34;&gt;https://github.com/apache/skywalking/commits?author=zifeihan&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Events: Release Apache SkyWalking APM 8.3.0</title>
+      <link>https://skywalking.apache.org/events/release-apache-skwaylking-apm-8-3-0/</link>
+      <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://skywalking.apache.org/events/release-apache-skwaylking-apm-8-3-0/</guid>
+      <description>
+        
+        
+        &lt;p&gt;SkyWalking 8.3.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+&lt;h4 id=&#34;project&#34;&gt;Project&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Test: ElasticSearch version 7.0.0 and 7.9.3 as storage are E2E tested.&lt;/li&gt;
+&lt;li&gt;Test: Bump up testcontainers version to work around the Docker bug on MacOS.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;java-agent&#34;&gt;Java Agent&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Support propagate the sending timestamp in MQ plugins to calculate the transfer latency in the async MQ scenarios.&lt;/li&gt;
+&lt;li&gt;Support auto-tag with the fixed values propagated in the correlation context.&lt;/li&gt;
+&lt;li&gt;Make HttpClient 3.x, 4.x, and HttpAsyncClient 3.x plugins to support collecting HTTP parameters.&lt;/li&gt;
+&lt;li&gt;Make the Feign plugin to support Java 14&lt;/li&gt;
+&lt;li&gt;Make the okhttp3 plugin to support Java 14&lt;/li&gt;
+&lt;li&gt;Polish tracing context related codes.&lt;/li&gt;
+&lt;li&gt;Add the plugin for async-http-client 2.x&lt;/li&gt;
+&lt;li&gt;Fix NPE in the nutz plugin.&lt;/li&gt;
+&lt;li&gt;Provide Apache Commons DBCP 2.x plugin.&lt;/li&gt;
+&lt;li&gt;Add the plugin for mssql-jtds 1.x.&lt;/li&gt;
+&lt;li&gt;Add the plugin for mssql-jdbc 6.x -&amp;gt; 9.x.&lt;/li&gt;
+&lt;li&gt;Fix the default ignore mechanism isn&amp;rsquo;t accurate enough bug.&lt;/li&gt;
+&lt;li&gt;Add the plugin for spring-kafka 1.3.x.&lt;/li&gt;
+&lt;li&gt;Add the plugin for Apache CXF 3.x.&lt;/li&gt;
+&lt;li&gt;Fix okhttp-3.x and async-http-client-2.x did not overwrite the old trace header.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;oap-backend&#34;&gt;OAP-Backend&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Add the &lt;code&gt;@SuperDataset&lt;/code&gt; annotation for BrowserErrorLog.&lt;/li&gt;
+&lt;li&gt;Add the thread pool to the Kafka fetcher to increase the performance.&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;contain&lt;/code&gt; and &lt;code&gt;not contain&lt;/code&gt; OPS in OAL.&lt;/li&gt;
+&lt;li&gt;Add Envoy ALS analyzer based on metadata exchange.&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;listMetrics&lt;/code&gt; GraphQL query.&lt;/li&gt;
+&lt;li&gt;Add group name into services of so11y and istio relevant metrics&lt;/li&gt;
+&lt;li&gt;Support keeping collecting the slowly segments in the sampling mechanism.&lt;/li&gt;
+&lt;li&gt;Support choose files to active the meter analyzer.&lt;/li&gt;
+&lt;li&gt;Support nested class definition in the Service, ServiceInstance, Endpoint, ServiceRelation, and ServiceInstanceRelation sources.&lt;/li&gt;
+&lt;li&gt;Support &lt;code&gt;sideCar.internalErrorCode&lt;/code&gt; in the Service, ServiceInstance, Endpoint, ServiceRelation, and ServiceInstanceRelation sources.&lt;/li&gt;
+&lt;li&gt;Improve Kubernetes service registry for ALS analysis.&lt;/li&gt;
+&lt;li&gt;Add health checker for cluster management&lt;/li&gt;
+&lt;li&gt;Support the service auto grouping.&lt;/li&gt;
+&lt;li&gt;Support query service list by the group name.&lt;/li&gt;
+&lt;li&gt;Improve the queryable tags generation. Remove the duplicated tags to reduce the storage payload.&lt;/li&gt;
+&lt;li&gt;Fix the threads of the Kafka fetcher exit if some unexpected exceptions happen.&lt;/li&gt;
+&lt;li&gt;Fix the excessive timeout period set by the kubernetes-client.&lt;/li&gt;
+&lt;li&gt;Fix deadlock problem when using elasticsearch-client-7.0.0.&lt;/li&gt;
+&lt;li&gt;Fix storage-jdbc isExists not set dbname.&lt;/li&gt;
+&lt;li&gt;Fix &lt;code&gt;searchService&lt;/code&gt; bug in the InfluxDB storage implementation.&lt;/li&gt;
+&lt;li&gt;Fix CVE in the alarm module, when activating the dynamic configuration feature.&lt;/li&gt;
+&lt;li&gt;Fix CVE in the endpoint grouping, when activating the dynamic configuration feature.&lt;/li&gt;
+&lt;li&gt;Fix CVE in the uninstrumented gateways configs, when activating the dynamic configuration feature.&lt;/li&gt;
+&lt;li&gt;Fix CVE in the Apdex threshold configs, when activating the dynamic configuration feature.&lt;/li&gt;
+&lt;li&gt;Make the codes and doc consistent in sharding server and core server.&lt;/li&gt;
+&lt;li&gt;Fix that chunked string is incorrect while the tag contains colon.&lt;/li&gt;
+&lt;li&gt;Fix the incorrect dynamic configuration key bug of &lt;code&gt;endpoint-name-grouping&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Remove unused min date timebucket in jdbc deletehistory logical&lt;/li&gt;
+&lt;li&gt;Fix &amp;ldquo;transaction too large error&amp;rdquo; when use TiDB as storage.&lt;/li&gt;
+&lt;li&gt;Fix &amp;ldquo;index not found&amp;rdquo; in trace query when use ES7 storage.&lt;/li&gt;
+&lt;li&gt;Add otel rules to ui template to observe Istio control plane.&lt;/li&gt;
+&lt;li&gt;Remove istio mixer&lt;/li&gt;
+&lt;li&gt;Support close influxdb batch write model.&lt;/li&gt;
+&lt;li&gt;Check SAN in the ALS (m)TLS process.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ui&#34;&gt;UI&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix incorrect label in radial chart in topology.&lt;/li&gt;
+&lt;li&gt;Replace node-sass with dart-sass.&lt;/li&gt;
+&lt;li&gt;Replace serviceFilter with serviceGroup&lt;/li&gt;
+&lt;li&gt;Removed &amp;ldquo;Les Miserables&amp;rdquo; from radial chart in topology.&lt;/li&gt;
+&lt;li&gt;Add the Promise dropdown option&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;documentation&#34;&gt;Documentation&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Add VNode FAQ doc.&lt;/li&gt;
+&lt;li&gt;Add logic endpoint section in the agent setup doc.&lt;/li&gt;
+&lt;li&gt;Adjust configuration names and system environment names of the sharing server module&lt;/li&gt;
+&lt;li&gt;Tweak Istio metrics collection doc.&lt;/li&gt;
+&lt;li&gt;Add otel receiver.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All issues and pull requests are &lt;a href=&#34;https://github.com/apache/skywalking/milestone/62?closed=1&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Events: Release Apache SkyWalking CLI 0.5.0</title>
+      <link>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-5-0/</link>
+      <pubDate>Sun, 29 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-5-0/</guid>
+      <description>
+        
+        
+        &lt;p&gt;SkyWalking CLI 0.5.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Features&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use template files in yaml format instead&lt;/li&gt;
+&lt;li&gt;Refactor &lt;code&gt;metrics&lt;/code&gt; command to adopt metrics-v2 protocol&lt;/li&gt;
+&lt;li&gt;Use goroutine to speed up &lt;code&gt;dashboard global&lt;/code&gt; command&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;metrics list&lt;/code&gt; command&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bug Fixes&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Add flags of instance, endpoint and normal for &lt;code&gt;metrics&lt;/code&gt; command&lt;/li&gt;
+&lt;li&gt;Fix the problem of unable to query database metrics&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Chores&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Update release guide doc&lt;/li&gt;
+&lt;li&gt;Add screenshots for use cases in &lt;code&gt;README.md&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Introduce generated codes into codebase&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Events: Release Apache SkyWalking Python 0.4.0</title>
+      <link>https://skywalking.apache.org/events/release-apache-skywalking-python-0-4-0/</link>
+      <pubDate>Tue, 24 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://skywalking.apache.org/events/release-apache-skywalking-python-0-4-0/</guid>
+      <description>
+        
+        
+        &lt;p&gt;SkyWalking Python 0.4.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Feature: Support Kafka reporter protocol (#74)&lt;/li&gt;
+&lt;li&gt;BugFix: Move generated packages into skywalking namespace to avoid conflicts (#72)&lt;/li&gt;
+&lt;li&gt;BugFix: Agent cannot reconnect after server is down (#79)&lt;/li&gt;
+&lt;li&gt;Test: Mitigate unsafe yaml loading (#76)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Events: Release Apache SkyWalking Client JS 0.2.0</title>
       <link>https://skywalking.apache.org/events/release-apache-skywalking-client-js-0.2.0/</link>
       <pubDate>Tue, 17 Nov 2020 00:00:00 +0000</pubDate>
@@ -105,20 +276,122 @@
     
     <item>
       <title>Events: Release Apache SkyWalking APM 8.2.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-8.2.0/</link>
+      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-8-2-0/</link>
       <pubDate>Tue, 27 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-8.2.0/</guid>
+      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-8-2-0/</guid>
       <description>
         
         
-        &lt;p&gt;SkyWalking 8.2.0 is released. Go to &lt;a href=&#34;https://github.com/apache/skywalking-website/blob/master/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+        &lt;p&gt;SkyWalking 8.2.0 is released. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+&lt;h4 id=&#34;project&#34;&gt;Project&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;Support Browser Side Monitoring&lt;/li&gt;
-&lt;li&gt;Query Traces by Tags&lt;/li&gt;
-&lt;li&gt;Introduce Meter Analysis Language&lt;/li&gt;
-&lt;li&gt;Allow Configuring Composite Alert Rules&lt;/li&gt;
+&lt;li&gt;Support Browser monitoring.&lt;/li&gt;
+&lt;li&gt;Add e2e test for ALS solution of service mesh observability.&lt;/li&gt;
+&lt;li&gt;Support compiling(include testing) in JDK11.&lt;/li&gt;
+&lt;li&gt;Support build a single module.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h4 id=&#34;java-agent&#34;&gt;Java Agent&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Support metrics plugin.&lt;/li&gt;
+&lt;li&gt;Support slf4j logs of gRPC and Kafka(when agent uses them) into the agent log files.&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;PROPERTIES_REPORT_PERIOD_FACTOR&lt;/code&gt; config to avoid the properties of instance cleared.&lt;/li&gt;
+&lt;li&gt;Limit the size of traced SQL to avoid OOM.&lt;/li&gt;
+&lt;li&gt;Support &lt;code&gt;mount&lt;/code&gt; command to load a new set of plugins.&lt;/li&gt;
+&lt;li&gt;Add plugin selector mechanism.&lt;/li&gt;
+&lt;li&gt;Enhance the witness classes for MongoDB plugin.&lt;/li&gt;
+&lt;li&gt;Enhance the parameter truncate mechanism of SQL plugins.&lt;/li&gt;
+&lt;li&gt;Enhance the SpringMVC plugin in the reactive APIs.&lt;/li&gt;
+&lt;li&gt;Enhance the SpringMVC plugin to collect HTTP headers as the span tags.&lt;/li&gt;
+&lt;li&gt;Enhance the Kafka plugin, about &lt;code&gt;@KafkaPollAndInvoke&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Enhance the configuration initialization core. Plugin could have its own plugins.&lt;/li&gt;
+&lt;li&gt;Enhance Feign plugin to collect parameters.&lt;/li&gt;
+&lt;li&gt;Enhance Dubbo plugin to collect parameters.&lt;/li&gt;
+&lt;li&gt;Provide Thrift plugin.&lt;/li&gt;
+&lt;li&gt;Provide XXL-job plugin.&lt;/li&gt;
+&lt;li&gt;Provide MongoDB 4.x plugin.&lt;/li&gt;
+&lt;li&gt;Provide Kafka client 2.1+ plugin.&lt;/li&gt;
+&lt;li&gt;Provide WebFlux-WebClient plugin.&lt;/li&gt;
+&lt;li&gt;Provide ignore-exception plugin.&lt;/li&gt;
+&lt;li&gt;Provide quartz scheduler plugin.&lt;/li&gt;
+&lt;li&gt;Provide ElasticJob 2.x plugin.&lt;/li&gt;
+&lt;li&gt;Provide Spring @Scheduled plugin.&lt;/li&gt;
+&lt;li&gt;Provide Spring-Kafka plugin.&lt;/li&gt;
+&lt;li&gt;Provide HBase client plugin.&lt;/li&gt;
+&lt;li&gt;Provide JSON log format.&lt;/li&gt;
+&lt;li&gt;Move Spring WebFlux plugin to the optional plugin.&lt;/li&gt;
+&lt;li&gt;Fix inconsistent logic bug in PrefixMatch&lt;/li&gt;
+&lt;li&gt;Fix duplicate exit spans in Feign LoadBalancer mechanism.&lt;/li&gt;
+&lt;li&gt;Fix the target service blocked by the Kafka reporter.&lt;/li&gt;
+&lt;li&gt;Fix configurations of Kafka report don&amp;rsquo;t work.&lt;/li&gt;
+&lt;li&gt;Fix rest template concurrent conflict.&lt;/li&gt;
+&lt;li&gt;Fix NPE in the ActiveMQ plugin.&lt;/li&gt;
+&lt;li&gt;Fix conflict between Kafka reporter and sampling plugin.&lt;/li&gt;
+&lt;li&gt;Fix NPE in the log formatter.&lt;/li&gt;
+&lt;li&gt;Fix span layer missing in certain cases, in the Kafka plugin.&lt;/li&gt;
+&lt;li&gt;Fix error format of time in serviceTraffic update.&lt;/li&gt;
+&lt;li&gt;Upgrade bytebuddy to 1.10.14&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;oap-backend&#34;&gt;OAP-Backend&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Support Nacos authentication.&lt;/li&gt;
+&lt;li&gt;Support labeled meter in the meter receiver.&lt;/li&gt;
+&lt;li&gt;Separate UI template into multiple files.&lt;/li&gt;
+&lt;li&gt;Provide support for Envoy tracing. Envoy tracer depends on the Envoy community.&lt;/li&gt;
+&lt;li&gt;Support query trace by tags.&lt;/li&gt;
+&lt;li&gt;Support composite alarm rules.&lt;/li&gt;
+&lt;li&gt;Support alarm messages to DingTalk.&lt;/li&gt;
+&lt;li&gt;Support alarm messages to WeChat.&lt;/li&gt;
+&lt;li&gt;Support alarm messages to Slack.&lt;/li&gt;
+&lt;li&gt;Support SSL for Prometheus fetcher and self telemetry.&lt;/li&gt;
+&lt;li&gt;Support labeled histogram in the prometheus format.&lt;/li&gt;
+&lt;li&gt;Support the status of segment based on entry span or first span only.&lt;/li&gt;
+&lt;li&gt;Support the error segment in the sampling mechanism.&lt;/li&gt;
+&lt;li&gt;Support SSL certs of gRPC server.&lt;/li&gt;
+&lt;li&gt;Support labeled metrics in the alarm rule setting.&lt;/li&gt;
+&lt;li&gt;Support to query all labeled data, if no explicit label in the query condition.&lt;/li&gt;
+&lt;li&gt;Add TLS parameters in the mesh analysis.&lt;/li&gt;
+&lt;li&gt;Add health check for InfluxDB storage.&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;super dataset&lt;/code&gt; concept for the traces/logs.&lt;/li&gt;
+&lt;li&gt;Add separate replicas configuration for super dataset.&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;IN&lt;/code&gt; operator in the OAL.&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;!=&lt;/code&gt; operator in the OAL.&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;like&lt;/code&gt; operator in the OAL.&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;latest&lt;/code&gt; function in the prometheus analysis.&lt;/li&gt;
+&lt;li&gt;Add more configurations in the gRPC server.&lt;/li&gt;
+&lt;li&gt;Optimize the trace query performance.&lt;/li&gt;
+&lt;li&gt;Optimize the CPU usage rate calculation, at least to be 1.&lt;/li&gt;
+&lt;li&gt;Optimize the length of slow SQL column in the MySQL storage.&lt;/li&gt;
+&lt;li&gt;Optimize the topology query, use client side component name when no server side mapping.&lt;/li&gt;
+&lt;li&gt;Add component IDs for Python component.&lt;/li&gt;
+&lt;li&gt;Add component ID range for C++.&lt;/li&gt;
+&lt;li&gt;Fix Slack notification setting NPE.&lt;/li&gt;
+&lt;li&gt;Fix some module missing check of the module manager core.&lt;/li&gt;
+&lt;li&gt;Fix authentication doesn&amp;rsquo;t work in sharing server.&lt;/li&gt;
+&lt;li&gt;Fix metrics batch persistent size bug.&lt;/li&gt;
+&lt;li&gt;Fix trace sampling bug.&lt;/li&gt;
+&lt;li&gt;Fix CLR receiver bug.&lt;/li&gt;
+&lt;li&gt;Fix end time bug in the query process.&lt;/li&gt;
+&lt;li&gt;Fix &lt;code&gt;Exporter INCREMENT mode&lt;/code&gt; is not working.&lt;/li&gt;
+&lt;li&gt;Fix an error when executing startup.bat when the log directory exists&lt;/li&gt;
+&lt;li&gt;Add syncBulkActions configuration to set up the batch size of the metrics persistent.&lt;/li&gt;
+&lt;li&gt;Meter Analysis Language.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ui&#34;&gt;UI&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Add browser dashboard.&lt;/li&gt;
+&lt;li&gt;Add browser log query page.&lt;/li&gt;
+&lt;li&gt;Support query trace by tags.&lt;/li&gt;
+&lt;li&gt;Fix JVM configuration.&lt;/li&gt;
+&lt;li&gt;Fix CLR configuration.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;document&#34;&gt;Document&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Add the document about &lt;code&gt;SW_NO_UPSTREAM_REAL_ADDRESS&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Update ALS setup document.&lt;/li&gt;
+&lt;li&gt;Add Customization Config section for plugin development.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All issues and pull requests are &lt;a href=&#34;https://github.com/apache/skywalking/milestone/56?closed=1&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -147,10 +420,10 @@
     
     <item>
       <title>Events: Release Apache SkyWalking CLI 0.4.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-cli-0.4.0/</link>
+      <link>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-4-0/</link>
       <pubDate>Sun, 11 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-cli-0.4.0/</guid>
+      <guid>https://skywalking.apache.org/events/release-apache-skywalking-cli-0-4-0/</guid>
       <description>
         
         
@@ -264,11 +537,77 @@
         
         
         &lt;p&gt;SkyWalking APM 8.1.0 is release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+&lt;h4 id=&#34;project&#34;&gt;Project&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;Support Kafka as an optional trace, JVM metrics, profiling snapshots and meter system data transport layer.&lt;/li&gt;
 &lt;li&gt;Support Meter system, including the native metrics APIs and the Spring Sleuth adoption.&lt;/li&gt;
 &lt;li&gt;Support JVM thread metrics.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h4 id=&#34;java-agent&#34;&gt;Java Agent&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;[&lt;strong&gt;Core&lt;/strong&gt;] Fix the concurrency access bug in the Concurrency ClassLoader Case.&lt;/li&gt;
+&lt;li&gt;[&lt;strong&gt;Core&lt;/strong&gt;] Separate the config of the plugins from the core level.&lt;/li&gt;
+&lt;li&gt;[&lt;strong&gt;Core&lt;/strong&gt;] Support instrumented class cached in memory or file, to be compatible with other agents, such as Arthas.&lt;/li&gt;
+&lt;li&gt;Add logic endpoint concept. Could analysis any span or tags flagged by the logic endpoint.&lt;/li&gt;
+&lt;li&gt;Add Spring annotation component name for UI visualization only.&lt;/li&gt;
+&lt;li&gt;Add support to trace &lt;code&gt;Call procedures&lt;/code&gt; in MySQL plugin.&lt;/li&gt;
+&lt;li&gt;Support GraphQL plugin.&lt;/li&gt;
+&lt;li&gt;Support Quasar fiber plugin.&lt;/li&gt;
+&lt;li&gt;Support InfluxDB java client plugin.&lt;/li&gt;
+&lt;li&gt;Support brpc java plugin&lt;/li&gt;
+&lt;li&gt;Support &lt;code&gt;ConsoleAppender&lt;/code&gt; in the logback v1 plugin.&lt;/li&gt;
+&lt;li&gt;Enhance vert.x endpoint names.&lt;/li&gt;
+&lt;li&gt;Optimize the code to prevent mongo statements from being too long.&lt;/li&gt;
+&lt;li&gt;Fix WebFlux plugin concurrency access bug.&lt;/li&gt;
+&lt;li&gt;Fix ShardingSphere plugins internal conflicts.&lt;/li&gt;
+&lt;li&gt;Fix duplicated Spring MVC endpoint.&lt;/li&gt;
+&lt;li&gt;Fix lettuce plugin sometimes trace doesn‘t show span layer.&lt;/li&gt;
+&lt;li&gt;Fix &lt;code&gt;@Tag&lt;/code&gt; returnedObject bug.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;oap-backend&#34;&gt;OAP-Backend&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Support Jetty Server advanced configurations.&lt;/li&gt;
+&lt;li&gt;Support label based filter in the prometheus fetcher and OpenCensus receiver.&lt;/li&gt;
+&lt;li&gt;Support using k8s configmap as the configuration center.&lt;/li&gt;
+&lt;li&gt;Support OAP health check, and storage module health check.&lt;/li&gt;
+&lt;li&gt;Support sampling rate in the dynamic configuration.&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;endpoint_relation_sla&lt;/code&gt; and &lt;code&gt;endpoint_relation_percentile&lt;/code&gt; for endpoint relationship metrics.&lt;/li&gt;
+&lt;li&gt;Add components for Python plugins, including Kafka, Tornado, Redis, Django, PyMysql.&lt;/li&gt;
+&lt;li&gt;Add components for Golang SDK.&lt;/li&gt;
+&lt;li&gt;Add Nacos 1.3.1 back as an optional cluster coordinator and dynamic configuration center.&lt;/li&gt;
+&lt;li&gt;Enhance the metrics query for ElasticSearch implementation to increase the stability.&lt;/li&gt;
+&lt;li&gt;Reduce the length of storage entity names in the self-observability for MySQL and TiDB storage.&lt;/li&gt;
+&lt;li&gt;Fix labels are missing in Prometheus analysis context.&lt;/li&gt;
+&lt;li&gt;Fix column length issue in MySQL/TiDB storage.&lt;/li&gt;
+&lt;li&gt;Fix no data in 2nd level aggregation in self-observability.&lt;/li&gt;
+&lt;li&gt;Fix searchService bug in ES implementation.&lt;/li&gt;
+&lt;li&gt;Fix wrong validation of endpoint relation entity query.&lt;/li&gt;
+&lt;li&gt;Fix the bug caused by the OAL debug flag.&lt;/li&gt;
+&lt;li&gt;Fix endpoint dependency bug in MQ and uninstrumented proxy cases.&lt;/li&gt;
+&lt;li&gt;Fix time bucket conversion issue in the InfluxDB storage implementation.&lt;/li&gt;
+&lt;li&gt;Update k8s client to 8.0.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ui&#34;&gt;UI&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Support endpoint dependency graph.&lt;/li&gt;
+&lt;li&gt;Support x-scroll of trace/profile page&lt;/li&gt;
+&lt;li&gt;Fix database selector issue.&lt;/li&gt;
+&lt;li&gt;Add the bar chart in the UI templates.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;document&#34;&gt;Document&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Update the user logo wall.&lt;/li&gt;
+&lt;li&gt;Add backend configuration vocabulary document.&lt;/li&gt;
+&lt;li&gt;Add agent installation doc for Tomcat9 on Windows.&lt;/li&gt;
+&lt;li&gt;Add istioctl ALS commands for the document.&lt;/li&gt;
+&lt;li&gt;Fix TTL documentation.&lt;/li&gt;
+&lt;li&gt;Add FAQ doc about thread instrumentation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;cve&#34;&gt;CVE&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix fuzzy query sql injection in the MySQL/TiDB storage.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All issues and pull requests are &lt;a href=&#34;https://github.com/apache/skywalking/milestone/52?closed=1&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -414,12 +753,66 @@
         
         
         &lt;p&gt;SkyWalking APM 8.0.0 is release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.&lt;/p&gt;
+&lt;h4 id=&#34;project&#34;&gt;Project&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;v3 protocol is added and implemented&lt;/li&gt;
-&lt;li&gt;New Dashboard UI and new Query Protocol are provided&lt;/li&gt;
-&lt;li&gt;Prometheus fetcher is supported. Once you have Prometheus SDK instrumented app, the metrics could be read by SkyWalking.&lt;/li&gt;
-&lt;li&gt;Register mechanism has been removed due to buckets effect on performance and memory cost.&lt;/li&gt;
+&lt;li&gt;v3 protocol is added and implemented. All previous releases are incompatible with 8.x releases.&lt;/li&gt;
+&lt;li&gt;Service, Instance, Endpoint register mechanism and inventory storage entities are removed.&lt;/li&gt;
+&lt;li&gt;New GraphQL query protocol is provided, the legacy procotol is still supported(plan to remove at the end of this year).&lt;/li&gt;
+&lt;li&gt;Support Prometheus network protocol. Metrics in Prometheus format could be transferred into SkyWalking.&lt;/li&gt;
+&lt;li&gt;Python agent provided.&lt;/li&gt;
+&lt;li&gt;All inventory caches have been removed.&lt;/li&gt;
+&lt;li&gt;Apache ShardingSphere(4.1.0, 4.1.1) agent plugin provided.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h4 id=&#34;java-agent&#34;&gt;Java Agent&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Add MariaDB plugin.&lt;/li&gt;
+&lt;li&gt;Vert.x plugin enhancement. More cases are covered.&lt;/li&gt;
+&lt;li&gt;Support v3 extension header.&lt;/li&gt;
+&lt;li&gt;Fix ElasticSearch 5.x plugin TransportClient error.&lt;/li&gt;
+&lt;li&gt;Support Correlation protocol v1.&lt;/li&gt;
+&lt;li&gt;Fix Finagle plugin bug, in processing Noop Span.&lt;/li&gt;
+&lt;li&gt;Make &lt;code&gt;CommandService&lt;/code&gt; daemon to avoid blocking target application shutting down gracefully.&lt;/li&gt;
+&lt;li&gt;Refactor spring cloud gateway plugin and support tracing spring cloud gateway 2.2.x&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;oap-backend&#34;&gt;OAP-Backend&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Support meter system for Prometheus adoption. In future releases, we will add native meter APIs and MicroMeter(Sleuth) system.&lt;/li&gt;
+&lt;li&gt;Support endpoint grouping.&lt;/li&gt;
+&lt;li&gt;Add &lt;strong&gt;SuperDataSet&lt;/strong&gt; annotation for storage entity.&lt;/li&gt;
+&lt;li&gt;Add &lt;strong&gt;superDatasetIndexShardsFactor&lt;/strong&gt; in the ElasticSearch storage, to provide more shards for @SuperDataSet annotated entites. Typically TraceSegment.&lt;/li&gt;
+&lt;li&gt;Support alarm settings for relationship of service, instance, and endpoint level metrics.&lt;/li&gt;
+&lt;li&gt;Support alarm settings for database(conjecture node in tracing scenario).&lt;/li&gt;
+&lt;li&gt;Data Model could be added in the runtime, don&amp;rsquo;t depend on the bootstrap sequence anymore.&lt;/li&gt;
+&lt;li&gt;Reduce the memory cost, due to no inventory caches.&lt;/li&gt;
+&lt;li&gt;No buffer files in tracing and service mesh cases.&lt;/li&gt;
+&lt;li&gt;New ReadWriteSafe cache implementation. Simplify codes.&lt;/li&gt;
+&lt;li&gt;Provide default way for metrics query, even the metrics doesn&amp;rsquo;t exist.&lt;/li&gt;
+&lt;li&gt;New GraphQL query protocol is provided. Support the metrics type query.&lt;/li&gt;
+&lt;li&gt;Set up length rule of service, instance, and endpoint.&lt;/li&gt;
+&lt;li&gt;Adjust the default jks for ElasticSearch to empty.&lt;/li&gt;
+&lt;li&gt;Fix Apdex function integer overflow issue.&lt;/li&gt;
+&lt;li&gt;Fix profile storage issue.&lt;/li&gt;
+&lt;li&gt;Fix TTL issue.&lt;/li&gt;
+&lt;li&gt;Fix H2 column type bug.&lt;/li&gt;
+&lt;li&gt;Add JRE 8-14 test for the backend.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ui&#34;&gt;UI&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;UI dashboard is 100% configurable to adopt new metrics definited in the backend.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;document&#34;&gt;Document&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Add v8 upgrade document.&lt;/li&gt;
+&lt;li&gt;Make the coverage accurate including UT and e2e tests.&lt;/li&gt;
+&lt;li&gt;Add miss doc about collecting parameters in the profiled traces.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;cve&#34;&gt;CVE&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix SQL Injection vulnerability in H2/MySQL implementation.&lt;/li&gt;
+&lt;li&gt;Upgrade Nacos to avoid the FastJson CVE in high frequency.&lt;/li&gt;
+&lt;li&gt;Upgrade jasckson-databind to 2.9.10.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All issues and pull requests are &lt;a href=&#34;https://github.com/apache/skywalking/milestone/45?closed=1&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -852,68 +1245,6 @@
         &lt;p&gt;6.2.0 release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.
 ElasticSearch storage implementation changed, high reduce payload to ElasticSearch cluster.&lt;/p&gt;
 &lt;p&gt;Read &lt;a href=&#34;https://github.com/apache/skywalking/blob/master/CHANGES.md&#34;&gt;changelog&lt;/a&gt; for the details.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Events: Welcome Zhenxu Ke as a new committer</title>
-      <link>https://skywalking.apache.org/events/welcome-zhenxu-ke-as-a-new-committer/</link>
-      <pubDate>Mon, 17 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://skywalking.apache.org/events/welcome-zhenxu-ke-as-a-new-committer/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Based on his continuous contributions, Zhenxu Ke (a.k.a &lt;a href=&#34;https://github.com/kezhenxu94&#34;&gt;kezhenxu94&lt;/a&gt;) has been voted as a new committer.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Events: Release Apache SkyWalking APM 6.1.0</title>
-      <link>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-1-0/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://skywalking.apache.org/events/release-apache-skywalking-apm-6-1-0/</guid>
-      <description>
-        
-        
-        &lt;p&gt;6.1.0 release. Go to &lt;a href=&#34;https://skywalking.apache.org/downloads&#34;&gt;downloads&lt;/a&gt; page to find release tars.
-This is the first top level project version.&lt;/p&gt;
-&lt;p&gt;Key updates&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;RocketBot UI&lt;/li&gt;
-&lt;li&gt;OAP performance improvement&lt;/li&gt;
-&lt;/ol&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Events: RocketBot UI has been accepted as SkyWalking primary UI</title>
-      <link>https://skywalking.apache.org/events/rocketbot-ui-has-been-accepted-as-skywalking-primary-ui/</link>
-      <pubDate>Tue, 23 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://skywalking.apache.org/events/rocketbot-ui-has-been-accepted-as-skywalking-primary-ui/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Apache SkyWalking PMC accept the RocketBot UI contributions. After IP clearance, it will be released in SkyWalking 6.1 soon.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Events: SkyWalking graduated as Apache Top Level Project</title>
-      <link>https://skywalking.apache.org/events/skywalking-graduated-as-apache-top-level-project/</link>
-      <pubDate>Wed, 17 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://skywalking.apache.org/events/skywalking-graduated-as-apache-top-level-project/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Apache board approved SkyWalking graduated as TLP at April 17th 2019.&lt;/p&gt;
 
       </description>
     </item>
