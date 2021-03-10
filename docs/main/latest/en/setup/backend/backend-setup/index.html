@@ -20,27 +20,35 @@
 <meta name="theme-color" content="#ffffff">
 
 <title>Backend setup | Apache SkyWalking</title><meta property="og:title" content="Backend setup" />
-<meta property="og:description" content="Backend setup First and most important thing is, SkyWalking backend startup behaviours are driven by config/application.yml. Understood the setting file will help you to read this document.
-Startup script The default startup scripts are /bin/oapService.sh(.bat). Read start up mode document to know other options of starting backend.
-application.yml The core concept behind this setting file is, SkyWalking collector is based on pure modularization design. End user can switch or assemble the collector features by their own requirements." />
+<meta property="og:description" content="Backend setup SkyWalking backend distribution package includes the following parts:
+  bin/cmd scripts, in /bin folder. Includes startup linux shell and Windows cmd scripts for Backend server and UI startup.
+  Backend config, in /config folder. Includes settings files of the backend, which are:
+ application.yml log4j.xml alarm-settings.yml    Libraries of backend, in /oap-libs folder. All the dependencies of the backend are in it.
+  Webapp env, in webapp folder." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/main/latest/en/setup/backend/backend-setup/" />
-
+<meta property="article:published_time" content="2021-03-09T15:01:03+00:00" />
+<meta property="article:modified_time" content="2021-03-09T15:01:03+00:00" />
 <meta itemprop="name" content="Backend setup">
-<meta itemprop="description" content="Backend setup First and most important thing is, SkyWalking backend startup behaviours are driven by config/application.yml. Understood the setting file will help you to read this document.
-Startup script The default startup scripts are /bin/oapService.sh(.bat). Read start up mode document to know other options of starting backend.
-application.yml The core concept behind this setting file is, SkyWalking collector is based on pure modularization design. End user can switch or assemble the collector features by their own requirements.">
-
-<meta itemprop="wordCount" content="1239">
+<meta itemprop="description" content="Backend setup SkyWalking backend distribution package includes the following parts:
+  bin/cmd scripts, in /bin folder. Includes startup linux shell and Windows cmd scripts for Backend server and UI startup.
+  Backend config, in /config folder. Includes settings files of the backend, which are:
+ application.yml log4j.xml alarm-settings.yml    Libraries of backend, in /oap-libs folder. All the dependencies of the backend are in it.
+  Webapp env, in webapp folder.">
+<meta itemprop="datePublished" content="2021-03-09T15:01:03+00:00" />
+<meta itemprop="dateModified" content="2021-03-09T15:01:03+00:00" />
+<meta itemprop="wordCount" content="1508">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Backend setup"/>
-<meta name="twitter:description" content="Backend setup First and most important thing is, SkyWalking backend startup behaviours are driven by config/application.yml. Understood the setting file will help you to read this document.
-Startup script The default startup scripts are /bin/oapService.sh(.bat). Read start up mode document to know other options of starting backend.
-application.yml The core concept behind this setting file is, SkyWalking collector is based on pure modularization design. End user can switch or assemble the collector features by their own requirements."/>
+<meta name="twitter:description" content="Backend setup SkyWalking backend distribution package includes the following parts:
+  bin/cmd scripts, in /bin folder. Includes startup linux shell and Windows cmd scripts for Backend server and UI startup.
+  Backend config, in /config folder. Includes settings files of the backend, which are:
+ application.yml log4j.xml alarm-settings.yml    Libraries of backend, in /oap-libs folder. All the dependencies of the backend are in it.
+  Webapp env, in webapp folder."/>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -56,8 +64,8 @@ if (!doNotTrack) {
 
 
 
-<link rel="preload" href="/scss/main.min.23ad955cba500a0b91ec3371ea1bf316cde102a3cde438be9f9c6a216b8f57c8.css" as="style">
-<link href="/scss/main.min.23ad955cba500a0b91ec3371ea1bf316cde102a3cde438be9f9c6a216b8f57c8.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.47fb3abdc4acc7f634ea3832299986022ed5251b9bdb53a1c86cb11b43d390a4.css" as="style">
+<link href="/scss/main.min.47fb3abdc4acc7f634ea3832299986022ed5251b9bdb53a1c86cb11b43d390a4.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -170,7 +178,8 @@ if (!doNotTrack) {
           <div class="col-12 col-md-3 col-xl-2 d-print-none td-sidebar">
 
                     <h5>Documentation: latest</h5>
-                    <ul class="">
+                    
+<ul class="sidebar-menu">
     
 
     <li>
@@ -185,21 +194,22 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/latest/en/concepts-and-designs/readme">Concepts and Designs</a></div>
-
+            <a href="#">Concepts and Designs<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
         
 
             
-            <div >What is SkyWalking?</div>
+            <a href="#">What is SkyWalking?<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -217,7 +227,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -227,10 +239,11 @@ if (!doNotTrack) {
         
 
             
-            <div >Probe</div>
+            <a href="#">Probe<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -264,7 +277,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -274,10 +289,11 @@ if (!doNotTrack) {
         
 
             
-            <div >Backend</div>
+            <a href="#">Backend<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -298,12 +314,30 @@ if (!doNotTrack) {
 
     <li>
         
+            <a href="/docs/main/latest/en/concepts-and-designs/mal">Meter Analysis Language</a>
+        
+    </li>
+
+    
+
+    <li>
+        
+            <a href="/docs/main/latest/en/concepts-and-designs/lal">Log Analysis Language</a>
+        
+    </li>
+
+    
+
+    <li>
+        
             <a href="/docs/main/latest/en/protocols/readme#query-protocol">Query in OAP</a>
         
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -311,56 +345,30 @@ if (!doNotTrack) {
 
     <li>
         
-
-            
-            <div >UI</div>
-            
-
-            <ul class="">
-    
-
-    <li>
-        
-            <a href="/docs/main/latest/en/concepts-and-designs/ui-overview">Overview</a>
+            <a href="/docs/main/latest/en/concepts-and-designs/ui-overview">UI</a>
         
     </li>
 
     
+
+    <li>
+        
+            <a href="https://github.com/apache/skywalking-cli">CLI</a>
+        
+    </li>
+
+    
+
+    <li>
+        
+            <a href="/docs/main/latest/en/concepts-and-designs/event/">Event</a>
+        
+    </li>
+
+    
+
 </ul>
-        
-    </li>
 
-    
-</ul>
-        
-    </li>
-
-    
-
-    <li>
-        
-
-            
-            <div ><a href="/docs/main/latest/en/setup/readme">Setup</a></div>
-
-            
-
-            <ul class="">
-    
-
-    <li>
-        
-
-            
-            <div >Language agents in Service</div>
-            
-
-            <ul class="">
-    
-
-    <li>
-        
-            <a href="/docs/main/latest/en/setup/readme#language-agents-in-service">Agents</a>
         
     </li>
 
@@ -370,11 +378,30 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/latest/en/setup/service-agent/java-agent/readme">Java agent</a></div>
-
+            <a href="#">Setup<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
+    
+
+    <li>
+        
+
+            
+            <a href="#">Java agent<i class="fa fa-angle-left pull-right"></i></a>
+            
+
+            
+<ul class="sidebar-submenu" >
+    
+
+    <li>
+        
+            <a href="/docs/main/latest/en/setup/service-agent/java-agent/readme">Setup</a>
+        
+    </li>
+
     
 
     <li>
@@ -419,7 +446,7 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/en/setup/service-agent/java-agent/readme#plugin-development-guide">Plugin development guide</a>
+            <a href="/docs/main/latest/en/guides/java-plugin-development-guide/">Plugin development guide</a>
         
     </li>
 
@@ -427,12 +454,14 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/en/setup/service-agent/java-agent/readme#plugin-development-guide">Agent plugin tests and performance tests</a>
+            <a href="https://skyapmtest.github.io/Agent-Benchmarks/">Java Agent Performance Test</a>
         
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -440,12 +469,15 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/en/setup/readme#language-agents-in-service">Other language agents</a>
+            <a href="/docs/main/latest/en/setup/service-agent/server-agents">All available server agents</a>
         
     </li>
 
     
-</ul>
+
+    <li>
+        
+            <a href="/docs/main/latest/en/setup/service-agent/browser-agent">Browser agent</a>
         
     </li>
 
@@ -455,10 +487,11 @@ if (!doNotTrack) {
         
 
             
-            <div >Service Mesh</div>
+            <a href="#">Service Mesh<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -476,32 +509,6 @@ if (!doNotTrack) {
     </li>
 
     
-</ul>
-        
-    </li>
-
-    
-
-    <li>
-        
-
-            
-            <div >Proxy</div>
-            
-
-            <ul class="">
-    
-
-    <li>
-        
-
-            
-            <div ><a href="https://www.envoyproxy.io/">Envoy Proxy</a></div>
-
-            
-
-            <ul class="">
-    
 
     <li>
         
@@ -510,12 +517,9 @@ if (!doNotTrack) {
     </li>
 
     
-</ul>
-        
-    </li>
 
-    
 </ul>
+
         
     </li>
 
@@ -525,22 +529,19 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/latest/en/setup/backend/backend-ui-setup">Backend, UI and CLI setup document</a></div>
-
+            <a href="#">Backend<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
         
+            <a href="/docs/main/latest/en/setup/backend/backend-setup">Setup</a>
+        
+    </li>
 
-            
-            <div ><a href="/docs/main/latest/en/setup/backend/backend-setup">Backend setup document</a></div>
-
-            
-
-            <ul class="">
     
 
     <li>
@@ -713,7 +714,7 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/backend-receivers.md#opentelemetry-receiver">OpenTelemetry Metrics Analysis</a>
+            <a href="/docs/main/latest/en/backend-receivers#opentelemetry-receiver">OpenTelemetry Metrics Analysis</a>
         
     </li>
 
@@ -734,7 +735,17 @@ if (!doNotTrack) {
     </li>
 
     
+
+    <li>
+        
+            <a href="/docs/main/latest/en/setup/backend/log-analyzer">Log Analyzer</a>
+        
+    </li>
+
+    
+
 </ul>
+
         
     </li>
 
@@ -742,7 +753,7 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/en/setup/backend/ui-setup">UI setup document</a>
+            <a href="/docs/main/latest/en/setup/backend/ui-setup">UI Setup</a>
         
     </li>
 
@@ -750,17 +761,14 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="https://github.com/apache/skywalking-cli">CLI setup document</a>
+            <a href="https://github.com/apache/skywalking-cli">CLI Setup</a>
         
     </li>
 
     
-</ul>
-        
-    </li>
 
-    
 </ul>
+
         
     </li>
 
@@ -778,16 +786,16 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/latest/en/guides/readme">Contributing Guides</a></div>
-
+            <a href="#">Contributing Guides<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
         
-            <a href="/docs/main/latest/en/guides/readme#contact-us">Contact us</a>
+            <a href="/docs/main/latest/en/guides/readme">Contribute</a>
         
     </li>
 
@@ -795,7 +803,7 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/en/guides/asf/committer">Process to become official Apache SkyWalking Committer</a>
+            <a href="/docs/main/latest/en/guides/asf/committer">Become a committer</a>
         
     </li>
 
@@ -816,7 +824,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -837,9 +847,40 @@ if (!doNotTrack) {
     </li>
 
     
+
+    <li>
+        
+            <a href="https://github.com/apache/skywalking/tree/master/changes">Changelog</a>
+        
+    </li>
+
+    
+
 </ul>
-                    <div class="commit-id">Commit Id: 8c3d167</div>
+<script src="/js/sidebar-menu.js"></script>
+<script>
+  (function (){
+    $.sidebarMenu($('.sidebar-menu'))
+    var path = window.location.pathname;
+    var hash = window.location.hash;
+    var $a = $('.sidebar-menu a')
+    $a.each(function (e){
+      if($(this).attr('href')+'/' === path || $(this).attr('href').replace('#','/#') === path+hash){
+        $(this).parents('li').addClass('active').show()
+      }
+    })
+    $a.on('click',function (){
+      var url = $(this).attr('href')
+      if(url!=='#'){
+        window.location.href = url
+      }
+    })
+  })()
+</script>
+                    <div class="commit-id">Commit Id: a202144</div>
                     
+
+
 
 
 
@@ -872,6 +913,11 @@ if (!doNotTrack) {
 
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#requirements-and-default-settings">Requirements and default settings</a>
+      <ul>
+        <li><a href="#interaction">Interaction</a></li>
+      </ul>
+    </li>
     <li><a href="#startup-script">Startup script</a></li>
     <li><a href="#applicationyml">application.yml</a></li>
     <li><a href="#configuration-vocabulary">Configuration Vocabulary</a></li>
@@ -922,8 +968,8 @@ if (!doNotTrack) {
 
           </div>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
-            <br>
-            
+              <i class="fa fa-bars doc-menu-button"></i>
+              
 <div class="td-content">
 
 
@@ -937,14 +983,55 @@ if (!doNotTrack) {
 
 
 	<h1 id="backend-setup">Backend setup</h1>
-<p>First and most important thing is, SkyWalking backend startup behaviours are driven by <code>config/application.yml</code>.
-Understood the setting file will help you to read this document.</p>
+<p>SkyWalking backend distribution package includes the following parts:</p>
+<ol>
+<li>
+<p><strong>bin/cmd scripts</strong>, in <code>/bin</code> folder. Includes startup linux shell and Windows cmd scripts for Backend
+server and UI startup.</p>
+</li>
+<li>
+<p><strong>Backend config</strong>, in <code>/config</code> folder. Includes settings files of the backend, which are:</p>
+<ul>
+<li><code>application.yml</code></li>
+<li><code>log4j.xml</code></li>
+<li><code>alarm-settings.yml</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Libraries of backend</strong>, in <code>/oap-libs</code> folder. All the dependencies of the backend are in it.</p>
+</li>
+<li>
+<p><strong>Webapp env</strong>, in <code>webapp</code> folder. UI frontend jar file is here, with its <code>webapp.yml</code> setting file.</p>
+</li>
+</ol>
+<h2 id="requirements-and-default-settings">Requirements and default settings</h2>
+<p>Requirement: <strong>JDK8 to JDK12 are tested</strong>, other versions are not tested and may or may not work.</p>
+<p>Before you start, you should know that the quickstart aims to get you a basic configuration mostly for previews/demo, performance and long-term running are not our goals.</p>
+<p>For production/QA/tests environments, you should head to <a href="#deploy-backend-and-ui">Backend and UI deployment documents</a>.</p>
+<p>You can use <code>bin/startup.sh</code> (or cmd) to startup the backend and UI with their default settings, which are:</p>
+<ul>
+<li>Backend storage uses <strong>H2 by default</strong> (for an easier start)</li>
+<li>Backend listens <code>0.0.0.0/11800</code> for gRPC APIs and <code>0.0.0.0/12800</code> for http rest APIs.</li>
+</ul>
+<p>In Java, DotNetCore, Node.js, Istio agents/probe, you should set the gRPC service address to <code>ip/host:11800</code>, with ip/host where your backend is.</p>
+<ul>
+<li>UI listens on <code>8080</code> port and request <code>127.0.0.1/12800</code> to do GraphQL query.</li>
+</ul>
+<h3 id="interaction">Interaction</h3>
+<p>Before deploying Skywalking in your distributed environment, you should know how agents/probes, backend, UI communicates with each other:</p>
+<img src="https://skywalking.apache.org/doc-graph/communication-net.png"/>
+<ul>
+<li>All native agents and probes, either language based or mesh probe, are using gRPC service (<code>core/default/gRPC*</code> in <code>application.yml</code>) to report data to the backend. Also, jetty service supported in JSON format.</li>
+<li>UI uses GraphQL (HTTP) query to access the backend also in Jetty service (<code>core/default/rest*</code> in <code>application.yml</code>).</li>
+</ul>
 <h2 id="startup-script">Startup script</h2>
 <p>The default startup scripts are <code>/bin/oapService.sh</code>(.bat).
 Read <a href="../backend-start-up-mode">start up mode</a> document to know other options
 of starting backend.</p>
 <h2 id="applicationyml">application.yml</h2>
-<p>The core concept behind this setting file is, SkyWalking collector is based on pure modularization design.
+<p>SkyWalking backend startup behaviours are driven by <code>config/application.yml</code>.
+Understood the setting file will help you to read this document.
+The core concept behind this setting file is, SkyWalking collector is based on pure modularization design.
 End user can switch or assemble the collector features by their own requirements.</p>
 <p>So, in <code>application.yml</code>, there are three levels.</p>
 <ol>
@@ -1045,6 +1132,7 @@ And learn how to write your own conversion rules.</li>
 <li><a href="../backend-meter">Meter Analysis</a>. Set up the backend analysis rules, when use <a href="../../service-agent/java-agent/readme#advanced-features">SkyWalking Meter System Toolkit</a>
 or meter plugins.</li>
 <li><a href="../spring-sleuth-setup">Spring Sleuth Metrics Analysis</a>. Configure the agent and backend to receiver metrics from micrometer.</li>
+<li><a href="../log-analyzer">Log Analyzer</a></li>
 </ol>
 <h2 id="telemetry-for-backend">Telemetry for backend</h2>
 <p>OAP backend cluster itself underlying is a distributed streaming process system. For helping the Ops team,
@@ -1232,13 +1320,8 @@ SkyWalking provide a config to add all necessary name column(s) into the final m
 
   </body>
   <script>
-    $(function (){
-      var path = window.location.pathname;
-      $('.td-sidebar a').each(function (e){
-        if($(this).attr('href')+'/'==path){
-          $(this).addClass('active')
-        }
-      })
+    $('.doc-menu-button').on('click',function (){
+      $('.td-sidebar').toggleClass('active')
     })
   </script>
 </html>

@@ -25,13 +25,15 @@ We have following receivers, and default implementors are provided in our Apache
  receiver-trace. gRPC and HTTPRestful services to accept SkyWalking format traces. receiver-register. gRPC and HTTPRestful services to provide service, service instance and endpoint register." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/main/latest/en/setup/backend/backend-receivers/" />
-
+<meta property="article:published_time" content="2021-03-09T15:01:03+00:00" />
+<meta property="article:modified_time" content="2021-03-09T15:01:03+00:00" />
 <meta itemprop="name" content="Choose receiver">
 <meta itemprop="description" content="Choose receiver Receiver is a concept in SkyWalking backend. All modules, which are responsible for receiving telemetry or tracing data from other being monitored system, are all being called Receiver. If you are looking for the pull mode, Take a look at fetcher document.
 We have following receivers, and default implementors are provided in our Apache distribution.
  receiver-trace. gRPC and HTTPRestful services to accept SkyWalking format traces. receiver-register. gRPC and HTTPRestful services to provide service, service instance and endpoint register.">
-
-<meta itemprop="wordCount" content="894">
+<meta itemprop="datePublished" content="2021-03-09T15:01:03+00:00" />
+<meta itemprop="dateModified" content="2021-03-09T15:01:03+00:00" />
+<meta itemprop="wordCount" content="708">
 
 
 
@@ -56,8 +58,8 @@ if (!doNotTrack) {
 
 
 
-<link rel="preload" href="/scss/main.min.23ad955cba500a0b91ec3371ea1bf316cde102a3cde438be9f9c6a216b8f57c8.css" as="style">
-<link href="/scss/main.min.23ad955cba500a0b91ec3371ea1bf316cde102a3cde438be9f9c6a216b8f57c8.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.47fb3abdc4acc7f634ea3832299986022ed5251b9bdb53a1c86cb11b43d390a4.css" as="style">
+<link href="/scss/main.min.47fb3abdc4acc7f634ea3832299986022ed5251b9bdb53a1c86cb11b43d390a4.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -170,7 +172,8 @@ if (!doNotTrack) {
           <div class="col-12 col-md-3 col-xl-2 d-print-none td-sidebar">
 
                     <h5>Documentation: latest</h5>
-                    <ul class="">
+                    
+<ul class="sidebar-menu">
     
 
     <li>
@@ -185,21 +188,22 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/latest/en/concepts-and-designs/readme">Concepts and Designs</a></div>
-
+            <a href="#">Concepts and Designs<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
         
 
             
-            <div >What is SkyWalking?</div>
+            <a href="#">What is SkyWalking?<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -217,7 +221,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -227,10 +233,11 @@ if (!doNotTrack) {
         
 
             
-            <div >Probe</div>
+            <a href="#">Probe<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -264,7 +271,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -274,10 +283,11 @@ if (!doNotTrack) {
         
 
             
-            <div >Backend</div>
+            <a href="#">Backend<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -298,12 +308,30 @@ if (!doNotTrack) {
 
     <li>
         
+            <a href="/docs/main/latest/en/concepts-and-designs/mal">Meter Analysis Language</a>
+        
+    </li>
+
+    
+
+    <li>
+        
+            <a href="/docs/main/latest/en/concepts-and-designs/lal">Log Analysis Language</a>
+        
+    </li>
+
+    
+
+    <li>
+        
             <a href="/docs/main/latest/en/protocols/readme#query-protocol">Query in OAP</a>
         
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -311,56 +339,30 @@ if (!doNotTrack) {
 
     <li>
         
-
-            
-            <div >UI</div>
-            
-
-            <ul class="">
-    
-
-    <li>
-        
-            <a href="/docs/main/latest/en/concepts-and-designs/ui-overview">Overview</a>
+            <a href="/docs/main/latest/en/concepts-and-designs/ui-overview">UI</a>
         
     </li>
 
     
+
+    <li>
+        
+            <a href="https://github.com/apache/skywalking-cli">CLI</a>
+        
+    </li>
+
+    
+
+    <li>
+        
+            <a href="/docs/main/latest/en/concepts-and-designs/event/">Event</a>
+        
+    </li>
+
+    
+
 </ul>
-        
-    </li>
 
-    
-</ul>
-        
-    </li>
-
-    
-
-    <li>
-        
-
-            
-            <div ><a href="/docs/main/latest/en/setup/readme">Setup</a></div>
-
-            
-
-            <ul class="">
-    
-
-    <li>
-        
-
-            
-            <div >Language agents in Service</div>
-            
-
-            <ul class="">
-    
-
-    <li>
-        
-            <a href="/docs/main/latest/en/setup/readme#language-agents-in-service">Agents</a>
         
     </li>
 
@@ -370,11 +372,30 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/latest/en/setup/service-agent/java-agent/readme">Java agent</a></div>
-
+            <a href="#">Setup<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
+    
+
+    <li>
+        
+
+            
+            <a href="#">Java agent<i class="fa fa-angle-left pull-right"></i></a>
+            
+
+            
+<ul class="sidebar-submenu" >
+    
+
+    <li>
+        
+            <a href="/docs/main/latest/en/setup/service-agent/java-agent/readme">Setup</a>
+        
+    </li>
+
     
 
     <li>
@@ -419,7 +440,7 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/en/setup/service-agent/java-agent/readme#plugin-development-guide">Plugin development guide</a>
+            <a href="/docs/main/latest/en/guides/java-plugin-development-guide/">Plugin development guide</a>
         
     </li>
 
@@ -427,12 +448,14 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/en/setup/service-agent/java-agent/readme#plugin-development-guide">Agent plugin tests and performance tests</a>
+            <a href="https://skyapmtest.github.io/Agent-Benchmarks/">Java Agent Performance Test</a>
         
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -440,12 +463,15 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/en/setup/readme#language-agents-in-service">Other language agents</a>
+            <a href="/docs/main/latest/en/setup/service-agent/server-agents">All available server agents</a>
         
     </li>
 
     
-</ul>
+
+    <li>
+        
+            <a href="/docs/main/latest/en/setup/service-agent/browser-agent">Browser agent</a>
         
     </li>
 
@@ -455,10 +481,11 @@ if (!doNotTrack) {
         
 
             
-            <div >Service Mesh</div>
+            <a href="#">Service Mesh<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -476,32 +503,6 @@ if (!doNotTrack) {
     </li>
 
     
-</ul>
-        
-    </li>
-
-    
-
-    <li>
-        
-
-            
-            <div >Proxy</div>
-            
-
-            <ul class="">
-    
-
-    <li>
-        
-
-            
-            <div ><a href="https://www.envoyproxy.io/">Envoy Proxy</a></div>
-
-            
-
-            <ul class="">
-    
 
     <li>
         
@@ -510,12 +511,9 @@ if (!doNotTrack) {
     </li>
 
     
-</ul>
-        
-    </li>
 
-    
 </ul>
+
         
     </li>
 
@@ -525,22 +523,19 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/latest/en/setup/backend/backend-ui-setup">Backend, UI and CLI setup document</a></div>
-
+            <a href="#">Backend<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
         
+            <a href="/docs/main/latest/en/setup/backend/backend-setup">Setup</a>
+        
+    </li>
 
-            
-            <div ><a href="/docs/main/latest/en/setup/backend/backend-setup">Backend setup document</a></div>
-
-            
-
-            <ul class="">
     
 
     <li>
@@ -713,7 +708,7 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/backend-receivers.md#opentelemetry-receiver">OpenTelemetry Metrics Analysis</a>
+            <a href="/docs/main/latest/en/backend-receivers#opentelemetry-receiver">OpenTelemetry Metrics Analysis</a>
         
     </li>
 
@@ -734,7 +729,17 @@ if (!doNotTrack) {
     </li>
 
     
+
+    <li>
+        
+            <a href="/docs/main/latest/en/setup/backend/log-analyzer">Log Analyzer</a>
+        
+    </li>
+
+    
+
 </ul>
+
         
     </li>
 
@@ -742,7 +747,7 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/en/setup/backend/ui-setup">UI setup document</a>
+            <a href="/docs/main/latest/en/setup/backend/ui-setup">UI Setup</a>
         
     </li>
 
@@ -750,17 +755,14 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="https://github.com/apache/skywalking-cli">CLI setup document</a>
+            <a href="https://github.com/apache/skywalking-cli">CLI Setup</a>
         
     </li>
 
     
-</ul>
-        
-    </li>
 
-    
 </ul>
+
         
     </li>
 
@@ -778,16 +780,16 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/latest/en/guides/readme">Contributing Guides</a></div>
-
+            <a href="#">Contributing Guides<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
         
-            <a href="/docs/main/latest/en/guides/readme#contact-us">Contact us</a>
+            <a href="/docs/main/latest/en/guides/readme">Contribute</a>
         
     </li>
 
@@ -795,7 +797,7 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/latest/en/guides/asf/committer">Process to become official Apache SkyWalking Committer</a>
+            <a href="/docs/main/latest/en/guides/asf/committer">Become a committer</a>
         
     </li>
 
@@ -816,7 +818,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -837,9 +841,40 @@ if (!doNotTrack) {
     </li>
 
     
+
+    <li>
+        
+            <a href="https://github.com/apache/skywalking/tree/master/changes">Changelog</a>
+        
+    </li>
+
+    
+
 </ul>
-                    <div class="commit-id">Commit Id: 8c3d167</div>
+<script src="/js/sidebar-menu.js"></script>
+<script>
+  (function (){
+    $.sidebarMenu($('.sidebar-menu'))
+    var path = window.location.pathname;
+    var hash = window.location.hash;
+    var $a = $('.sidebar-menu a')
+    $a.each(function (e){
+      if($(this).attr('href')+'/' === path || $(this).attr('href').replace('#','/#') === path+hash){
+        $(this).parents('li').addClass('active').show()
+      }
+    })
+    $a.on('click',function (){
+      var url = $(this).attr('href')
+      if(url!=='#'){
+        window.location.href = url
+      }
+    })
+  })()
+</script>
+                    <div class="commit-id">Commit Id: a202144</div>
                     
+
+
 
 
 
@@ -875,12 +910,7 @@ if (!doNotTrack) {
     <li><a href="#grpchttp-server-for-receiver">gRPC/HTTP server for receiver</a></li>
     <li><a href="#opentelemetry-receiver">OpenTelemetry receiver</a></li>
     <li><a href="#meter-receiver">Meter receiver</a></li>
-    <li><a href="#experimental-receivers">Experimental receivers</a>
-      <ul>
-        <li><a href="#zipkin-receiver">Zipkin receiver</a></li>
-        <li><a href="#jaeger-receiver">Jaeger receiver</a></li>
-      </ul>
-    </li>
+    <li><a href="#zipkin-receiver">Zipkin receiver</a></li>
   </ul>
 </nav>
 
@@ -921,8 +951,8 @@ if (!doNotTrack) {
 
           </div>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
-            <br>
-            
+              <i class="fa fa-bars doc-menu-button"></i>
+              
 <div class="td-content">
 
 
@@ -950,14 +980,13 @@ Take a look at <a href="../backend-fetcher">fetcher document</a>.</p>
 <li><strong>receiver-otel</strong>. See <a href="#opentelemetry-receiver">details</a>. Receiver for analyzing metrics data from OpenTelemetry</li>
 <li><strong>receiver-meter</strong>. See <a href="../backend-meter">details</a>. Receiver for analyzing metrics in SkyWalking native meter format.</li>
 <li><strong>receiver-browser</strong>. gRPC services to accept browser performance data and error log.</li>
-<li><strong>receiver-log</strong>. gRPC services accept log data.</li>
+<li><strong>receiver-log</strong>. Receiver for native log format. Read <a href="../log-analyzer">Log Analyzer</a> for advanced features.</li>
 <li><strong>configuration-discovery</strong>. gRPC services handle configurationDiscovery.</li>
 <li><strong>receiver-event</strong>. gRPC services to handle events data.</li>
 <li><strong>receiver-zabbix</strong>. See <a href="../backend-zabbix">details</a>.</li>
-<li>Experimental receivers. All following receivers are in the POC stage, not production ready.
+<li>Experimental receivers.
 <ol>
-<li><strong>receiver_zipkin</strong>. See <a href="#zipkin-receiver">details</a>. (Experimental)</li>
-<li><strong>receiver_jaeger</strong>. See <a href="#jaeger-receiver">details</a>. (Experimental)</li>
+<li><strong>receiver_zipkin</strong>. See <a href="#zipkin-receiver">details</a>.</li>
 </ol>
 </li>
 </ol>
@@ -1005,9 +1034,11 @@ Take a look at <a href="../backend-fetcher">fetcher document</a>.</p>
   <span style="color:#f92672">default</span>:
     <span style="color:#f92672">sampleRate</span>: <span style="color:#ae81ff">${SW_RECEIVER_BROWSER_SAMPLE_RATE:10000}</span>
 
-<span style="color:#f92672">receiver-log</span>:
-  <span style="color:#f92672">selector</span>: <span style="color:#ae81ff">${SW_RECEIVER_LOG:default}</span>
-  <span style="color:#f92672">default</span>:
+<span style="color:#f92672">log-analyzer</span>:
+   <span style="color:#f92672">selector</span>: <span style="color:#ae81ff">${SW_LOG_ANALYZER:default}</span>
+   <span style="color:#f92672">default</span>:
+      <span style="color:#f92672">lalFiles</span>: <span style="color:#ae81ff">${SW_LOG_LAL_FILES:default}</span>
+      <span style="color:#f92672">malFiles</span>: <span style="color:#ae81ff">${SW_LOG_MAL_FILES:&#34;&#34;}</span>
   
 <span style="color:#f92672">configuration-discovery</span>:
   <span style="color:#f92672">selector</span>: <span style="color:#ae81ff">${SW_CONFIGURATION_DISCOVERY:default}</span>
@@ -1088,19 +1119,11 @@ to be the identification of the metric data.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">receiver-meter</span>:
   <span style="color:#f92672">selector</span>: <span style="color:#ae81ff">${SW_RECEIVER_METER:default}</span>
   <span style="color:#f92672">default</span>:
-</code></pre></div><h2 id="experimental-receivers">Experimental receivers</h2>
-<p>All following receivers are in the POC stage, not production ready.</p>
-<h3 id="zipkin-receiver">Zipkin receiver</h3>
-<p>Zipkin receiver could work in two different mode.</p>
-<ol>
-<li>Tracing mode(default). Tracing mode is that, skywalking OAP acts like zipkin collector,
-fully supports Zipkin v1/v2 formats through HTTP service,
-also provide persistence and query in skywalking UI.
-But it wouldn&rsquo;t analysis metrics from them. In most case, I suggest you could use this feature, when metrics come from service mesh.
-Notice, in this mode, Zipkin receiver requires <code>zipkin-elasticsearch</code> storage implementation active.
-Read <a href="../backend-storage#elasticsearch-6-with-zipkin-trace-extension">this</a> to know
-how to active.</li>
-</ol>
+</code></pre></div><h2 id="zipkin-receiver">Zipkin receiver</h2>
+<p>Zipkin receiver makes the OAP server as an alternative Zipkin server implementation. It supports Zipkin v1/v2 formats through HTTP service.
+Make sure you use this with <code>SW_STORAGE=zipkin-elasticsearch7</code> option to activate Zipkin storage implementation.
+Once this receiver and storage activated, SkyWalking native traces would be ignored, and SkyWalking wouldn&rsquo;t analysis topology, metrics, endpoint
+dependency from Zipkin&rsquo;s trace.</p>
 <p>Use following config to active.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">receiver_zipkin</span>:
   <span style="color:#f92672">selector</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN:-}</span>
@@ -1113,40 +1136,9 @@ how to active.</li>
     <span style="color:#f92672">jettyIdleTimeOut</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN_JETTY_IDLE_TIMEOUT:30000}</span>
     <span style="color:#f92672">jettyAcceptorPriorityDelta</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN_JETTY_DELTA:0}</span>
     <span style="color:#f92672">jettyAcceptQueueSize</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN_QUEUE_SIZE:0}</span>
-</code></pre></div><ol start="2">
-<li>Analysis mode(Not production ready), receive Zipkin v1/v2 formats through HTTP service. Transform the trace to skywalking
-native format, and analysis like skywalking trace. This feature can&rsquo;t work in production env right now,
-because of Zipkin tag/endpoint value unpredictable, we can&rsquo;t make sure it fits production env requirements.</li>
-</ol>
-<p>Active <code>analysis mode</code>, you should set <code>needAnalysis</code> config.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">receiver_zipkin</span>:
-  <span style="color:#f92672">selector</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN:-}</span>
-  <span style="color:#f92672">default</span>:
-    <span style="color:#f92672">host</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN_HOST:0.0.0.0}</span>
-    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN_PORT:9411}</span>
-    <span style="color:#f92672">contextPath</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN_CONTEXT_PATH:/}</span>
-    <span style="color:#f92672">jettyMinThreads</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN_JETTY_MIN_THREADS:1}</span>
-    <span style="color:#f92672">jettyMaxThreads</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN_JETTY_MAX_THREADS:200}</span>
-    <span style="color:#f92672">jettyIdleTimeOut</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN_JETTY_IDLE_TIMEOUT:30000}</span>
-    <span style="color:#f92672">jettyAcceptorPriorityDelta</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN_JETTY_DELTA:0}</span>
-    <span style="color:#f92672">jettyAcceptQueueSize</span>: <span style="color:#ae81ff">${SW_RECEIVER_ZIPKIN_QUEUE_SIZE:0}</span>
-    <span style="color:#f92672">needAnalysis</span>: <span style="color:#66d9ef">true</span>    
-</code></pre></div><p>NOTICE, Zipkin receiver is only provided in <code>apache-skywalking-apm-x.y.z.tar.gz</code> tar.</p>
-<h3 id="jaeger-receiver">Jaeger receiver</h3>
-<p>Jaeger receiver right now only works in <code>Tracing Mode</code>, and no analysis.
-Jaeger receiver provides extra gRPC host/port, if absent, sharing-server host/port will be used, then core gRPC host/port.
-Receiver requires <code>jaeger-elasticsearch</code> storage implementation active.
-Read <a href="../backend-storage#elasticsearch-6-with-jaeger-trace-extension">this</a> to know how to active.</p>
-<p>Right now, you need <a href="https://www.jaegertracing.io/docs/1.11/architecture/#agent">jaeger agent</a> to batch
-send spans to SkyWalking oap server. Read <a href="https://www.jaegertracing.io/docs/1.11/architecture/">Jaeger Architecture</a>
-to get more details.</p>
-<p>Active the receiver.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">receiver_jaeger</span>:
-  <span style="color:#f92672">selector</span>: <span style="color:#ae81ff">${SW_RECEIVER_JAEGER:-}</span>
-  <span style="color:#f92672">default</span>:
-    <span style="color:#f92672">gRPCHost</span>: <span style="color:#ae81ff">${SW_RECEIVER_JAEGER_HOST:0.0.0.0}</span>
-    <span style="color:#f92672">gRPCPort</span>: <span style="color:#ae81ff">${SW_RECEIVER_JAEGER_PORT:14250}</span>
-</code></pre></div><p>NOTICE, Jaeger receiver is only provided in <code>apache-skywalking-apm-x.y.z.tar.gz</code> tar.</p>
+</code></pre></div><p>NOTICE, Zipkin receiver is only provided in <code>apache-skywalking-apm-es7-x.y.z.tar.gz</code> tar.
+And this requires <code>zipkin-elasticsearch7</code> storage implementation active.
+Read <a href="../backend-storage#elasticsearch-7-with-zipkin-trace-extension">this</a> doc to know Zipkin as storage option.</p>
 
 
 
@@ -1308,13 +1300,8 @@ to get more details.</p>
 
   </body>
   <script>
-    $(function (){
-      var path = window.location.pathname;
-      $('.td-sidebar a').each(function (e){
-        if($(this).attr('href')+'/'==path){
-          $(this).addClass('active')
-        }
-      })
+    $('.doc-menu-button').on('click',function (){
+      $('.td-sidebar').toggleClass('active')
     })
   </script>
 </html>

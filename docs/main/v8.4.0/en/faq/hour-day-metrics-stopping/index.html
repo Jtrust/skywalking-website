@@ -24,11 +24,13 @@
 The users could simply delete all expired *-day_xxxxx and *-hour_xxxxx(xxxxx is a timestamp) indexes. SkyWalking is using metrics name-xxxxx and metrics name-month_xxxxx indexes only." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/main/v8.4.0/en/faq/hour-day-metrics-stopping/" />
-
+<meta property="article:published_time" content="2021-02-25T15:56:03+00:00" />
+<meta property="article:modified_time" content="2021-02-25T15:56:03+00:00" />
 <meta itemprop="name" content="Why metrics indexes in Hour and Day precisions stop update after upgrade to 7.x?">
 <meta itemprop="description" content="Why metrics indexes in Hour and Day precisions stop update after upgrade to 7.x? This is an expected case when 6.x-&gt;7.x upgrade. Read Downsampling Data Packing feature of the ElasticSearch storage.
 The users could simply delete all expired *-day_xxxxx and *-hour_xxxxx(xxxxx is a timestamp) indexes. SkyWalking is using metrics name-xxxxx and metrics name-month_xxxxx indexes only.">
-
+<meta itemprop="datePublished" content="2021-02-25T15:56:03+00:00" />
+<meta itemprop="dateModified" content="2021-02-25T15:56:03+00:00" />
 <meta itemprop="wordCount" content="55">
 
 
@@ -53,8 +55,8 @@ if (!doNotTrack) {
 
 
 
-<link rel="preload" href="/scss/main.min.23ad955cba500a0b91ec3371ea1bf316cde102a3cde438be9f9c6a216b8f57c8.css" as="style">
-<link href="/scss/main.min.23ad955cba500a0b91ec3371ea1bf316cde102a3cde438be9f9c6a216b8f57c8.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.47fb3abdc4acc7f634ea3832299986022ed5251b9bdb53a1c86cb11b43d390a4.css" as="style">
+<link href="/scss/main.min.47fb3abdc4acc7f634ea3832299986022ed5251b9bdb53a1c86cb11b43d390a4.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -168,7 +170,8 @@ if (!doNotTrack) {
 
 
                     <h5>Documentation: v8.4.0</h5>
-                    <ul class="">
+                    
+<ul class="sidebar-menu">
     
 
     <li>
@@ -183,21 +186,22 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/v8.4.0/en/concepts-and-designs/readme">Concepts and Designs</a></div>
-
+            <a href="/docs/main/v8.4.0/en/concepts-and-designs/readme">Concepts and Designs<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
         
 
             
-            <div >What is SkyWalking?</div>
+            <a href="#">What is SkyWalking?<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -215,7 +219,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -225,10 +231,11 @@ if (!doNotTrack) {
         
 
             
-            <div >Probe</div>
+            <a href="#">Probe<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -262,7 +269,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -272,10 +281,11 @@ if (!doNotTrack) {
         
 
             
-            <div >Backend</div>
+            <a href="#">Backend<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -301,7 +311,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -311,10 +323,11 @@ if (!doNotTrack) {
         
 
             
-            <div >UI</div>
+            <a href="#">UI<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -324,12 +337,16 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -339,21 +356,22 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/v8.4.0/en/setup/readme">Setup</a></div>
-
+            <a href="/docs/main/v8.4.0/en/setup/readme">Setup<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
         
 
             
-            <div >Language agents in Service</div>
+            <a href="#">Language agents in Service<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -368,11 +386,11 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/v8.4.0/en/setup/service-agent/java-agent/readme">Java agent</a></div>
-
+            <a href="/docs/main/v8.4.0/en/setup/service-agent/java-agent/readme">Java agent<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -425,12 +443,14 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/v8.4.0/en/setup/service-agent/java-agent/readme#plugin-development-guide">Agent plugin tests and performance tests</a>
+            <a href="/docs/main/v8.4.0/en/setup/service-agent/java-agent/readme#test">Agent plugin tests and performance tests</a>
         
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -443,7 +463,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -453,10 +475,11 @@ if (!doNotTrack) {
         
 
             
-            <div >Service Mesh</div>
+            <a href="#">Service Mesh<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -474,7 +497,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -484,20 +509,22 @@ if (!doNotTrack) {
         
 
             
-            <div >Proxy</div>
+            <a href="#">Proxy<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
         
 
             
-            <div >Envoy Proxy</div>
+            <a href="#">Envoy Proxy<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -507,12 +534,16 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -522,22 +553,22 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/v8.4.0/en/setup/backend/backend-ui-setup">Backend, UI and CLI setup document</a></div>
-
+            <a href="/docs/main/v8.4.0/en/setup/backend/backend-ui-setup">Backend, UI and CLI setup document<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
         
 
             
-            <div ><a href="/docs/main/v8.4.0/en/setup/backend/backend-setup">Backend setup document</a></div>
-
+            <a href="/docs/main/v8.4.0/en/setup/backend/backend-setup">Backend setup document<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -710,7 +741,7 @@ if (!doNotTrack) {
 
     <li>
         
-            <a href="/docs/main/v8.4.0/backend-receivers.md#opentelemetry-receiver">OpenTelemetry Metrics Analysis</a>
+            <a href="/docs/main/v8.4.0/en/backend-receivers#opentelemetry-receiver">OpenTelemetry Metrics Analysis</a>
         
     </li>
 
@@ -731,7 +762,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -752,12 +785,16 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -775,11 +812,11 @@ if (!doNotTrack) {
         
 
             
-            <div ><a href="/docs/main/v8.4.0/en/guides/readme">Contributing Guides</a></div>
-
+            <a href="/docs/main/v8.4.0/en/guides/readme">Contributing Guides<i class="fa fa-angle-left pull-right"></i></a>
             
 
-            <ul class="">
+            
+<ul class="sidebar-submenu" >
     
 
     <li>
@@ -813,7 +850,9 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
+
         
     </li>
 
@@ -834,9 +873,32 @@ if (!doNotTrack) {
     </li>
 
     
+
 </ul>
-                    <div class="commit-id">Commit Id: ca978d0</div>
+<script src="/js/sidebar-menu.js"></script>
+<script>
+  (function (){
+    $.sidebarMenu($('.sidebar-menu'))
+    var path = window.location.pathname;
+    var hash = window.location.hash;
+    var $a = $('.sidebar-menu a')
+    $a.each(function (e){
+      if($(this).attr('href')+'/' === path || $(this).attr('href').replace('#','/#') === path+hash){
+        $(this).parents('li').addClass('active').show()
+      }
+    })
+    $a.on('click',function (){
+      var url = $(this).attr('href')
+      if(url!=='#'){
+        window.location.href = url
+      }
+    })
+  })()
+</script>
+                    <div class="commit-id">Commit Id: 9dce6d4</div>
                     
+
+
 
 
 
@@ -903,8 +965,8 @@ if (!doNotTrack) {
 
           </div>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
-            <br>
-            
+              <i class="fa fa-bars doc-menu-button"></i>
+              
 <div class="td-content">
 
 
@@ -1084,13 +1146,8 @@ SkyWalking is using <code>metrics name-xxxxx</code> and <code>metrics name-month
 
   </body>
   <script>
-    $(function (){
-      var path = window.location.pathname;
-      $('.td-sidebar a').each(function (e){
-        if($(this).attr('href')+'/'==path){
-          $(this).addClass('active')
-        }
-      })
+    $('.doc-menu-button').on('click',function (){
+      $('.td-sidebar').toggleClass('active')
     })
   </script>
 </html>
