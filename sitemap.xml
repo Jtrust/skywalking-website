@@ -3298,7 +3298,7 @@
   </url>
   
   <url>
-    <loc>/docs/main/next/en/changes/changes/</loc>
+    <loc>/docs/main/next/en/changes/changes-10.1.0/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -3311,6 +3311,12 @@
   
   <url>
     <loc>/docs/main/v10.0.1/en/changes/changes/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/docs/main/next/en/changes/changes/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
