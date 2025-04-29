@@ -7438,6 +7438,12 @@
   </url>
   
   <url>
+    <loc>/docs/skywalking-banyandb/next/interacting/bydbctl/schema/top-n-aggregation/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/docs/skywalking-banyandb/latest/interacting/web-ui/schema/top-n-aggregation/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -14756,6 +14762,12 @@
   
   <url>
     <loc>/docs/skywalking-banyandb/v0.7.1/interacting/web-ui/query/stream/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/docs/skywalking-banyandb/next/interacting/bydbctl/query/top-n-aggregation/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
