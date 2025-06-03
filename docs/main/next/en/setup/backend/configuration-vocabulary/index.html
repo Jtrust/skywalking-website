@@ -34,7 +34,7 @@ Main Configuration The main configuration is provided by application.yml. It div
 Main Configuration The main configuration is provided by application.yml. It divided into several modules, each of which has its own settings. The following table lists the modules and their settings.
    Module Provider Settings Value(s) and Explanation System Environment Variable¹ Default     core default role Option values: Mixed/Receiver/Aggregator. Receiver mode OAP opens the service to the agents, then analyzes and aggregates the results, and forwards the results for distributed aggregation.">
 
-<meta itemprop="wordCount" content="6951">
+<meta itemprop="wordCount" content="6950">
 
 
 
@@ -2632,7 +2632,7 @@ Main Configuration The main configuration is provided by application.yml. It div
   })()
 </script>
 
-                  <div class="commit-id">Commit Id: 04648b3</div>
+                  <div class="commit-id">Commit Id: 485b7ff</div>
                 
 
 
@@ -5528,10 +5528,10 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 </thead>
 <tbody>
 <tr>
-<td>recordsNormal</td>
+<td>records</td>
 <td>-</td>
 <td>-</td>
-<td>The group for records not specified in <code>super</code>. Each dataset will be grouped under a single group named <code>normal</code>.</td>
+<td>The group for records not specified. Each normal dataset will be grouped under a single group named <code>records</code>.</td>
 <td>-</td>
 <td>-</td>
 </tr>
@@ -5540,7 +5540,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>shardNum</td>
 <td>-</td>
 <td>Shards Number for normal records group.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_SHARD_NUM</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5548,7 +5548,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>segmentInterval</td>
 <td>-</td>
 <td>Segment Interval Days for normal records group.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5556,7 +5556,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>ttl</td>
 <td>-</td>
 <td>TTL Days for normal records group.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_TTL_DAYS</td>
 <td>3</td>
 </tr>
 <tr>
@@ -5564,7 +5564,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableWarmStage</td>
 <td>-</td>
 <td>Activate warm stage for normal records group.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_ENABLE_WARM_STAGE</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_ENABLE_WARM_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -5572,7 +5572,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableColdStage</td>
 <td>-</td>
 <td>Activate cold stage for normal records group.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_ENABLE_COLD_STAGE</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_ENABLE_COLD_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -5588,7 +5588,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_WARM_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_WARM_SHARD_NUM</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5596,7 +5596,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_WARM_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_WARM_SI_DAYS</td>
 <td>2</td>
 </tr>
 <tr>
@@ -5604,7 +5604,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_WARM_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_WARM_TTL_DAYS</td>
 <td>7</td>
 </tr>
 <tr>
@@ -5612,7 +5612,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_WARM_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_WARM_NODE_SELECTOR</td>
 <td>type=warm</td>
 </tr>
 <tr>
@@ -5628,7 +5628,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_COLD_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_COLD_SHARD_NUM</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5636,7 +5636,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_COLD_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_COLD_SI_DAYS</td>
 <td>3</td>
 </tr>
 <tr>
@@ -5644,7 +5644,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_COLD_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_COLD_TTL_DAYS</td>
 <td>30</td>
 </tr>
 <tr>
@@ -5652,7 +5652,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_NORMAL_COLD_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_RECORDS_COLD_NODE_SELECTOR</td>
 <td>type=cold</td>
 </tr>
 <tr>
@@ -5668,7 +5668,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>shardNum</td>
 <td>-</td>
 <td>Shards Number for SkyWalking trace records group.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_TRACE_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -5676,7 +5676,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>segmentInterval</td>
 <td>-</td>
 <td>Segment Interval Days.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_TRACE_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5684,7 +5684,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>ttl</td>
 <td>-</td>
 <td>TTL Days.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_TRACE_TTL_DAYS</td>
 <td>3</td>
 </tr>
 <tr>
@@ -5692,7 +5692,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableWarmStage</td>
 <td>-</td>
 <td>Activate warm stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_ENABLE_WARM_STAGE</td>
+<td>SW_STORAGE_BANYANDB_TRACE_ENABLE_WARM_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -5700,7 +5700,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableColdStage</td>
 <td>-</td>
 <td>Activate cold stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_ENABLE_COLD_STAGE</td>
+<td>SW_STORAGE_BANYANDB_TRACE_ENABLE_COLD_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -5716,7 +5716,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_WARM_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_TRACE_WARM_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -5724,7 +5724,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_WARM_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_TRACE_WARM_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5732,7 +5732,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_WARM_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_TRACE_WARM_TTL_DAYS</td>
 <td>7</td>
 </tr>
 <tr>
@@ -5740,7 +5740,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_WARM_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_TRACE_WARM_NODE_SELECTOR</td>
 <td>type=warm</td>
 </tr>
 <tr>
@@ -5756,7 +5756,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_COLD_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_TRACE_COLD_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -5764,7 +5764,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_COLD_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_TRACE_COLD_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5772,7 +5772,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_COLD_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_TRACE_COLD_TTL_DAYS</td>
 <td>30</td>
 </tr>
 <tr>
@@ -5780,7 +5780,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_TRACE_COLD_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_TRACE_COLD_NODE_SELECTOR</td>
 <td>type=cold</td>
 </tr>
 <tr>
@@ -5796,7 +5796,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>shardNum</td>
 <td>-</td>
 <td>Shards Number for Zipkin trace records group.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -5804,7 +5804,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>segmentInterval</td>
 <td>-</td>
 <td>Segment Interval Days.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5812,7 +5812,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>ttl</td>
 <td>-</td>
 <td>TTL Days.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_TTL_DAYS</td>
 <td>3</td>
 </tr>
 <tr>
@@ -5820,7 +5820,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableWarmStage</td>
 <td>-</td>
 <td>Activate warm stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_ENABLE_WARM_STAGE</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_ENABLE_WARM_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -5828,7 +5828,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableColdStage</td>
 <td>-</td>
 <td>Activate cold stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_ENABLE_COLD_STAGE</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_ENABLE_COLD_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -5844,7 +5844,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_WARM_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_WARM_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -5852,7 +5852,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_WARM_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_WARM_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5860,7 +5860,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_WARM_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_WARM_TTL_DAYS</td>
 <td>7</td>
 </tr>
 <tr>
@@ -5868,7 +5868,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_WARM_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_WARM_NODE_SELECTOR</td>
 <td>type=warm</td>
 </tr>
 <tr>
@@ -5884,7 +5884,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_COLD_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_COLD_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -5892,7 +5892,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_COLD_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_COLD_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5900,7 +5900,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_COLD_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_COLD_TTL_DAYS</td>
 <td>30</td>
 </tr>
 <tr>
@@ -5908,7 +5908,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_ZIPKIN_TRACE_COLD_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_ZIPKIN_TRACE_COLD_NODE_SELECTOR</td>
 <td>type=cold</td>
 </tr>
 <tr>
@@ -5924,7 +5924,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>shardNum</td>
 <td>-</td>
 <td>Shards Number.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_LOG_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -5932,7 +5932,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>segmentInterval</td>
 <td>-</td>
 <td>Segment Interval Days.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_LOG_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5940,7 +5940,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>ttl</td>
 <td>-</td>
 <td>TTL Days.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_LOG_TTL_DAYS</td>
 <td>3</td>
 </tr>
 <tr>
@@ -5948,7 +5948,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableWarmStage</td>
 <td>-</td>
 <td>Activate warm stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_ENABLE_WARM_STAGE</td>
+<td>SW_STORAGE_BANYANDB_LOG_ENABLE_WARM_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -5956,7 +5956,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableColdStage</td>
 <td>-</td>
 <td>Activate cold stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_ENABLE_COLD_STAGE</td>
+<td>SW_STORAGE_BANYANDB_LOG_ENABLE_COLD_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -5972,7 +5972,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_WARM_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_LOG_WARM_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -5980,7 +5980,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_WARM_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_LOG_WARM_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -5988,7 +5988,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_WARM_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_LOG_WARM_TTL_DAYS</td>
 <td>7</td>
 </tr>
 <tr>
@@ -5996,7 +5996,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_WARM_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_LOG_WARM_NODE_SELECTOR</td>
 <td>type=warm</td>
 </tr>
 <tr>
@@ -6012,7 +6012,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_COLD_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_LOG_COLD_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -6020,7 +6020,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_COLD_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_LOG_COLD_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -6028,7 +6028,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_COLD_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_LOG_COLD_TTL_DAYS</td>
 <td>30</td>
 </tr>
 <tr>
@@ -6036,7 +6036,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_LOG_COLD_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_LOG_COLD_NODE_SELECTOR</td>
 <td>type=cold</td>
 </tr>
 <tr>
@@ -6052,7 +6052,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>shardNum</td>
 <td>-</td>
 <td>Shards Number.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -6060,7 +6060,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>segmentInterval</td>
 <td>-</td>
 <td>Segment Interval Days.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -6068,7 +6068,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>ttl</td>
 <td>-</td>
 <td>TTL Days.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_TTL_DAYS</td>
 <td>3</td>
 </tr>
 <tr>
@@ -6076,7 +6076,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableWarmStage</td>
 <td>-</td>
 <td>Activate warm stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_ENABLE_WARM_STAGE</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_ENABLE_WARM_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -6084,7 +6084,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableColdStage</td>
 <td>-</td>
 <td>Activate cold stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_ENABLE_COLD_STAGE</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_ENABLE_COLD_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -6100,7 +6100,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_WARM_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_WARM_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -6108,7 +6108,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_WARM_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_WARM_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -6116,7 +6116,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_WARM_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_WARM_TTL_DAYS</td>
 <td>7</td>
 </tr>
 <tr>
@@ -6124,7 +6124,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_WARM_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_WARM_NODE_SELECTOR</td>
 <td>type=warm</td>
 </tr>
 <tr>
@@ -6140,7 +6140,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_COLD_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_COLD_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -6148,7 +6148,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_COLD_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_COLD_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -6156,7 +6156,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_COLD_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_COLD_TTL_DAYS</td>
 <td>30</td>
 </tr>
 <tr>
@@ -6164,11 +6164,11 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GR_BROWSER_ERROR_LOG_COLD_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_BROWSER_ERROR_LOG_COLD_NODE_SELECTOR</td>
 <td>type=cold</td>
 </tr>
 <tr>
-<td>metricsMin</td>
+<td>metricsMinute</td>
 <td>-</td>
 <td>-</td>
 <td>The group for minute granularity metrics group.</td>
@@ -6180,7 +6180,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>shardNum</td>
 <td>-</td>
 <td>Shards Number for minute granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -6188,7 +6188,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>segmentInterval</td>
 <td>-</td>
 <td>Segment Interval Days for minute granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_SI_DAYS</td>
 <td>1</td>
 </tr>
 <tr>
@@ -6196,7 +6196,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>ttl</td>
 <td>-</td>
 <td>TTL Days for minute granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_TTL_DAYS</td>
 <td>7</td>
 </tr>
 <tr>
@@ -6204,7 +6204,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableWarmStage</td>
 <td>-</td>
 <td>Activate warm stage for minute granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_ENABLE_WARM_STAGE</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_ENABLE_WARM_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -6212,7 +6212,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableColdStage</td>
 <td>-</td>
 <td>Activate cold stage for minute granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_ENABLE_COLD_STAGE</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_ENABLE_COLD_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -6228,7 +6228,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_WARM_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_WARM_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -6236,7 +6236,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_WARM_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_WARM_SI_DAYS</td>
 <td>3</td>
 </tr>
 <tr>
@@ -6244,7 +6244,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_WARM_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_WARM_TTL_DAYS</td>
 <td>15</td>
 </tr>
 <tr>
@@ -6252,7 +6252,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_WARM_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_WARM_NODE_SELECTOR</td>
 <td>type=warm</td>
 </tr>
 <tr>
@@ -6268,7 +6268,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_COLD_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_COLD_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -6276,7 +6276,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_COLD_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_COLD_SI_DAYS</td>
 <td>5</td>
 </tr>
 <tr>
@@ -6284,7 +6284,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_COLD_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_COLD_TTL_DAYS</td>
 <td>60</td>
 </tr>
 <tr>
@@ -6292,7 +6292,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_MINUTE_COLD_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_METRICS_MINUTE_COLD_NODE_SELECTOR</td>
 <td>type=cold</td>
 </tr>
 <tr>
@@ -6308,7 +6308,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>shardNum</td>
 <td>-</td>
 <td>Shards Number for hour granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_SHARD_NUM</td>
 <td>1</td>
 </tr>
 <tr>
@@ -6316,7 +6316,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>segmentInterval</td>
 <td>-</td>
 <td>Segment Interval Days for hour granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_SI_DAYS</td>
 <td>5</td>
 </tr>
 <tr>
@@ -6324,7 +6324,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>ttl</td>
 <td>-</td>
 <td>TTL Days for hour granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_TTL_DAYS</td>
 <td>15</td>
 </tr>
 <tr>
@@ -6332,7 +6332,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableWarmStage</td>
 <td>-</td>
 <td>Activate warm stage for hour granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_ENABLE_WARM_STAGE</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_ENABLE_WARM_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -6340,7 +6340,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableColdStage</td>
 <td>-</td>
 <td>Activate cold stage for hour granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_ENABLE_COLD_STAGE</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_ENABLE_COLD_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -6356,7 +6356,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_WARM_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_WARM_SHARD_NUM</td>
 <td>1</td>
 </tr>
 <tr>
@@ -6364,7 +6364,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_WARM_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_WARM_SI_DAYS</td>
 <td>7</td>
 </tr>
 <tr>
@@ -6372,7 +6372,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_WARM_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_WARM_TTL_DAYS</td>
 <td>30</td>
 </tr>
 <tr>
@@ -6380,7 +6380,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_WARM_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_WARM_NODE_SELECTOR</td>
 <td>type=warm</td>
 </tr>
 <tr>
@@ -6396,7 +6396,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_COLD_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_COLD_SHARD_NUM</td>
 <td>1</td>
 </tr>
 <tr>
@@ -6404,7 +6404,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_COLD_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_COLD_SI_DAYS</td>
 <td>15</td>
 </tr>
 <tr>
@@ -6412,7 +6412,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_COLD_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_COLD_TTL_DAYS</td>
 <td>120</td>
 </tr>
 <tr>
@@ -6420,7 +6420,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_HOUR_COLD_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_METRICS_HOUR_COLD_NODE_SELECTOR</td>
 <td>type=cold</td>
 </tr>
 <tr>
@@ -6436,7 +6436,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>shardNum</td>
 <td>-</td>
 <td>Shards Number for day granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_SHARD_NUM</td>
 <td>1</td>
 </tr>
 <tr>
@@ -6444,7 +6444,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>segmentInterval</td>
 <td>-</td>
 <td>Segment Interval Days for day granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_SI_DAYS</td>
 <td>15</td>
 </tr>
 <tr>
@@ -6452,7 +6452,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>ttl</td>
 <td>-</td>
 <td>TTL Days for day granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_TTL_DAYS</td>
 <td>15</td>
 </tr>
 <tr>
@@ -6460,7 +6460,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableWarmStage</td>
 <td>-</td>
 <td>Activate warm stage for day granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_ENABLE_WARM_STAGE</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_ENABLE_WARM_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -6468,7 +6468,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>enableColdStage</td>
 <td>-</td>
 <td>Activate cold stage for day granularity metrics group.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_ENABLE_COLD_STAGE</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_ENABLE_COLD_STAGE</td>
 <td>false</td>
 </tr>
 <tr>
@@ -6484,7 +6484,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_WARM_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_WARM_SHARD_NUM</td>
 <td>1</td>
 </tr>
 <tr>
@@ -6492,7 +6492,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_WARM_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_WARM_SI_DAYS</td>
 <td>15</td>
 </tr>
 <tr>
@@ -6500,7 +6500,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_WARM_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_WARM_TTL_DAYS</td>
 <td>30</td>
 </tr>
 <tr>
@@ -6508,7 +6508,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_WARM_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_WARM_NODE_SELECTOR</td>
 <td>type=warm</td>
 </tr>
 <tr>
@@ -6524,7 +6524,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>shardNum</td>
 <td>Shards Number for for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_COLD_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_COLD_SHARD_NUM</td>
 <td>1</td>
 </tr>
 <tr>
@@ -6532,7 +6532,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>segmentInterval</td>
 <td>Segment Interval Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_COLD_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_COLD_SI_DAYS</td>
 <td>15</td>
 </tr>
 <tr>
@@ -6540,7 +6540,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>ttl</td>
 <td>TTL Days for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_COLD_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_COLD_TTL_DAYS</td>
 <td>120</td>
 </tr>
 <tr>
@@ -6548,7 +6548,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>-</td>
 <td>nodeSelector</td>
 <td>Specifying target nodes for this stage.</td>
-<td>SW_STORAGE_BANYANDB_GM_DAY_COLD_NODE_SELECTOR</td>
+<td>SW_STORAGE_BANYANDB_METRICS_DAY_COLD_NODE_SELECTOR</td>
 <td>type=cold</td>
 </tr>
 <tr>
@@ -6564,7 +6564,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>shardNum</td>
 <td>-</td>
 <td>Shards Number for metadata <code>index</code> group.</td>
-<td>SW_STORAGE_BANYANDB_GM_METADATA_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_METADATA_SHARD_NUM</td>
 <td>2</td>
 </tr>
 <tr>
@@ -6572,7 +6572,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>segmentInterval</td>
 <td>-</td>
 <td>Segment Interval Days for metadata <code>index</code> group.</td>
-<td>SW_STORAGE_BANYANDB_GM_METADATA_SI_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METADATA_SI_DAYS</td>
 <td>15</td>
 </tr>
 <tr>
@@ -6580,7 +6580,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>ttl</td>
 <td>-</td>
 <td>TTL Days for metadata <code>index</code> group.</td>
-<td>SW_STORAGE_BANYANDB_GM_METADATA_TTL_DAYS</td>
+<td>SW_STORAGE_BANYANDB_METADATA_TTL_DAYS</td>
 <td>15</td>
 </tr>
 <tr>
@@ -6596,7 +6596,7 @@ OAP will query the data from the &ldquo;hot and warm&rdquo; stage by default if 
 <td>shardNum</td>
 <td>-</td>
 <td>Shards Number for property group.</td>
-<td>SW_STORAGE_BANYANDB_GP_PROPERTY_SHARD_NUM</td>
+<td>SW_STORAGE_BANYANDB_PROPERTY_SHARD_NUM</td>
 <td>1</td>
 </tr>
 </tbody>
