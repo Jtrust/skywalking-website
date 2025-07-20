@@ -7564,6 +7564,12 @@
   </url>
   
   <url>
+    <loc>/docs/skywalking-banyandb/next/contribute/debugging/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/docs/main/latest/en/concepts-and-designs/service-hierarchy-configuration/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -15542,6 +15548,12 @@
   
   <url>
     <loc>/docs/main/v10.1.0/en/setup/backend/backend-rocketmq-monitoring/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/docs/skywalking-ruby/next/en/agent/meter-log-reporter/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
