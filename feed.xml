@@ -13,6 +13,468 @@
     
     
     <item>
+      <title>Blog: How AI Changed the Economics of Architecture</title>
+      <link>/blog/2026-03-13-how-ai-changed-the-economics-of-architecture/</link>
+      <pubDate>Fri, 13 Mar 2026 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2026-03-13-how-ai-changed-the-economics-of-architecture/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;em&gt;SkyWalking GraalVM Distro: A case study in turning runnable PoCs into a repeatable migration pipeline.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./graph.jpg&#34; alt=&#34;graph.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The most important lesson from this project is not that AI can generate a large amount of code. It is that AI changes the economics of architecture. When runnable PoCs become cheap to build, compare, discard, and rebuild, architects can push further toward the design they actually want instead of stopping early at a compromise they can afford to implement.&lt;/p&gt;
+&lt;p&gt;That shift matters a lot in mature open source systems. Apache SkyWalking OAP has long been a powerful and production-proven observability backend, but it also carries all the realities of a large Java platform: runtime bytecode generation, reflection-heavy initialization, classpath scanning, SPI-based module wiring, and dynamic DSL execution that are friendly to extensibility but hostile to GraalVM native image.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SkyWalking GraalVM Distro&lt;/strong&gt; is the result of treating that challenge as a design-system problem instead of a one-off porting exercise. The goal was not only to make OAP run as a native binary, but to turn GraalVM migration itself into a repeatable automation pipeline that can stay aligned with upstream evolution.&lt;/p&gt;
+&lt;p&gt;For the full technical design, benchmark data, and getting-started guide, see the companion post: &lt;a href=&#34;../2026-03-13-skywalking-graalvm-distro-design-and-benchmarks/index.md&#34;&gt;SkyWalking GraalVM Distro: Design and Benchmarks&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;from-paused-idea-to-runnable-system&#34;&gt;From Paused Idea to Runnable System&lt;/h2&gt;
+&lt;p&gt;This journey actually began years ago. Shortly after this repository was created, &lt;a href=&#34;https://github.com/yswdqz&#34;&gt;yswdqz&lt;/a&gt; spent several months exploring the transition. The project proved much harder in practice than the individual GraalVM limitations sounded on paper, and the work eventually paused for years.&lt;/p&gt;
+&lt;p&gt;That pause is important. The missing ingredient was not ideas. Mature maintainers usually have more ideas than time. The real constraint was implementation economics. Even when the architect can see several promising directions, limited developer resources force an earlier trade-off: choose the path that is cheapest to implement, not necessarily the path that is cleanest, most reusable, or most future-proof.&lt;/p&gt;
+&lt;p&gt;This is a very common reality, not an exceptional one. In open source communities, much of the work depends on volunteers or limited company sponsorship. In commercial products, the pressure is different but the constraint is still real: roadmap commitments, staffing limits, and delivery deadlines keep engineering resources tight. In both worlds, good ideas are often abandoned not because they are wrong, but because they are too expensive to validate and implement thoroughly.&lt;/p&gt;
+&lt;p&gt;There is another constraint that matters just as much: the architect is usually also a very senior engineer, not a full-time implementation machine. That means limited personal coding energy, fragmented time, and a constant need to explain ideas to other senior engineers before the code exists. Traditionally, that explanation happens through diagrams, documents, and conversations. It is slow, lossy, and unpredictable. We all know some version of the Telephone Game: even simple words are easy to misunderstand, and by the time the misunderstanding becomes visible, a lot of time has already passed.&lt;/p&gt;
+&lt;p&gt;What changed in late 2025 was that AI engineering made multiple runnable ideas affordable. Instead of picking an early compromise because implementation capacity was scarce, we could switch repeatedly between designs, validate them with code, discard weak directions quickly, and keep iterating until the architecture became solid, practical, and efficient enough to hold.&lt;/p&gt;
+&lt;p&gt;That design freedom was critical. GraalVM documentation gives clear guidance on isolated limitations, but a mature OSS platform hits them as a connected system. Fixing only one dynamic mechanism is not enough. To make native image practical, we had to turn whole categories of runtime behavior into build-time artifacts and automated metadata generation.&lt;/p&gt;
+&lt;p&gt;There was also a very concrete mountain in front of us in the early history of this distro. In the first several commits of the repository, upstream SkyWalking still relied heavily on Groovy for LAL, MAL, and Hierarchy scripts. In theory, that was just one more unsupported runtime-heavy component. In practice, Groovy was the biggest obstacle in the whole path. It represented not only script execution, but a whole dynamic model that was deeply convenient on the JVM side and deeply unfriendly to native image.&lt;/p&gt;
+&lt;p&gt;To bridge the gap, we re-architected the core engines of OAP around an AOT-first model. Earlier experiments had to confront Groovy-era runtime behavior directly and explore alternative script-compilation approaches to get around it. The finalized direction went further: align with the upstream compiler pipeline, move dynamic generation to build time, and add automation so the migration stays controllable as upstream keeps moving. Concretely, that meant turning OAL, MAL, LAL, and Hierarchy generation into build-time precompiler outputs instead of leaving them as startup-time dynamic behavior.&lt;/p&gt;
+&lt;h2 id=&#34;ai-speed-changed-the-design-loop&#34;&gt;AI Speed Changed the Design Loop&lt;/h2&gt;
+&lt;p&gt;The scale of this transformation was not only about coding faster. AI changed the loop between idea, prototype, validation, and redesign. We could build runnable PoCs for different approaches, throw away weak ones quickly, and preserve the promising abstractions until they formed a coherent migration system.&lt;/p&gt;
+&lt;p&gt;That does not reduce the role of human architecture. It raises the value of it. Human judgment was still required to decide what should become build-time, what should stay configurable, where to introduce same-FQCN replacements, how to keep upstream sync controllable, and which abstractions were worth preserving. But AI speed made it realistic to pursue those better designs instead of settling for a simpler compromise too early.&lt;/p&gt;
+&lt;p&gt;This is the real change in the economics of architecture. In the past, an architect might already know the cleaner direction, but limited engineering capacity often forced that vision back toward a cheaper compromise. Now the architect can return much closer to being a fast developer again: building code, shaping high-abstraction interfaces, and using design patterns to prove the vision directly in the real world.&lt;/p&gt;
+&lt;p&gt;That changes communication as much as implementation. In open source, we often say, &lt;code&gt;talk is cheap, show me the code&lt;/code&gt;. With AI engineering, showing the code becomes much more straightforward. The design no longer depends so heavily on a slow top-down translation from idea to documents to interpretation to implementation. The code can appear earlier, and it can run earlier.&lt;/p&gt;
+&lt;p&gt;Other senior engineers benefit from this too. They do not need to reconstruct the whole design only from diagrams, meetings, or long explanations. They can review the actual abstraction, see the behavior in code, run it, challenge it, and refine it from something concrete. That makes architectural collaboration faster, clearer, and less lossy.&lt;/p&gt;
+&lt;p&gt;This is also where I think the current AI discussion is often noisy. Many projects are fun, surprising, and worth exploring, but advanced engineering work is not improved merely by attaching an agent to a codebase. The important question is not which demo looks most magical. The important question is which engineering capabilities are actually being accelerated without losing the discipline of software development itself.&lt;/p&gt;
+&lt;p&gt;For architects and senior engineers, the capabilities that mattered most here were:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Fast comparative prototyping:&lt;/strong&gt; Building several runnable approaches in code instead of defending one idea with slides and documents.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Large-scale code comprehension:&lt;/strong&gt; Reading across many modules quickly enough to keep the whole system in view.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Systematic refactoring:&lt;/strong&gt; Converting reflection-heavy or runtime-dynamic paths into designs that fit AOT constraints.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Automation construction:&lt;/strong&gt; When a migration step must be repeated every upstream sync, doing it manually once is already expensive. Doing it manually again next time is even more expensive. AI made it practical to invest in generators, inventories, consistency checks, and drift detectors that turn repeated manual work into repeatable automation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Review at breadth:&lt;/strong&gt; Checking edge cases, compatibility boundaries, and repeatability across a large surface area.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Those capabilities were visible in the resulting design. Same-FQCN replacements created a controlled boundary for GraalVM-specific behavior. Reflection metadata was generated from build outputs instead of maintained as a hand-written guess list. Inventories and drift detectors turned upstream sync from a vague maintenance risk into an explicit engineering workflow.&lt;/p&gt;
+&lt;p&gt;For junior engineers, I think the lesson is equally important. AI does not remove the need to learn architecture, invariants, interfaces, testing, or maintenance. It makes those skills more valuable, because they determine whether accelerated implementation produces a durable system or just more code faster. The leverage comes from engineering judgment, not from novelty.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claude Code&lt;/strong&gt; and &lt;strong&gt;Gemini AI&lt;/strong&gt; acted as engineering accelerators throughout this process. In the GraalVM Distro specifically, they helped us:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explore migration strategies as running code:&lt;/strong&gt; Instead of debating which approach might work, we built and compared multiple real prototypes, discarded the weak ones, and kept what held up.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Refactor reflection-heavy and dynamic code paths:&lt;/strong&gt; Replace runtime-hostile patterns with AOT-friendly alternatives across the codebase.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Make upstream sync sustainable:&lt;/strong&gt; Every time the distro pulls from upstream SkyWalking, metadata scanning, config regeneration, and recompilation must happen again. AI helped build the pipeline so that each sync is a controlled, largely automated process rather than a fresh manual effort that grows longer each time.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Review logic and edge cases at scale:&lt;/strong&gt; Especially in places where feature parity mattered more than raw implementation speed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The result was not just a large rewrite. It was a repeatable system: precompilers, manifest-driven loading, reflection-config generation, replacement boundaries, and drift detectors that make upstream migration reviewable and automatable.&lt;/p&gt;
+&lt;p&gt;For the broader methodology behind this style of development, see &lt;a href=&#34;https://builder.aws.com/content/3AgtzlikuD9bSUJrWDCjGW5Q5nW/agentic-vibe-coding-in-a-mature-oss-project-what-worked-what-didnt&#34;&gt;Agentic Vibe Coding in a Mature OSS Project&lt;/a&gt;. This post is the next step in that story: not only enhancing an active mature codebase, but reviving a paused effort and making it actually runnable.&lt;/p&gt;
+&lt;h2 id=&#34;what-actually-changed&#34;&gt;What Actually Changed&lt;/h2&gt;
+&lt;p&gt;The most important outcome of this project is not a benchmark table. The benchmark results belong to the distro itself, and they matter because they prove the system is real. But for this post, the deeper result is methodological: AI engineering changed how architecture could be explored, validated, and refined.&lt;/p&gt;
+&lt;p&gt;Instead of treating architecture as a mostly document-driven activity followed by a long and expensive implementation phase, we were able to move much faster between idea, prototype, comparison, and redesign. That made it realistic to pursue higher-abstraction solutions, preserve cleaner boundaries, and build the automation needed to keep the migration maintainable over time.&lt;/p&gt;
+&lt;p&gt;The technical evidence for that work is the SkyWalking GraalVM Distro itself: not only a runnable system, but a migration pipeline expressed as precompilers, generated reflection metadata, controlled replacement boundaries, and drift checks. The benchmark data matter because they prove the system works in practice, but the architectural result is that the migration became a repeatable system rather than a one-time port. For detailed benchmark methodology, per-pod data, and the full technical design, see &lt;a href=&#34;https://skywalking.apache.org/blog/2026-03-13-how-ai-changed-the-economics-of-architecture/&#34;&gt;SkyWalking GraalVM Distro: Design and Benchmarks&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The project is hosted at &lt;a href=&#34;https://github.com/apache/skywalking-graalvm-distro&#34;&gt;apache/skywalking-graalvm-distro&lt;/a&gt;. We invite the community to test it, report issues, and help move it toward production readiness.&lt;/p&gt;
+&lt;p&gt;For me, the deeper takeaway is broader than this distro. AI engineering does not make architecture less important. It makes architecture more worth pursuing. When implementation speed rises enough, we can afford to test more ideas in code, keep the good abstractions, and build systems that would previously have been judged too expensive to finish well.&lt;/p&gt;
+&lt;p&gt;For senior engineers, that means the bottleneck shifts away from raw typing speed and toward taste, system judgment, and the ability to define stable boundaries. For junior engineers, it means the path forward is not to chase every exciting AI workflow, but to become stronger at the fundamentals that let acceleration compound: understanding requirements, reading unfamiliar systems, questioning assumptions, and recognizing what must remain correct as everything around it changes. AI changed the economics of architecture because it lowered the cost of validating better designs without lowering the bar for engineering judgment.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: SkyWalking GraalVM Distro: Design and Benchmarks</title>
+      <link>/blog/2026-03-13-skywalking-graalvm-distro-design-and-benchmarks/</link>
+      <pubDate>Fri, 13 Mar 2026 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2026-03-13-skywalking-graalvm-distro-design-and-benchmarks/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;em&gt;A technical deep-dive into how we migrated Apache SkyWalking OAP to GraalVM Native Image — not as a one-off port, but as a repeatable pipeline that stays aligned with upstream.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./graph.jpg&#34; alt=&#34;graph.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;For the broader story of how AI engineering made this project economically viable, see &lt;a href=&#34;/blog/2026-03-13-how-ai-changed-the-economics-of-architecture/&#34;&gt;How AI Changed the Economics of Architecture&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;why-graalvm-is-not-optional&#34;&gt;Why GraalVM Is Not Optional&lt;/h2&gt;
+&lt;p&gt;GraalVM Native Image compiles Java applications Ahead-of-Time (AOT) into standalone executables. For an observability backend like SkyWalking OAP, this is not a performance optimization — it is an operational necessity.&lt;/p&gt;
+&lt;p&gt;An observability platform must be the most reliable component in the infrastructure. It has to survive the failures it is supposed to observe. In cloud-native environments where workloads scale, migrate, and restart constantly, the backend that watches everything cannot itself be the slow, heavy process that takes seconds to recover and gigabytes to idle.&lt;/p&gt;
+&lt;p&gt;Our benchmarks make the case concrete:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Startup:&lt;/strong&gt; ~5 ms vs ~635 ms. In a Kubernetes cluster where an OAP pod gets evicted or rescheduled, a 635 ms gap means lost telemetry — traces, metrics, and logs that arrive during that window are simply dropped. At 5 ms, the new pod is receiving data before most clients even notice the disruption.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Idle memory:&lt;/strong&gt; ~41 MiB vs ~1.2 GiB. Observability backends run 24/7. In a multi-tenant or edge deployment, a 97% reduction in baseline RSS is the difference between fitting the observability stack on a small node and needing a dedicated one.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Memory under load:&lt;/strong&gt; ~629 MiB vs ~2.0 GiB at 20 RPS. A 70% reduction at production-like traffic means fewer nodes, lower cloud bills, and more headroom before the backend itself becomes a scaling bottleneck.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;No warm-up penalty:&lt;/strong&gt; Peak throughput is available from the first request. The JVM&amp;rsquo;s JIT compiler needs minutes of traffic before it optimizes hot paths — during that window, tail latency is worse and data processing lags behind. A native binary has no such phase.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Smaller attack surface:&lt;/strong&gt; No JDK runtime means fewer CVEs to track and patch. For a component that ingests data from every service in the cluster, that matters.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These are not incremental improvements. They change what deployment topologies are practical. Serverless observability backends, sidecar-model collectors, edge nodes with tight memory budgets — all become realistic when the backend is this light and this fast.&lt;/p&gt;
+&lt;h2 id=&#34;the-challenge-a-mature-dynamic-java-platform&#34;&gt;The Challenge: A Mature, Dynamic Java Platform&lt;/h2&gt;
+&lt;p&gt;SkyWalking OAP carries all the realities of a large Java platform: runtime bytecode generation, reflection-heavy initialization, classpath scanning, SPI-based module wiring, and dynamic DSL execution. These patterns are friendly to extensibility but hostile to GraalVM native image.&lt;/p&gt;
+&lt;p&gt;The documented GraalVM limitations are only the beginning. In a mature OSS platform, those limitations are deeply entangled with years of runtime design decisions. Standard GraalVM native images struggle with runtime class generation, reflection, dynamic discovery, and script execution — all of which had deep roots in SkyWalking OAP.&lt;/p&gt;
+&lt;p&gt;There was also a very concrete mountain in the early history of this distro. Upstream SkyWalking relied heavily on Groovy for LAL, MAL, and Hierarchy scripts. In theory, that was just one more unsupported runtime-heavy component. In practice, Groovy was the biggest obstacle in the whole path. It represented not only script execution, but a whole dynamic model that was deeply convenient on the JVM side and deeply unfriendly to native image.&lt;/p&gt;
+&lt;h2 id=&#34;the-design-goal-make-migration-repeatable&#34;&gt;The Design Goal: Make Migration Repeatable&lt;/h2&gt;
+&lt;p&gt;The final design is not just &amp;ldquo;run native-image successfully.&amp;rdquo; It is a system that keeps migration work repeatable:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Pre-compile runtime-generated assets at build time.&lt;/strong&gt; OAL, MAL, LAL, Hierarchy rules, and meter-related generated classes are compiled during the build and packaged as artifacts instead of being generated at startup.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Replace dynamic discovery with deterministic loading.&lt;/strong&gt; Classpath scanning and runtime registration paths are converted into manifest-driven loading.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reduce runtime reflection and generate native metadata from the build.&lt;/strong&gt; Reflection configuration is produced from actual manifests and scanned classes instead of being maintained as a hand-written guess list.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Keep the upstream sync boundary explicit.&lt;/strong&gt; Same-FQCN replacements are intentionally packaged, inventoried, and guarded with staleness checks.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Make drift visible immediately.&lt;/strong&gt; If upstream providers, rule files, or replaced source files change, tests fail and force explicit review.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That is the architectural shift that matters most. Reusable abstraction and foresight did not become less important in the AI era. They became more important, because they determine whether AI speed produces a maintainable system or just a fast-growing pile of code.&lt;/p&gt;
+&lt;h2 id=&#34;turning-runtime-dynamism-into-build-time-assets&#34;&gt;Turning Runtime Dynamism into Build-Time Assets&lt;/h2&gt;
+&lt;p&gt;SkyWalking OAP has several dynamic subsystems that are natural in a JVM world but problematic for native image:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OAL generates classes at runtime.&lt;/li&gt;
+&lt;li&gt;LAL, MAL, and Hierarchy were historically tied to Groovy-heavy runtime behavior, which became one of the biggest practical blockers in the early distro work.&lt;/li&gt;
+&lt;li&gt;MAL, LAL, and Hierarchy rules depend on runtime compilation behavior.&lt;/li&gt;
+&lt;li&gt;Guava-based classpath scanning discovers annotations, dispatchers, decorators, and meter functions.&lt;/li&gt;
+&lt;li&gt;SPI-based module/provider discovery expects a more dynamic runtime environment.&lt;/li&gt;
+&lt;li&gt;YAML/config initialization and framework integrations depend on reflective access.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In SkyWalking GraalVM Distro, these are not solved one by one as isolated patches. They are pulled into a build-time pipeline.&lt;/p&gt;
+&lt;p&gt;The precompiler runs the DSL engines during the build, exports generated classes, writes manifests, serializes config data, and generates native-image metadata. That means startup becomes class loading and registration, not runtime code generation. The runtime path is simpler because the build path became richer.&lt;/p&gt;
+&lt;p&gt;This is also why the project is more than a performance exercise. The design goal was to move complexity into a place where it is easier to verify, easier to automate, and easier to repeat.&lt;/p&gt;
+&lt;h2 id=&#34;same-fqcn-replacements-as-a-controlled-boundary&#34;&gt;Same-FQCN Replacements as a Controlled Boundary&lt;/h2&gt;
+&lt;p&gt;One of the most practical design choices in this distro is the use of same-FQCN replacement classes. We do not rely on vague startup tricks or undocumented ordering assumptions. Instead, the GraalVM-specific jars are repackaged so the original upstream classes are excluded and the replacement classes occupy the exact same fully-qualified names.&lt;/p&gt;
+&lt;p&gt;This matters for maintainability. It creates a very clear boundary:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the upstream class still defines the behavior contract,&lt;/li&gt;
+&lt;li&gt;the GraalVM replacement provides a compatible implementation strategy,&lt;/li&gt;
+&lt;li&gt;and the packaging makes that swap explicit.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For example, OAL loading changes from runtime compilation into manifest-driven loading of precompiled classes. Similar replacements handle MAL and LAL DSL loading, module wiring, config initialization, and several reflection-sensitive paths. The goal is not to fork everything. The goal is to replace only the places where the runtime model is fundamentally unfriendly to native image.&lt;/p&gt;
+&lt;p&gt;That boundary is then guarded by tests that hash the upstream source files corresponding to the replacements. When upstream changes one of those files, the build fails and tells us exactly which replacement needs review. This is what turns &amp;ldquo;keeping up with upstream&amp;rdquo; from an anxiety problem into a visible engineering task.&lt;/p&gt;
+&lt;h2 id=&#34;reflection-config-is-generated-not-guessed&#34;&gt;Reflection Config Is Generated, Not Guessed&lt;/h2&gt;
+&lt;p&gt;In many GraalVM migrations, &lt;code&gt;reflect-config.json&lt;/code&gt; becomes a manually accumulated artifact. It grows over time, gets stale, and nobody is fully sure whether it is complete or why each entry exists. That approach does not scale well for a large, evolving OSS platform.&lt;/p&gt;
+&lt;p&gt;In this distro, reflection metadata is generated from the build outputs and scanned classes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;manifests for OAL, MAL, LAL, Hierarchy, and meter-generated classes,&lt;/li&gt;
+&lt;li&gt;annotation-scanned classes,&lt;/li&gt;
+&lt;li&gt;Armeria HTTP handlers,&lt;/li&gt;
+&lt;li&gt;GraphQL resolvers and schema-mapped types,&lt;/li&gt;
+&lt;li&gt;and accepted &lt;code&gt;ModuleConfig&lt;/code&gt; classes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is a much healthier model. Instead of asking people to remember every reflective access path, the system derives reflection metadata from the actual migration pipeline. The build becomes the source of truth.&lt;/p&gt;
+&lt;h2 id=&#34;keeping-upstream-sync-practical&#34;&gt;Keeping Upstream Sync Practical&lt;/h2&gt;
+&lt;p&gt;If this distro were only a one-time engineering sprint, it would be much less interesting. The real challenge is keeping it alive while upstream SkyWalking continues to evolve.&lt;/p&gt;
+&lt;p&gt;That is why the repo includes explicit inventories and drift detectors:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;provider inventories that force new upstream providers to be categorized,&lt;/li&gt;
+&lt;li&gt;rule-file inventories that force new DSL inputs to be acknowledged,&lt;/li&gt;
+&lt;li&gt;SHA watchers for precompiled YAML inputs,&lt;/li&gt;
+&lt;li&gt;and SHA watchers for upstream source files with GraalVM-specific replacements.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Good abstraction is not only about elegant code structure. It is about choosing a migration design that can survive contact with future change.&lt;/p&gt;
+&lt;h2 id=&#34;benchmark-results&#34;&gt;Benchmark Results&lt;/h2&gt;
+&lt;p&gt;We benchmarked the standard JVM OAP against the GraalVM Distro on an Apple M3 Max (macOS, Docker Desktop, 10 CPUs / 62.7 GB), both connecting to BanyanDB.&lt;/p&gt;
+&lt;h3 id=&#34;boot-test-docker-compose-no-traffic-median-of-3-runs&#34;&gt;Boot Test (Docker Compose, no traffic, median of 3 runs)&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;JVM OAP&lt;/th&gt;
+&lt;th&gt;GraalVM OAP&lt;/th&gt;
+&lt;th&gt;Delta&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Cold boot startup&lt;/td&gt;
+&lt;td&gt;635 ms&lt;/td&gt;
+&lt;td&gt;5 ms&lt;/td&gt;
+&lt;td&gt;~127x faster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Warm boot startup&lt;/td&gt;
+&lt;td&gt;630 ms&lt;/td&gt;
+&lt;td&gt;5 ms&lt;/td&gt;
+&lt;td&gt;~126x faster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Idle RSS&lt;/td&gt;
+&lt;td&gt;~1.2 GiB&lt;/td&gt;
+&lt;td&gt;~41 MiB&lt;/td&gt;
+&lt;td&gt;~97% reduction&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Boot time is measured from OAP&amp;rsquo;s first application log timestamp to the &lt;code&gt;listening on 11800&lt;/code&gt; log line (gRPC server ready).&lt;/p&gt;
+&lt;h3 id=&#34;under-sustained-load-kind--istio-1252--bookinfo-at-20-rps-2-oap-replicas&#34;&gt;Under Sustained Load (Kind + Istio 1.25.2 + Bookinfo at ~20 RPS, 2 OAP replicas)&lt;/h3&gt;
+&lt;p&gt;30 samples at 10s intervals after 60s warmup.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;JVM OAP&lt;/th&gt;
+&lt;th&gt;GraalVM OAP&lt;/th&gt;
+&lt;th&gt;Delta&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;CPU median (millicores)&lt;/td&gt;
+&lt;td&gt;101&lt;/td&gt;
+&lt;td&gt;68&lt;/td&gt;
+&lt;td&gt;-33%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CPU avg (millicores)&lt;/td&gt;
+&lt;td&gt;107&lt;/td&gt;
+&lt;td&gt;67&lt;/td&gt;
+&lt;td&gt;-37%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Memory median (MiB)&lt;/td&gt;
+&lt;td&gt;2068&lt;/td&gt;
+&lt;td&gt;629&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;-70%&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Memory avg (MiB)&lt;/td&gt;
+&lt;td&gt;2082&lt;/td&gt;
+&lt;td&gt;624&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;-70%&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Both variants reported identical entry-service CPM, confirming equivalent traffic processing capability.&lt;/p&gt;
+&lt;p&gt;Service metrics collected every 30s via swctl for all discovered services:
+&lt;code&gt;service_cpm&lt;/code&gt;, &lt;code&gt;service_resp_time&lt;/code&gt;, &lt;code&gt;service_sla&lt;/code&gt;, &lt;code&gt;service_apdex&lt;/code&gt;, &lt;code&gt;service_percentile&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Full benchmark scripts and raw data are in the &lt;a href=&#34;https://github.com/apache/skywalking-graalvm-distro/tree/main/benchmark&#34;&gt;benchmark/&lt;/a&gt; directory of the distro repository.&lt;/p&gt;
+&lt;h2 id=&#34;current-status&#34;&gt;Current Status&lt;/h2&gt;
+&lt;p&gt;The project is a runnable experimental distribution, hosted in its own repository: &lt;a href=&#34;https://github.com/apache/skywalking-graalvm-distro&#34;&gt;apache/skywalking-graalvm-distro&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The current distro intentionally focuses on a modern, high-performance operating model:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Storage:&lt;/strong&gt; BanyanDB&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cluster modes:&lt;/strong&gt; Standalone and Kubernetes&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Configuration:&lt;/strong&gt; none or Kubernetes ConfigMap&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Runtime model:&lt;/strong&gt; fixed module set, precompiled assets, and AOT-friendly wiring&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This focus is deliberate. A repeatable migration system starts by making a clear scope runnable, then expanding without losing control.&lt;/p&gt;
+&lt;h2 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h2&gt;
+&lt;p&gt;Because the SkyWalking GraalVM Distro is designed for peak performance, it is optimized to work with &lt;strong&gt;BanyanDB&lt;/strong&gt; as its storage backend. The current published image is available on Docker Hub, and you can boot the stack using the following &lt;code&gt;docker-compose.yml&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#000080&#34;&gt;version&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#d14&#34;&gt;&amp;#39;3.8&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;services&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;banyandb&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;image&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;ghcr.io/apache/skywalking-banyandb:e1ba421bd624727760c7a69c84c6fe55878fb526&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;container_name&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;banyandb&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;restart&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;always&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;ports&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;17912:17912&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;17913:17913&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;command&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;standalone --stream-root-path /tmp/stream-data --measure-root-path /tmp/measure-data --measure-metadata-cache-wait-duration 1m --stream-metadata-cache-wait-duration 1m&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;healthcheck&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;test&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;[&lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;CMD&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;sh&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;-c&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;nc -nz 127.0.0.1 17912&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;interval&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;5s&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;timeout&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;10s&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;retries&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;120&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;oap&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;image&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;apache/skywalking-graalvm-distro:0.1.1&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;container_name&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;oap&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;depends_on&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;banyandb&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;condition&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;service_healthy&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;restart&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;always&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;ports&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;11800:11800&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;12800:12800&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;environment&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;SW_STORAGE&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;banyandb&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;SW_STORAGE_BANYANDB_TARGETS&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;banyandb:17912&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;SW_HEALTH_CHECKER&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;default&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;healthcheck&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;test&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;[&lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;CMD-SHELL&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;nc -nz 127.0.0.1 11800 || exit 1&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;interval&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;5s&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;timeout&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;10s&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;retries&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#099&#34;&gt;120&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;ui&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;image&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;ghcr.io/apache/skywalking/ui:10.3.0&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;container_name&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;ui&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;depends_on&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;oap&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;condition&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;service_healthy&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;restart&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;always&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;ports&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;8080:8080&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;environment&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#000080&#34;&gt;SW_OAP_ADDRESS&lt;/span&gt;:&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;http://oap:12800&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Simply run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker compose up -d
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We invite the community to test this new distribution, report issues, and help us move it toward a production-ready state.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Special thanks to the GraalVM team for the technology foundation.&lt;/em&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Agentic Vibe Coding in a Mature OSS Project: What Worked, What Didn&#39;t</title>
+      <link>/blog/2026-03-08-agentic-vibe-coding/</link>
+      <pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2026-03-08-agentic-vibe-coding/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Most &amp;ldquo;vibe coding&amp;rdquo; stories start with a greenfield project. This one doesn&amp;rsquo;t.&lt;/p&gt;
+&lt;p&gt;Apache SkyWalking is a 9-year-old observability platform with hundreds of production deployments, a complex DSL stack, and an external API surface that users have built dashboards, alerting rules, and automation scripts against. When I decided to replace the core scripting engine — purging the Groovy runtime from four DSL compilers — the constraint wasn&amp;rsquo;t &amp;ldquo;can AI write the code?&amp;rdquo; It was: &amp;ldquo;can AI write the code without breaking anything for existing users?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;The answer turned out to be yes — &lt;strong&gt;~77,000 lines changed across 10 major PRs in about 5 weeks&lt;/strong&gt; — but only because the AI was tightly guided by a human who understood the project&amp;rsquo;s architecture, its compatibility contracts, and its users. This post is about the methodology: what worked, what didn&amp;rsquo;t, and what mature open-source maintainers should know before handing their codebase to AI agents.&lt;/p&gt;
+&lt;h2 id=&#34;the-project-in-brief&#34;&gt;The Project in Brief&lt;/h2&gt;
+&lt;p&gt;The task was to replace SkyWalking&amp;rsquo;s Groovy-based scripting engines (MAL, LAL, Hierarchy) with a unified ANTLR4 + Javassist bytecode compilation pipeline, matching the architecture already proven by the OAL compiler. The internal tech stack was completely overhauled; the external interface had to remain identical.&lt;/p&gt;
+&lt;p&gt;Beyond the compiler rewrites, the scope included a new queue infrastructure (threads dropped from 36 to 15), virtual thread support for JDK 25+, and E2E test modernization. By conventional estimates, this was 5-8 months of senior engineer work.&lt;/p&gt;
+&lt;p&gt;For the full technical details on the compiler architecture, see the &lt;a href=&#34;https://github.com/apache/skywalking/discussions/13716&#34;&gt;Groovy elimination discussion&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;what-is-agentic-vibe-coding&#34;&gt;What is Agentic Vibe Coding?&lt;/h2&gt;
+&lt;p&gt;&amp;ldquo;Vibe coding&amp;rdquo; — a term coined by Andrej Karpathy — describes a style of programming where you describe intent and let AI write the code. It&amp;rsquo;s powerful for prototyping, but on its own, it&amp;rsquo;s risky for production systems.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Agentic vibe coding&lt;/strong&gt; takes this further: instead of a single AI autocomplete, you orchestrate multiple AI agents — each with different strengths — under your architectural direction, with automated tests as the safety net. In my workflow:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Claude Code (plan mode)&lt;/strong&gt;: Primary coding agent. Plan mode lets me review the approach before any code is generated. This is critical for architectural decisions — I steer the design, Claude handles the implementation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gemini&lt;/strong&gt;: Code review, concurrency analysis, and verification reports. Gemini reviewed every major PR for thread-safety, feature parity, and edge cases.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Codex&lt;/strong&gt;: Autonomous task execution for well-defined, bounded work items.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The key insight: &lt;strong&gt;AI writes the code, but the architect owns the design.&lt;/strong&gt; Without deep domain knowledge of SkyWalking&amp;rsquo;s internals, no AI could have planned these changes. Without AI, I couldn&amp;rsquo;t have executed them in 5 weeks.&lt;/p&gt;
+&lt;h2 id=&#34;how-tdd-made-ai-coding-safe&#34;&gt;How TDD Made AI Coding Safe&lt;/h2&gt;
+&lt;p&gt;The reason I could move this fast without breaking things comes down to one principle: &lt;strong&gt;never let AI code without a test harness.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;My workflow for each major change:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Plan mode first&lt;/strong&gt;: Describe the goal to Claude, review the plan, iterate on architecture before any code is written.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Write the test contract&lt;/strong&gt;: Define what &amp;ldquo;correct&amp;rdquo; means — for the compiler rewrites, this meant cross-version comparison tests that run every expression through both the old and new engines, asserting identical results across 1,290+ expressions.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Let AI implement&lt;/strong&gt;: With the test contract in place, Claude can write thousands of lines of implementation code. If it&amp;rsquo;s wrong, the tests catch it immediately.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;E2E as the final gate&lt;/strong&gt;: Every PR must pass the full E2E test suite — Docker-based integration tests that boot the entire server with real storage backends.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI code review&lt;/strong&gt;: Gemini reviewed each PR for concurrency issues, thread-safety, and feature parity — catching things that unit tests alone wouldn&amp;rsquo;t find.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This is the opposite of &amp;ldquo;hope it works&amp;rdquo; vibe coding. The AI writes fast, the tests verify fast, and I steer the architecture. The feedback loop is tight enough that I can iterate on complex compiler code in minutes instead of days.&lt;/p&gt;
+&lt;h2 id=&#34;lessons-learned&#34;&gt;Lessons Learned&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;AI is a force multiplier, not a replacement.&lt;/strong&gt; Before any AI agent wrote a single line, a human had to define the replacement solution: &lt;em&gt;what&lt;/em&gt; gets replaced, &lt;em&gt;how&lt;/em&gt; it gets replaced, and — critically — &lt;em&gt;where the boundaries are&lt;/em&gt;. Which APIs could break? The internal compilation pipeline was fair game for a complete overhaul. Which APIs must stay aligned? Every external-facing DSL syntax, every YAML configuration key, every metrics name and tag structure had to remain byte-for-byte identical — because hundreds of deployed dashboards, alerting rules, and user scripts depend on them. Drawing these boundaries required deep knowledge of the codebase and its users. AI executed the plan at extraordinary speed, but the plan itself — the scope, the invariants, the compatibility contract — had to come from a human who understood the blast radius of every change.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Plan mode is non-negotiable for architectural work.&lt;/strong&gt; Letting AI jump straight to code on a compiler rewrite would be a disaster. Plan mode&amp;rsquo;s strength is that it collects code context — scanning imports, tracing call chains, mapping class hierarchies — and uses that context to help me fill in implementation details I&amp;rsquo;d otherwise have to look up manually. But it can&amp;rsquo;t tell you the design principles. That direction had to come from me, stated clearly upfront, so the AI&amp;rsquo;s planning stayed on the right track instead of optimizing toward a locally reasonable but architecturally wrong solution.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Know when to hit ESC.&lt;/strong&gt; Claude has a clear tendency to dive deep into solution code writing once it starts — and it won&amp;rsquo;t stop on its own when it encounters something that conflicts with the original plan&amp;rsquo;s concept. Instead of pausing to flag the conflict, it will push forward, improvising around the obstacle in ways that silently violate the design intent. I had to learn to watch for this: when Claude&amp;rsquo;s output started drifting from the plan, I&amp;rsquo;d manually cancel the task (ESC), call it off, identify where the plan and reality diverged, adjust the plan, and restart. This interrupt-replan cycle was a regular part of the workflow, not an exception. The architect has to stay in the loop — not just at planning time, but during execution — because AI agents don&amp;rsquo;t yet know when to stop and ask.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Spec-driven testing is necessary but not sufficient — the logic workflow matters more.&lt;/strong&gt; It&amp;rsquo;s tempting to think that if you define the input/output spec clearly enough, AI can fill in the implementation and tests will catch any mistakes. I tried this. It doesn&amp;rsquo;t work for anything non-trivial. During the expression compiler rewrite, Claude would sometimes change code in unreasonable ways just to make the spec tests pass — the inputs went in, the expected outputs came out, and everything looked green. But the internal logic was wrong: inconsistent with the design patterns the rest of the codebase relied on, impossible to extend, or solving the specific test case through a hack rather than a general mechanism. A spec only checks &lt;em&gt;what&lt;/em&gt; the code produces; it says nothing about &lt;em&gt;how&lt;/em&gt; the code produces it. For a mature project, the &amp;ldquo;how&amp;rdquo; matters enormously — the solution needs to be consistent with the existing architecture, widely adoptable by contributors, and maintainable long-term. That&amp;rsquo;s why I needed cross-version testing &lt;em&gt;and&lt;/em&gt; human review of the implementation path, not just the results.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Testing at two levels kept the rewrite honest.&lt;/strong&gt; Cross-version testing was part of my design plan from the start — I architected the dual-path comparison framework so that every production DSL expression runs through both the old and new engines, asserting identical results across 1,290+ expressions. This gave me confidence no human review could match, and it was a deliberate planning decision: I knew AI-generated compiler code needed a mechanical proof of behavioral equivalence, not just eyeball review. On top of that, E2E tests served as the project&amp;rsquo;s existing infrastructure safety net — Docker-based integration tests that boot the entire server with real storage backends. Unit tests and cross-version tests verify logic in isolation; E2E tests verify the system actually works end-to-end. For infrastructure-level changes like queue replacement and thread model changes, E2E is the only gate that truly matters. Together, the two layers — designed-for-this-rewrite cross-version tests and pre-existing E2E infrastructure — caught different classes of bugs and made shipping with confidence possible.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Multiple AIs have different strengths.&lt;/strong&gt; Claude excels at large-scale code generation with plan mode. Gemini is exceptional at logic review — it can mentally trace code branches with given input data, simulating execution without actually running the code. This is significant for reviewing AI-generated code: Gemini would walk through a generated compiler method step by step, flagging where a null check was missing or where a branch would produce wrong output for a specific edge case. Codex proved most valuable as a test reviewer and honesty checker. AI-generated code has a subtle failure mode: the coding agent can make wrong assumptions and then write tests that pass by setting expected values to match the wrong behavior — effectively bypassing the test safety net. Codex caught cases where Claude had set unreasonable expected values that happened to make tests green, masking logic errors that would have surfaced in production. Using all three as checks on each other was far more effective than relying on any single one.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Mythical Man-Month still applies — and so does the Mythical Token-Month.&lt;/strong&gt; Brooks taught us that a task requiring 12 person-months does not mean 12 people can finish it in one month. The same law applies to AI: you cannot simply throw more tokens, more agents, or more parallel sessions at a problem and expect it to converge faster. Communication costs, coordination overhead, requirements analysis, and conceptual integrity — these software engineering fundamentals do not disappear just because your workforce is artificial. Worse, when the direction is wrong — when there&amp;rsquo;s a conceptual error in the design or an unreasonable architectural choice — AI will not recognize it. It will charge down the wrong path at extraordinary speed, burning tokens furiously while trapped in a vortex of self-justification: patching code to make failing tests pass, adjusting expected values to match wrong behavior, adding workarounds on top of workarounds — each iteration making the codebase look more &amp;ldquo;complete&amp;rdquo; while drifting further from correctness. AI vibe coding cannot break out of this spiral on its own. Only a human who understands the domain can recognize &amp;ldquo;this is fundamentally wrong, stop,&amp;rdquo; discard the work, and redirect. Speed without direction is just expensive chaos.&lt;/p&gt;
+&lt;h2 id=&#34;the-bigger-picture&#34;&gt;The Bigger Picture&lt;/h2&gt;
+&lt;p&gt;The agentic vibe coding approach worked because it combined AI&amp;rsquo;s speed with human architectural judgment and automated test discipline. It&amp;rsquo;s not magic — it&amp;rsquo;s engineering, accelerated.&lt;/p&gt;
+&lt;p&gt;Brooks also gave us &amp;ldquo;No Silver Bullet,&amp;rdquo; and its core distinction matters more than ever: software complexity comes in two kinds. &lt;strong&gt;Essential complexity&lt;/strong&gt; comes from the problem itself — the domain semantics, the behavioral contracts, the concurrency invariants. No tool can eliminate this; it must be understood, modeled, and reasoned about by someone who knows the domain. &lt;strong&gt;Accidental complexity&lt;/strong&gt; comes from the tools and implementation — boilerplate code, manual refactoring across hundreds of files, the mechanical work of translating a design into compilable source. This is exactly where AI excels. What made this project work was recognizing which complexity was which: I owned the essential complexity (architecture, API boundaries, correctness invariants), and AI demolished the accidental complexity (generating 77K lines of implementation, scaffolding test harnesses, rewriting repetitive patterns across dozens of config files). Confuse the two — let AI make essential decisions, or waste human time on accidental work — and you get the worst of both worlds.&lt;/p&gt;
+&lt;p&gt;Qian Xuesen(Tsien Hsue-shen)&amp;rsquo;s &lt;em&gt;Engineering Cybernetics&lt;/em&gt; offers another lens that proved surprisingly relevant. His core framework — &lt;strong&gt;feedback&lt;/strong&gt;, &lt;strong&gt;control&lt;/strong&gt;, &lt;strong&gt;optimization&lt;/strong&gt; — describes how to keep complex systems running toward their target. AI vibe coding at full speed is like a hypersonic missile: extraordinarily fast, but without a guidance system it just creates a bigger crater in the wrong place. The feedback loop in my workflow was the test harness — cross-version tests and E2E tests providing continuous signal on whether the system was still on course. Control was the human architect deciding when to intervene: reviewing plans before execution, hitting ESC when the direction drifted, choosing which AI to trust for which task. Optimization was iterative: each interrupt-replan cycle refined the approach, each Gemini review tightened the logic, each Codex audit caught assumptions the coding agent had smuggled past the tests. Without all three — feedback to detect deviation, control to correct course, optimization to converge — the speed of AI coding would be not an advantage but a liability. The faster the missile, the more precise the guidance must be.&lt;/p&gt;
+&lt;p&gt;For more details or to share your own experience with agentic coding on production systems, feel free to reach me on &lt;a href=&#34;https://github.com/wu-sheng&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Apache SkyWalking 2025 in Review: Making BanyanDB Ready for Production</title>
+      <link>/blog/2026-01-01-skywalking-2025-year-in-review/</link>
+      <pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2026-01-01-skywalking-2025-year-in-review/</guid>
+      <description>
+        
+        
+        &lt;p&gt;2025 was a very focused year for the Apache SkyWalking community: &lt;strong&gt;moving BanyanDB from “native storage” to a “production-ready default”&lt;/strong&gt;, and making SkyWalking APM fully benefit from that foundation.&lt;/p&gt;
+&lt;p&gt;This post summarizes the key milestones, with an emphasis on BanyanDB.&lt;/p&gt;
+&lt;h2 id=&#34;storage-strategy-saying-goodbye-to-h2&#34;&gt;Storage strategy: saying goodbye to H2&lt;/h2&gt;
+&lt;p&gt;We started 2025 with a clear direction: the &lt;strong&gt;H2 storage option is permanently removed&lt;/strong&gt;.
+This change reduced long-term maintenance burden and removed a storage choice that was not aligned with production and cloud-native deployments.&lt;/p&gt;
+&lt;h2 id=&#34;banyandb-from-080-foundations-to-090-production-features&#34;&gt;BanyanDB: from 0.8.0 foundations to 0.9.0 production features&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;BanyanDB 0.8.0&lt;/strong&gt; delivered the “day-2 operations” foundation that a default storage backend needs. The community put a lot of effort into making queries faster and more predictable (for example &lt;code&gt;index_mode&lt;/code&gt;, numeric index types, and multiple query-path optimizations), while also making the system safer under real production pressure. Disk-usage thresholds and a query &lt;strong&gt;memory protector&lt;/strong&gt; were added as guardrails, and the operational toolbox matured with snapshot/backup/restore utilities and improved metadata synchronization.&lt;/p&gt;
+&lt;p&gt;Just as importantly, 0.8.0 started filling in the missing pieces of a full platform: native property storage and lifecycle-related capabilities that later enabled stronger HA and stage-based deployment patterns.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;BanyanDB 0.9.0&lt;/strong&gt; was the “production features” milestone. It introduced the &lt;strong&gt;Trace&lt;/strong&gt; data model as a first-class citizen, which unlocked much deeper trace storage and query capabilities. On the reliability and scaling side, the release brought configurable replicas, liaison-side improvements (including load balancing and moving some TopN flow), and broader correctness work such as migrations, version compatibility checks, and access logs.&lt;/p&gt;
+&lt;p&gt;It also made long-term operations more cloud-friendly with backup/restore support for AWS S3, GCS, and Azure Blob Storage, and added authentication primitives needed in shared environments. In short, 0.9.0 is where BanyanDB clearly moved beyond a “fast storage engine” into a “production platform”.&lt;/p&gt;
+&lt;h2 id=&#34;skywalking-apm-banyandb-becomes-the-default-path&#34;&gt;SkyWalking APM: BanyanDB becomes the default path&lt;/h2&gt;
+&lt;p&gt;With &lt;strong&gt;APM 10.2.0&lt;/strong&gt;, the project made the strategic shift official: H2 was removed permanently, and BanyanDB 0.8.0 became the default path that SkyWalking invests in. A lot of the work here was not flashy, but essential — refining OAP behavior (group settings, index model changes, Progressive TTL, query limits, and more) so running BanyanDB in production felt stable and predictable.&lt;/p&gt;
+&lt;p&gt;With &lt;strong&gt;APM 10.3.0&lt;/strong&gt;, SkyWalking and BanyanDB moved forward together: BanyanDB 0.9.0’s new trace model was adopted end-to-end, reducing inefficient query round-trips and enabling new query views that significantly lowered page latency. The integration also expanded into lifecycle-aware operations with hot/warm/cold stage configuration (including TTL and query support), and added BanyanDB &lt;strong&gt;self-monitoring&lt;/strong&gt; through OAP and the UI — the kind of end-to-end polish that turns a storage backend into a truly native solution.&lt;/p&gt;
+&lt;p&gt;If you’d like this review to cover &lt;strong&gt;APM 10.4.x&lt;/strong&gt; as well, please point me to the corresponding release content in this repo (I didn’t find an APM 10.4.0 release announcement in the current checkout).&lt;/p&gt;
+&lt;h2 id=&#34;packaging-and-deployment-ecosystem-helm&#34;&gt;Packaging and deployment ecosystem (Helm)&lt;/h2&gt;
+&lt;p&gt;BanyanDB’s production readiness is not only server features — it also depends on deployment maturity.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Helm charts:
+&lt;ul&gt;
+&lt;li&gt;SkyWalking Kubernetes Helm Chart 4.8.0 improved BanyanDB deployment defaults by updating the bundled BanyanDB Helm dependency, fixing an init-job volume-mount mismatch, and aligning OAP/UI images with the APM 10.3.0 line.&lt;/li&gt;
+&lt;li&gt;BanyanDB Helm 0.4.0 added backup/restore sidecars and a default volume for property storage.&lt;/li&gt;
+&lt;li&gt;BanyanDB Helm 0.5.0 introduced stage-aware patterns (hot/warm/cold), improved lifecycle-sidecar scheduling, moved liaison to StatefulSet, refined internal networking, and expanded configuration options.&lt;/li&gt;
+&lt;li&gt;BanyanDB Helm 0.5.1 refined liaison configuration and fixed restore-init environment issues.&lt;/li&gt;
+&lt;li&gt;BanyanDB Helm 0.5.3 fixed a liaison/data-node port issue.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-rest-of-the-community-agents-and-tooling-kept-moving&#34;&gt;The rest of the community: agents and tooling kept moving&lt;/h2&gt;
+&lt;p&gt;While storage was the “main storyline”, the community shipped releases across agents, clients, and surrounding components throughout 2025.&lt;/p&gt;
+&lt;p&gt;Below is a consolidated view of the other releases, grouped by project, with the most important notes.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SkyWalking Java Agent&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;9.4.0&lt;/strong&gt;: agent self-observability; async-profiler support; broader plugin improvements.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;9.5.0&lt;/strong&gt;: virtual thread executor plugin; compatibility and stability fixes; dependency upgrades.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SkyWalking Go&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;0.6.0&lt;/strong&gt;: richer manual APIs (events/logs/metrics, set span error); goframev2 plugin; bug fixes including Redis cluster mode.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SkyWalking for NodeJS&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;0.8.0&lt;/strong&gt;: Express 4/5 compatibility, keep-alive HTTP trace fix, and test/dependency maintenance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SkyWalking Python&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;1.2.0&lt;/strong&gt;: sampling service, &lt;code&gt;sw_grpc&lt;/code&gt; plugin, async/profiling stability fixes, Python 3.13 support, and dropping Python 3.7.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SkyWalking PHP&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;1.0.0&lt;/strong&gt;: reach 1.0; add PSR-3 log reporting; upgrade toolchain/dependencies.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SkyWalking Rust&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;0.9.0&lt;/strong&gt;: migrate to Rust edition 2024 and upgrade dependencies.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;0.10.0&lt;/strong&gt;: Kafka client configuration refactor, &lt;code&gt;rdkafka&lt;/code&gt; upgrade, CI maintenance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SkyWalking Ruby&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;0.1.0&lt;/strong&gt;: initialize agent core and e2e tests; add plugins for Sinatra, redis-rb, net-http, memcached, and Elasticsearch.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SkyWalking Client JS&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;1.0.0&lt;/strong&gt;: add Core Web Vitals and static resource metrics; fix fetch/resource error handling; dependency and e2e/test improvements.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SkyWalking Satellite&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;1.3.0&lt;/strong&gt;: support native eBPF Access Log protocol and async-profiler protocol; upgrade Go toolchain.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SkyWalking Eyes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;0.7.0&lt;/strong&gt;: improve installation/docs, respect gitignore behavior, upgrade Go, and simplify release steps.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;0.8.0&lt;/strong&gt;: add Elixir support and stronger dependency-license scanning (notably Ruby via Gemfile.lock), plus stability fixes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;looking-ahead-possible-directions-in-2026&#34;&gt;Looking ahead: possible directions in 2026&lt;/h2&gt;
+&lt;p&gt;2025 was about making BanyanDB ready for production. In 2026, the community is exploring the next set of improvements that could make the whole stack simpler to operate, more stable under stress, and easier to integrate into broader observability ecosystems.&lt;/p&gt;
+&lt;p&gt;Possible areas include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;BanyanDB: remove the etcd dependency&lt;/strong&gt;: the direction under discussion is to move away from etcd (given ecosystem activity and maintenance concerns) and rely more on DNS-based discovery plus BanyanDB’s native property capabilities.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BanyanDB: stronger stability testing&lt;/strong&gt;: more systematic testing, including chaos testing, to validate behavior under failures and noisy conditions.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BanyanDB: better observability export&lt;/strong&gt;: introducing First Occurrence Data Collection (FODC) as a sidecar and proxy server to provide a unified stream of observability data to third-party systems.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SkyWalking APM: broader runtime and query capabilities&lt;/strong&gt;: cold-stage data query support, a newer Java runtime (Java 25), and consideration of TraceQL protocol (Temper) support.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;closing&#34;&gt;Closing&lt;/h2&gt;
+&lt;p&gt;Thanks to everyone who contributed to SkyWalking in 2025. Every contribution is high-value — code, documentation, reviews, testing, issue triage, and operational experience — and each of them helped move the project forward.&lt;/p&gt;
+&lt;p&gt;We also want to say a special thank you to the countless end users across global companies. Many of the most valuable improvements don’t start from a pull request: they start from real-world use cases, performance investigations, production feedback, bug reports, and the patience to help us reproduce and validate fixes.&lt;/p&gt;
+&lt;p&gt;As another milestone, SkyWalking reached &lt;strong&gt;968 GitHub contributors&lt;/strong&gt; globally, and we expect the &lt;strong&gt;1000th&lt;/strong&gt; contributor milestone to arrive soon in 2026. But the community is much larger than the number suggests, and SkyWalking’s progress has always been driven by collaboration between contributors, adopters, and maintainers.&lt;/p&gt;
+&lt;p&gt;Apache SkyWalking was originally created by Sheng Wu as a personal project in May 2015. It would never have grown into what it is today without the whole community — and it will keep moving forward because of the community.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: Monitoring Flink with SkyWalking</title>
       <link>/blog/2024-04-19-flink-monitoring-by-skywalking/</link>
       <pubDate>Fri, 25 Apr 2025 00:00:00 +0000</pubDate>
@@ -8508,448 +8970,6 @@ Please download the &lt;code&gt;apache-skywalking-bin-es7.tar.gz&lt;/code&gt; if
 &lt;p&gt;&lt;strong&gt;NOTICE:&lt;/strong&gt; Elastic announced through their blog that Elasticsearch will be moving over to a Server Side Public
 License (SSPL), which is incompatible with Apache License 2.0. This license change is effective from Elasticsearch
 version 7.11. So please choose the suitable Elasticsearch version according to your usage.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: End-User Tracing in a SkyWalking-Observed Browser</title>
-      <link>/blog/end-user-tracing-in-a-skywalking-observed-browser/</link>
-      <pubDate>Thu, 25 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/end-user-tracing-in-a-skywalking-observed-browser/</guid>
-      <description>
-        
-        
-        &lt;p&gt;&lt;img src=&#34;aircraft.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Origin: &lt;a href=&#34;https://thenewstack.io/end-user-tracing-in-a-skywalking-observed-browser&#34;&gt;End-User Tracing in a SkyWalking-Observed Browser - The New Stack&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/apache/skywalking&#34;&gt;Apache SkyWalking&lt;/a&gt;: an APM (application performance monitor) system, especially
-designed for microservices, cloud native, and container-based (Docker, Kubernetes, Mesos) architectures.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/apache/skywalking-client-js&#34;&gt;skywalking-client-js&lt;/a&gt;: a lightweight client-side JavaScript exception, performance, and tracing library. It provides metrics and error collection to the SkyWalking backend. It also makes the browser the starting point for distributed tracing.&lt;/p&gt;
-&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
-&lt;p&gt;Web application performance affects the retention rate of users. If a page load time is too long, the user will give up. So we need to monitor the web application to understand performance and ensure that servers are stable, available and healthy. SkyWalking is an APM tool and the skywalking-client-js extends its monitoring to include the browser, providing performance metrics and error collection to the SkyWalking backend.&lt;/p&gt;
-&lt;h2 id=&#34;performance-metrics&#34;&gt;Performance Metrics&lt;/h2&gt;
-&lt;p&gt;The skywalking-client-js uses [window.performance] (&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/Window/performance&#34;&gt;https://developer.mozilla.org/en-US/docs/Web/API/Window/performance&lt;/a&gt;) for performance data collection. From the MDN doc, the performance interface provides access to performance-related information for the current page. It&amp;rsquo;s part of the High Resolution Time API, but is enhanced by the &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/Performance_Timeline&#34;&gt;Performance Timeline API&lt;/a&gt;,  the &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/Navigation_timing_API&#34;&gt;Navigation Timing API&lt;/a&gt;, the &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/User_Timing_API&#34;&gt;User Timing API&lt;/a&gt;, and the &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API&#34;&gt;Resource Timing API&lt;/a&gt;. In skywalking-client-js, all performance metrics  are calculated according to the &lt;a href=&#34;https://www.w3.org/TR/navigation-timing/?spm=a2c4g.11186623.2.12.2f495c7cmRef8Q#sec-navigation-timing-interface&#34;&gt;Navigation Timing API&lt;/a&gt; defined in the W3C specification. We can get a PerformanceTiming object describing our page using the window.performance.timing property. The PerformanceTiming interface contains properties that offer performance timing information for various events that occur during the loading and use of the current page.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;window.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;We can better understand these attributes when we see them together in the figure below from &lt;a href=&#34;https://www.w3.org/TR/navigation-timing/?spm=a2c4g.11186623.2.14.2f495c7cmRef8Q#processing-model&#34;&gt;W3C&lt;/a&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;w3c.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;The following table contains performance metrics in skywalking-client-js.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Metrics Name&lt;/th&gt;
-&lt;th&gt;Describe&lt;/th&gt;
-&lt;th&gt;Calculating Formulae&lt;/th&gt;
-&lt;th&gt;Note&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;redirectTime&lt;/td&gt;
-&lt;td&gt;Page redirection time&lt;/td&gt;
-&lt;td&gt;redirectEnd - redirectStart&lt;/td&gt;
-&lt;td&gt;If the current document and the document that is redirected to are not from the same &lt;a href=&#34;http://tools.ietf.org/html/rfc6454&#34;&gt;origin&lt;/a&gt;, set redirectStart, redirectEnd to 0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;ttfbTime&lt;/td&gt;
-&lt;td&gt;Time to First Byte&lt;/td&gt;
-&lt;td&gt;responseStart - requestStart&lt;/td&gt;
-&lt;td&gt;According to &lt;a href=&#34;https://developers.google.com/web/tools/chrome-devtools/network/reference?spm=a2c4g.11186623.2.16.2f495c7cmRef8Q#timing&#34;&gt;Google Development&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;dnsTime&lt;/td&gt;
-&lt;td&gt;Time to DNS query&lt;/td&gt;
-&lt;td&gt;domainLookupEnd - domainLookupStart&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;tcpTime&lt;/td&gt;
-&lt;td&gt;Time to TCP link&lt;/td&gt;
-&lt;td&gt;connectEnd - connectStart&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;transTime&lt;/td&gt;
-&lt;td&gt;Time to content transfer&lt;/td&gt;
-&lt;td&gt;responseEnd - responseStart&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;sslTime&lt;/td&gt;
-&lt;td&gt;Time to SSL secure connection&lt;/td&gt;
-&lt;td&gt;connectEnd - secureConnectionStart&lt;/td&gt;
-&lt;td&gt;Only supports HTTPS&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;resTime&lt;/td&gt;
-&lt;td&gt;Time to resource loading&lt;/td&gt;
-&lt;td&gt;loadEventStart - domContentLoadedEventEnd&lt;/td&gt;
-&lt;td&gt;Represents a synchronized load resource in pages&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;fmpTime&lt;/td&gt;
-&lt;td&gt;Time to First Meaningful Paint&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;td&gt;Listen for changes in page elements. Traverse each new element, and calculate the total score of these elements. If the element is visible, the score is 1 * weight; if the element is not visible, the score is 0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;domAnalysisTime&lt;/td&gt;
-&lt;td&gt;Time to DOM analysis&lt;/td&gt;
-&lt;td&gt;domInteractive - responseEnd&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;fptTime&lt;/td&gt;
-&lt;td&gt;First Paint Time&lt;/td&gt;
-&lt;td&gt;responseEnd - fetchStart&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;domReadyTime&lt;/td&gt;
-&lt;td&gt;Time to DOM ready&lt;/td&gt;
-&lt;td&gt;domContentLoadedEventEnd - fetchStart&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;loadPageTime&lt;/td&gt;
-&lt;td&gt;Page full load time&lt;/td&gt;
-&lt;td&gt;loadEventStart - fetchStart&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;ttlTime&lt;/td&gt;
-&lt;td&gt;Time to interact&lt;/td&gt;
-&lt;td&gt;domInteractive - fetchStart&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;firstPackTime&lt;/td&gt;
-&lt;td&gt;Time to first package&lt;/td&gt;
-&lt;td&gt;responseStart - domainLookupStart&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Skywalking-client-js collects those performance metrics and sends them to the &lt;a href=&#34;https://skywalking.apache.org/docs/main/latest/en/concepts-and-designs/backend-overview/&#34;&gt;OAP (Observability Analysis Platform) server&lt;/a&gt; , which aggregates data on the back-end side that is then shown in visualizations on the UI side. Users can optimize the page according to these data.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;performance.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;exception-metrics&#34;&gt;Exception Metrics&lt;/h2&gt;
-&lt;p&gt;There are five kinds of errors that can be caught in skywalking-client-js:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The resource loading error  is captured  by &lt;code&gt;window.addeventlistener (&#39;error &#39;, callback, true)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;window.onerror&lt;/code&gt; catches JS execution errors&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;window.addEventListener(&#39;unhandledrejection&#39;, callback)&lt;/code&gt; is used to catch the promise errors&lt;/li&gt;
-&lt;li&gt;the  Vue errors are captured by &lt;code&gt;Vue.config.errorHandler&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;the Ajax errors are captured by &lt;code&gt;addEventListener(&#39;error&#39;, callback); addEventListener(&#39;abort&#39;, callback); addEventListener(&#39;timeout&#39;, callback); &lt;/code&gt; in send callback.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The Skywalking-client-js traces error data to the OAP server, finally visualizing data on the UI side.  For an error overview of the App, there are several metrics for basic statistics and trends of errors, including the following metrics.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;App  Error Count, the total number of errors in the selected time period.&lt;/li&gt;
-&lt;li&gt;App JS Error Rate, the proportion of PV with JS errors in a selected time period to total PV.&lt;/li&gt;
-&lt;li&gt;All of  Apps Error Count, Top N Apps error count  ranking.&lt;/li&gt;
-&lt;li&gt;All of Apps JS Error Rate, Top N Apps JS error rate ranking.&lt;/li&gt;
-&lt;li&gt;Error Count of  Versions in the Selected App,  Top N Error Count of  Versions in the Selected App ranking.&lt;/li&gt;
-&lt;li&gt;Error Rate  of  Versions in the Selected App, Top N JS Error Rate of Versions in the Selected App ranking.&lt;/li&gt;
-&lt;li&gt;Error Count of the Selected App, Top N Error Count of the Selected App ranking.&lt;/li&gt;
-&lt;li&gt;Error Rate  of the Selected App, Top N JS Error Rate of the Selected App ranking.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;errors.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;For pages, we use several metrics for basic statistics and trends of errors, including the following metrics:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Top Unstable Pages / Error Rate, Top N Error Count pages of the Selected version ranking.&lt;/li&gt;
-&lt;li&gt;Top Unstable Pages / Error Count, Top N Error Count pages of the Selected version ranking.&lt;/li&gt;
-&lt;li&gt;Page Error Count Layout, data display of different errors in a period of time.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;trends-errors.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user-metrics&#34;&gt;User Metrics&lt;/h2&gt;
-&lt;p&gt;SkyWalking browser monitoring also provides metrics about how the visitors use the monitored websites, such as PV(page views), UV(unique visitors), top N PV(page views), etc.&lt;/p&gt;
-&lt;p&gt;In SPAs (single page applications), the page will be refreshed only once. The traditional method only reports PV once after the page loading, but cannot count the PV of each sub-page, and can&amp;rsquo;t make other types of logs aggregate by sub-page.&lt;/p&gt;
-&lt;p&gt;SkyWalking browser monitoring provides two processing methods for SPA pages:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Enable SPA automatic parsing. This method is suitable for most single page application scenarios with URL hash as the route. In the initialized configuration item, set enableSPA to true, which will turn on the page&amp;rsquo;s hashchange event listener (trigger re reporting PV), and use URL hash as the page field in other data reporting.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Manual reporting. This method can be used in all single page application scenarios. This method can be used if the first method is not usable. The following example provides a set page method to manually update the page name when data is reported. When this method is called, the page PV will be re reported by default:&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;app.on(&lt;span style=&#34;color:#d14&#34;&gt;&amp;#39;routeChange&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;function&lt;/span&gt; (to) {
-    ClientMonitor.setPerformance({
-    collector&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#d14&#34;&gt;&amp;#39;http://127.0.0.1:8080&amp;#39;&lt;/span&gt;,
-    service&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#d14&#34;&gt;&amp;#39;browser-app&amp;#39;&lt;/span&gt;,
-    serviceVersion&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#d14&#34;&gt;&amp;#39;1.0.0&amp;#39;&lt;/span&gt;,
-    pagePath&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; to.path,
-    autoTracePerf&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;true&lt;/span&gt;,
-    enableSPA&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;true&lt;/span&gt;,
-  });
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Let&amp;rsquo;s take a look at the result found in the following image. It shows the most popular applications and versions, and the changes of PV over a period of time.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;user.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;make-the-browser-the-starting-point-for-distributed-tracing&#34;&gt;Make the browser the starting point for distributed tracing&lt;/h2&gt;
-&lt;p&gt;SkyWalking browser monitoring intercepts HTTP requests to trace segments and spans. It supports tracking these following modes of HTTP requests: XMLHttpRequest and fetch. It also supports tracking libraries and tools based on XMLHttpRequest and fetch - such as Axios, SuperAgent, OpenApi, and so on.&lt;/p&gt;
-&lt;p&gt;Let’s see how the SkyWalking browser monitoring intercepts HTTP requests:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;interceptor.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;After this, use &lt;code&gt;window.addEventListener(&#39;xhrReadyStateChange&#39;, callback)&lt;/code&gt; and set the readyState value to&lt;code&gt;sw8 = xxxx&lt;/code&gt; in the request header. At the same time, reporting requests information to the back-end side. Finally, we can view trace data on the trace page. The following graphic is from the trace page:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;trace.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;To see how we listen for fetch requests, let’s see the source code of &lt;a href=&#34;https://github.com/github/fetch/blob/90fb680c1f50181782f276122c1b1115535b1603/fetch.js#L506&#34;&gt;fetch&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;fetch.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;As you can see, it creates a promise and a new XMLHttpRequest object. Because the code of the fetch is built into the browser, it must monitor the code execution first. Therefore, when we add listening events, we can&amp;rsquo;t monitor the code in the fetch. Just after monitoring the code execution, let&amp;rsquo;s rewrite the fetch:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;import&lt;/span&gt; { fetch } from &lt;span style=&#34;color:#d14&#34;&gt;&amp;#39;whatwg-fetch&amp;#39;&lt;/span&gt;; &lt;span style=&#34;color:#0086b3&#34;&gt;window&lt;/span&gt;.fetch &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; fetch;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In this way, we can intercept the fetch request through the above method.&lt;/p&gt;
-&lt;h2 id=&#34;additional-resources&#34;&gt;Additional Resources&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;/blog/end-user-tracing-in-a-skywalking-observed-browser&#34;&gt;End-User Tracing in a SkyWalking-Observed Browser&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: SourceMarker: Continuous Feedback for Developers</title>
-      <link>/blog/2021-03-16-continuous-feedback/</link>
-      <pubDate>Tue, 16 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2021-03-16-continuous-feedback/</guid>
-      <description>
-        
-        
-        &lt;p&gt;&lt;img src=&#34;SM_IDE-APM.gif&#34; alt=&#34;Alt Text&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://sourcemarker.dev&#34;&gt;SourceMarker&lt;/a&gt; is an open-source continuous feedback IDE plugin built on top of Apache SkyWalking, a popular open-source APM system with monitoring, tracing, and diagnosing capabilities for distributed software systems. SkyWalking, a truly holistic system, provides the means for automatically producing, storing, and querying software operation metrics. It requires little to no code changes to implement and is lightweight enough to be used in production. By itself, SkyWalking is a formidable force in the realm of continuous monitoring technology.&lt;/p&gt;
-&lt;p&gt;SourceMarker, leveraging the continuous monitoring functionality provided by SkyWalking, creates continuous feedback technology by automatically linking software operation metrics to source code and displaying feedback directly inside of the IDE. While currently only supporting JetBrains-based IDEs and JVM-based programming languages, SourceMarker may be extended to support any number of programming languages and IDEs. Using SourceMarker, software developers can understand and validate software operation inside of their IDE. Instead of charts that indicate the health of the application, software developers can view the health of individual source code components and interpret software operation metrics from a much more familiar perspective. Such capabilities improve productivity as time spent continuously context switching from development to monitoring would be eliminated.&lt;/p&gt;
-&lt;h2 id=&#34;logging&#34;&gt;Logging&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;SM_Logging.gif&#34; alt=&#34;Logging&#34;&gt;&lt;/p&gt;
-&lt;p&gt;The benefits of continuous feedback technology are immediately apparent with the ability to view and search logs directly from source code. Instead of tailing log files or viewing logs through the browser, SourceMarker allows software developers to navigate production logs just as easily as they navigate source code. By using the source code as the primary perspective for navigating logs, SourceMarker allows software developers to view logs specific to any package, class, method, or line directly from the context of the source code which resulted in those logs.&lt;/p&gt;
-&lt;h2 id=&#34;tracing&#34;&gt;Tracing&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;SM_Tracing.gif&#34; alt=&#34;Tracing&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Furthermore, continuous feedback technology offers software developers a deeper understanding of software by explicitly tying the implicit software operation to source code. Instead of visualizing software traces as Gantt charts, SourceMarker allows software developers to step through trace stacks while automatically resolving trace tags and logs. With SourceMarker, software developers can navigate production software traces in much the same way one debugs local applications.&lt;/p&gt;
-&lt;h2 id=&#34;alerting&#34;&gt;Alerting&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;SM_Alerting.gif&#34; alt=&#34;Alerting&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Most importantly, continuous feedback technology keeps software developers aware of production software operation. Armed with an APM-powered IDE, every software developer can keep track of the behavior of any method, class, package, and even the entire application itself. Moreover, this allows for source code to be the medium through which production bugs are made evident, thereby creating the feasibility of source code with the ability to self-diagnose and convey its own health.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id=&#34;download-sourcemarker&#34;&gt;Download SourceMarker&lt;/h1&gt;
-&lt;p&gt;SourceMarker aims to bridge the theoretical and empirical practices of software development through continuous feedback. The goal is to make developing software with empirical data feel natural and intuitive, creating more complete software developers that understand the entire software development cycle.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/sourceplusplus/sourcemarker&#34;&gt;https://github.com/sourceplusplus/sourcemarker&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This project is still early in its development, so if you think of any ways to improve SourceMarker, please let us know.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: Observe VM Service Meshes with Apache SkyWalking and the Envoy Access Log Service</title>
-      <link>/blog/obs-service-mesh-vm-with-sw-and-als/</link>
-      <pubDate>Sun, 21 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/obs-service-mesh-vm-with-sw-and-als/</guid>
-      <description>
-        
-        
-        &lt;p&gt;&lt;img src=&#34;stone-arch.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Origin: &lt;a href=&#34;https://thenewstack.io/observe-virtual-machine-service-meshes-with-apache-skywalking-and-the-envoy-access-log-service&#34;&gt;Observe VM Service Meshes with Apache SkyWalking and the Envoy Access Log Service - The New Stack&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/apache/skywalking&#34;&gt;Apache SkyWalking&lt;/a&gt;: an APM (application performance monitor) system, especially
-designed for microservices, cloud native, and container-based (Docker, Kubernetes, Mesos) architectures.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.envoyproxy.io/docs/envoy/latest/api-v2/service/accesslog/v2/als.proto&#34;&gt;Envoy Access Log Service&lt;/a&gt;: Access
-Log Service (ALS) is an Envoy extension that emits detailed access logs of all requests going through Envoy.&lt;/p&gt;
-&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
-&lt;p&gt;In the &lt;a href=&#34;/blog/obs-service-mesh-with-sw-and-als&#34;&gt;previous post&lt;/a&gt;, we talked about the observability of service mesh under
-Kubernetes environment, and applied it to the bookinfo application in practice. We also mentioned that, in order to map
-the IP addresses into services, SkyWalking needs access to the service metadata from a Kubernetes cluster, which is not
-available for services deployed in virtual machines (VMs). In this post, we will introduce a new analyzer in SkyWalking
-that leverages Envoy’s metadata exchange mechanism to decouple with Kubernetes. The analyzer is designed to work in
-Kubernetes environments, VM environments, and hybrid environments. If there are virtual machines in your service mesh,
-you might want to try out this new analyzer for better observability, which we will demonstrate in this tutorial.&lt;/p&gt;
-&lt;h2 id=&#34;how-it-works&#34;&gt;How it works&lt;/h2&gt;
-&lt;p&gt;The mechanism of how the analyzer works is the same as what we discussed in
-the &lt;a href=&#34;/blog/obs-service-mesh-with-sw-and-als&#34;&gt;previous post&lt;/a&gt;. What makes VMs different from Kubernetes is that, for VM
-services, there are no places where we can fetch the metadata to map the IP addresses into services.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;image1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;The basic idea we present in this article is to carry the metadata along with Envoy’s access logs, which is called
-metadata-exchange mechanism in Envoy. When Istio pilot-agent starts an Envoy proxy as a sidecar of a service, it
-collects the metadata of that service from the Kubernetes platform, or a file on the VM where that service is deployed,
-and injects the metadata into the bootstrap configuration of Envoy. Envoy will carry the metadata transparently when
-emitting access logs to the SkyWalking receiver.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;image2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;But how does Envoy compose a piece of a complete access log that involves the client side and server side? When a
-request goes out from Envoy, a plugin of istio-proxy named &amp;ldquo;metadata-exchange&amp;rdquo; injects the metadata into the http
-headers (with a prefix like &lt;code&gt;x-envoy-downstream-&lt;/code&gt;), and the metadata is propagated to the server side. The Envoy sidecar
-of the server side receives the request and parses the headers into metadata, and puts the metadata into the access log,
-keyed by &lt;code&gt;wasm.downstream_peer&lt;/code&gt;. The server side Envoy also puts its own metadata into the access log keyed
-by &lt;code&gt;wasm.upstream_peer.&lt;/code&gt; Hence the two sides of a single request are completed.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;image3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;With the metadata-exchange mechanism, we can use the metadata directly without any extra query.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;image4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;example&#34;&gt;Example&lt;/h2&gt;
-&lt;p&gt;In this tutorial, we will use another demo
-application &lt;a href=&#34;http://github.com/GoogleCloudPlatform/microservices-demo&#34;&gt;Online Boutique&lt;/a&gt; that consists of 10+ services so
-that we can deploy some of them in VMs and make them communicate with other services deployed in Kubernetes.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;image5.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Topology of Online Boutique In order to cover as many cases as possible, we will deploy &lt;code&gt;CheckoutService&lt;/code&gt;
-and &lt;code&gt;PaymentService&lt;/code&gt; on VM and all the other services on Kubernetes, so that we can cover the cases like Kubernetes →
-VM (e.g. &lt;code&gt;Frontend&lt;/code&gt; → &lt;code&gt;CheckoutService&lt;/code&gt;), VM → Kubernetes (e.g. &lt;code&gt;CheckoutService&lt;/code&gt; → &lt;code&gt;ShippingService&lt;/code&gt;), and VM → VM (
-e.g. &lt;code&gt;CheckoutService&lt;/code&gt; → &lt;code&gt;PaymentService&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: All the commands used in this tutorial are accessible
-on &lt;a href=&#34;https://github.com/SkyAPMTest/sw-als-vm-demo-scripts&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git clone https://github.com/SkyAPMTest/sw-als-vm-demo-scripts
-&lt;span style=&#34;color:#0086b3&#34;&gt;cd&lt;/span&gt; sw-als-vm-demo-scripts
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Make sure to init the &lt;code&gt;gcloud&lt;/code&gt; SDK properly before moving on. Modify the &lt;code&gt;GCP_PROJECT&lt;/code&gt; in file &lt;code&gt;env.sh&lt;/code&gt; to your own
-project name. Most of the other variables should be OK to work if you keep them intact. If you would like to
-use &lt;code&gt;ISTIO_VERSION&lt;/code&gt; &amp;gt;/= 1.8.0, please make sure &lt;a href=&#34;https://github.com/istio/istio/pull/28956&#34;&gt;this patch&lt;/a&gt; is included.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Prepare Kubernetes cluster and VM instances
-&lt;a href=&#34;https://github.com/SkyAPMTest/sw-als-vm-demo-scripts/blob/2179d04270c98b9f87cf3998f5af775870ed53a7/00-create-cluster-and-vms.sh&#34;&gt;&lt;code&gt;00-create-cluster-and-vms.sh&lt;/code&gt;&lt;/a&gt;
-creates a new GKE cluster and 2 VM instances that will be used through the entire tutorial, and sets up some necessary
-firewall rules for them to communicate with each other.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Install Istio and SkyWalking
-&lt;a href=&#34;https://github.com/SkyAPMTest/sw-als-vm-demo-scripts/blob/2179d04270c98b9f87cf3998f5af775870ed53a7/01a-install-istio.sh&#34;&gt;&lt;code&gt;01a-install-istio.sh&lt;/code&gt;&lt;/a&gt;
-installs Istio Operator with spec &lt;code&gt;resources/vmintegration.yaml&lt;/code&gt;. In the YAML file, we enable the &lt;code&gt;meshExpansion&lt;/code&gt; that
-supports VM in mesh. We also enable the Envoy access log service and specify the
-address &lt;code&gt;skywalking-oap.istio-system.svc.cluster.local:11800&lt;/code&gt; to which Envoy emits the access logs.
-&lt;a href=&#34;https://github.com/SkyAPMTest/sw-als-vm-demo-scripts/blob/2179d04270c98b9f87cf3998f5af775870ed53a7/01b-install-skywalking.sh&#34;&gt;&lt;code&gt;01b-install-skywalking.sh&lt;/code&gt;&lt;/a&gt;
-installs Apache SkyWalking and sets the analyzer to &lt;code&gt;mx-mesh&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Create files to initialize the VM
-&lt;a href=&#34;https://github.com/SkyAPMTest/sw-als-vm-demo-scripts/blob/2179d04270c98b9f87cf3998f5af775870ed53a7/02-create-files-to-transfer-to-vm.sh&#34;&gt;&lt;code&gt;02-create-files-to-transfer-to-vm.sh&lt;/code&gt;&lt;/a&gt;
-creates necessary files that will be used to initialize the VMs.
-&lt;a href=&#34;https://github.com/SkyAPMTest/sw-als-vm-demo-scripts/blob/2179d04270c98b9f87cf3998f5af775870ed53a7/03-copy-work-files-to-vm.sh&#34;&gt;&lt;code&gt;03-copy-work-files-to-vm.sh&lt;/code&gt;&lt;/a&gt;
-securely transfers the generated files to the VMs with &lt;code&gt;gcloud scp&lt;/code&gt; command. Now use &lt;code&gt;./ssh.sh checkoutservice&lt;/code&gt;
-and &lt;code&gt;./ssh.sh paymentservice&lt;/code&gt; to log into the two VMs respectively, and &lt;code&gt;cd&lt;/code&gt; to the &lt;code&gt;~/work&lt;/code&gt; directory,
-execute &lt;code&gt;./prep-checkoutservice.sh&lt;/code&gt; on &lt;code&gt;checkoutservice&lt;/code&gt; VM instance and &lt;code&gt;./prep-paymentservice.sh&lt;/code&gt;
-on &lt;code&gt;paymentservice&lt;/code&gt; VM instance. The Istio sidecar should be installed and started properly. To verify that,
-use &lt;code&gt;tail -f /var/logs/istio/istio.log&lt;/code&gt; to check the Istio logs. The output should be something like:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;2020-12-12T08:07:07.348329Z	info	sds	resource:default new connection
-2020-12-12T08:07:07.348401Z	info	sds	Skipping waiting for gateway secret
-2020-12-12T08:07:07.348401Z	info	sds	Skipping waiting for gateway secret
-2020-12-12T08:07:07.568676Z	info	cache	Root cert has changed, start rotating root cert for SDS clients
-2020-12-12T08:07:07.568718Z	info	cache	GenerateSecret default
-2020-12-12T08:07:07.569398Z	info	sds	resource:default pushed key/cert pair to proxy
-2020-12-12T08:07:07.949156Z	info	cache	Loaded root cert from certificate ROOTCA
-2020-12-12T08:07:07.949348Z	info	sds	resource:ROOTCA pushed root cert to proxy
-2020-12-12T20:12:07.384782Z	info	sds	resource:default pushed key/cert pair to proxy
-2020-12-12T20:12:07.384832Z	info	sds	Dynamic push for secret default
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The dnsmasq configuration &lt;code&gt;address=/.svc.cluster.local/{ISTIO_SERVICE_IP_STUB}&lt;/code&gt; also resolves the domain names ended
-with &lt;code&gt;.svc.cluster.local&lt;/code&gt; to Istio service IP, so that you are able to access the Kubernetes services in the VM by
-fully qualified domain name (FQDN) such as &lt;code&gt;httpbin.default.svc.cluster.local&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Deploy demo application Because we want to deploy &lt;code&gt;CheckoutService&lt;/code&gt; and &lt;code&gt;PaymentService&lt;/code&gt; manually on
-VM, &lt;code&gt;resources/google-demo.yaml&lt;/code&gt; removes the two services
-from &lt;a href=&#34;https://github.com/GoogleCloudPlatform/microservices-demo/blob/master/release/kubernetes-manifests.yaml&#34;&gt;the original YAML&lt;/a&gt;
-.
-&lt;a href=&#34;https://github.com/SkyAPMTest/sw-als-vm-demo-scripts/blob/2179d04270c98b9f87cf3998f5af775870ed53a7/04a-deploy-demo-app.sh&#34;&gt;&lt;code&gt;04a-deploy-demo-app.sh&lt;/code&gt;&lt;/a&gt;
-deploys the other services on Kubernetes. Then log into the 2 VMs, run &lt;code&gt;~/work/deploy-checkoutservice.sh&lt;/code&gt;
-and &lt;code&gt;~/work/deploy-paymentservice.sh&lt;/code&gt; respectively to deploy &lt;code&gt;CheckoutService&lt;/code&gt; and &lt;code&gt;PaymentService&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Register VMs to Istio Services on VMs can access the services on Kubernetes by FQDN, but that’s not the case when the
-Kubernetes services want to talk to the VM services. The mesh has no idea where to forward the requests such
-as &lt;code&gt;checkoutservice.default.svc.cluster.local&lt;/code&gt; because &lt;code&gt;checkoutservice&lt;/code&gt; is isolated in the VM. Therefore, we need to
-register the services to the
-mesh. &lt;a href=&#34;https://github.com/SkyAPMTest/sw-als-vm-demo-scripts/blob/2179d04270c98b9f87cf3998f5af775870ed53a7/04b-register-vm-with-istio.sh&#34;&gt;&lt;code&gt;04b-register-vm-with-istio.sh&lt;/code&gt;&lt;/a&gt;
-registers the VM services to the mesh by creating a &amp;ldquo;dummy&amp;rdquo; service without running Pods, and a &lt;code&gt;WorkloadEntry&lt;/code&gt; to
-bridge the &amp;ldquo;dummy&amp;rdquo; service with the VM service.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;done&#34;&gt;Done!&lt;/h2&gt;
-&lt;p&gt;The demo application contains a &lt;code&gt;load generator&lt;/code&gt; service that performs requests repeatedly. We only need to wait a few
-seconds, and then open the SkyWalking web UI to check the results.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;export POD_NAME=$(kubectl get pods --namespace istio-system -l &amp;quot;app=skywalking,release=skywalking,component=ui&amp;quot; -o jsonpath=&amp;quot;{.items[0].metadata.name}&amp;quot;)
-echo &amp;quot;Visit http://127.0.0.1:8080 to use your application&amp;quot;
-kubectl port-forward $POD_NAME 8080:8080 --namespace istio-system
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Navigate the browser to http://localhost:8080 . The metrics, topology should be there.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;image6.png&#34; alt=&#34;Topology&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;image7.png&#34; alt=&#34;Global metrics&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;image8.png&#34; alt=&#34;Metrics of CheckoutService&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;image9.png&#34; alt=&#34;Metrics of PaymentService&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h2&gt;
-&lt;p&gt;If you face any trouble when walking through the steps, here are some common problems and possible solutions:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;VM service cannot access Kubernetes services? It’s likely the DNS on the VM doesn’t correctly resolve the fully
-qualified domain names. Try to verify that with &lt;code&gt;nslookup istiod.istio-system.svc.cluster.local&lt;/code&gt;. If it doesn’t
-resolve to the Kubernetes CIDR address, recheck the step in &lt;code&gt;prep-checkoutservice.sh&lt;/code&gt; and &lt;code&gt;prep-paymentservice.sh&lt;/code&gt;. If
-the DNS works correctly, try to verify that Envoy has fetched the upstream clusters from the control plane
-with &lt;code&gt;curl http://localhost:15000/clusters&lt;/code&gt;. If it doesn’t contain the target service,
-recheck &lt;code&gt;prep-checkoutservice.sh&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Services are normal but nothing on SkyWalking WebUI? Check the SkyWalking OAP logs
-via &lt;code&gt;kubectl -n istio-system logs -f $(kubectl get pod -A -l &amp;quot;app=skywalking,release=skywalking,component=oap&amp;quot; -o name)&lt;/code&gt;
-and WebUI logs
-via &lt;code&gt;kubectl -n istio-system logs -f $(kubectl get pod -A -l &amp;quot;app=skywalking,release=skywalking,component=ui&amp;quot; -o name)&lt;/code&gt;
-to see whether there are any error logs . Also, make sure the time zone at the bottom-right of the browser is set
-to &lt;code&gt;UTC +0&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;additional-resources&#34;&gt;Additional Resources&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;/blog/obs-service-mesh-with-sw-and-als&#34;&gt;Observe a Service Mesh with Envoy ALS&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: Apache SkyWalking: How to propagate context between threads when using ThreadPoolExecutor</title>
-      <link>/blog/2021-02-09-skywalking-trace-threadpool/</link>
-      <pubDate>Tue, 09 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2021-02-09-skywalking-trace-threadpool/</guid>
-      <description>
-        
-        
-        &lt;p&gt;When using SkyWalking java agent, people usually propagate context easily. They even do not need to change the business
-code. However, it becomes harder when you want to propagate context between threads when using ThreadPoolExecutor.
-You can use the RunnableWrapper in the maven artifact org.apache.skywalking:apm-toolkit-trace. This way you must change
-your code. The developer manager usually don&amp;rsquo;t like this because there may be lots of projects, or lots of runnable code.
-If they don&amp;rsquo;t use SkyWalking some day, the code added will be superfluous and inelegant.&lt;/p&gt;
-&lt;p&gt;Is there a way to propagate context without changing the business code? Yes.&lt;/p&gt;
-&lt;p&gt;Skywalking java agent enhances a class by add a field and implement an interface. The ThreadPoolExecutor is a special
-class that is used widely. We even don&amp;rsquo;t know when and where it is loaded. Most JVMs do not allow changes in the class
-file format for classes that have been loaded previously. So SkyWalking should not enhance the ThreadPoolExecutor successfully by retransforming when the ThreadPoolExecutor has been loaded.
-However, we can apply advice to the ThreadPoolExecutor#execute method and wrap the Runnable param using our
-own agent, then enhance the wrapper class by SkyWalking java agent. An advice do not change the layout of a class.&lt;/p&gt;
-&lt;p&gt;Now we should decide how to do this. You can use the RunnableWrapper in the maven artifact
-org.apache.skywalking:apm-toolkit-trace to wrap the param, but you need to face another problem. This RunnableWrapper
-has a plugin whose active condition is checking if there is @TraceCrossThread. Agent core uses net.bytebuddy.pool.TypePool.Default.WithLazyResolution.LazyTypeDescription to find the annotations
-of a class. The LazyTypeDescription finds annotations by using a URLClassLoader with no urls if the classloader is
-null(bootstrap classloader). So it can not find the @TraceCrossThread class unless you change the LocationStrategy of
-SkyWalking java agent builder.&lt;/p&gt;
-&lt;p&gt;In &lt;a href=&#34;https://github.com/libinglong/skywalking-threadpool-agent&#34;&gt;this project&lt;/a&gt;, I write my own wrapper class,
-and simply add a plugin with a name match condition.
-Next, Let me show you how these two agents work together.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Move the plugin to the skywalking &amp;ldquo;plugins&amp;rdquo; directory.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;plugin.png&#34; alt=&#34;plugin&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;sky-plugins.png&#34; alt=&#34;plugins directory&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Add this agent after the SkyWalking agent since the wrapper class should not be loaded before
-SkyWalking agent instrumentation have finished. For example,&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;java -javaagent:/path/to/skywalking-agent.jar -javaagent:/path/to/skywalking-tool-agent-v1.0.0.jar &amp;hellip;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;agent.png&#34; alt=&#34;agent.png&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;When our application runs&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;SkyWalking java agent adds a transformer by parsing the plugin for enhancing the wrapper class in the tool agent.&lt;/li&gt;
-&lt;li&gt;The tool agent loads the wrapper class into bootstrap classloader. This triggers the previous transformer.&lt;/li&gt;
-&lt;li&gt;The tool agent applies an advice to the ThreadPoolExecutor class, wrapping the java.lang.Runnable param of &amp;ldquo;execute&amp;rdquo; method with the wrapper class.&lt;/li&gt;
-&lt;li&gt;Now SkyWalking propagates the context with the wrapper class.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Enjoy tracing with ThreadPoolExecutor in SkyWalking!&lt;/p&gt;
 
       </description>
     </item>
