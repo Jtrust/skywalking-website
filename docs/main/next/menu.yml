@@ -44,6 +44,8 @@ catalog:
             path: "/en/setup/backend/backend-docker"
           - name: "Run with Kubernetes"
             path: "/en/setup/backend/backend-k8s"
+          - name: "GraalVM Native Image Distribution"
+            path: "/en/setup/backend/graalvm-distro"
       - name: "Marketplace"
         catalog:
           - name: "Overview"
@@ -146,6 +148,10 @@ catalog:
             catalog:
               - name: "Flink"
                 path: "/en/setup/backend/backend-flink-monitoring"
+          - name: "GenAI"
+            catalog:
+              - name: "Virtual GenAI"
+                path: "/en/setup/service-agent/virtual-genai"
           - name: "Self Observability"
             catalog:
               - name: "OAP self telemetry"
