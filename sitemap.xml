@@ -13944,6 +13944,12 @@
   </url>
   
   <url>
+    <loc>/docs/main/next/en/guides/lal-extension/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/docs/skywalking-python/latest/en/setup/intrusive/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -14437,6 +14443,12 @@
   
   <url>
     <loc>/docs/main/v9.7.0/en/api/logql-service/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/docs/main/next/en/guides/mal-extension/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -15487,6 +15499,12 @@
   
   <url>
     <loc>/docs/skywalking-graalvm-distro/next/internals/oal-immigration/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/docs/main/next/en/guides/source-extension/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -20978,12 +20996,6 @@
   
   <url>
     <loc>/docs/main/latest/en/guides/source-extension/</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/docs/main/next/en/guides/source-extension/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
