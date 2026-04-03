@@ -32,7 +32,7 @@
 <meta itemprop="description" content="Configuration BanyanD is the BanyanDB server. There are two ways to configure BanyanD: using a bootstrap flag or using environment variables. The environment variable name has a prefix BYDB_ followed by the flag name in uppercase. For example, the flag --port can be set using the environment variable BYDB_PORT.
  BanyanDB supports both absolute and relative paths for directory and file configurations (such as data directories, TLS certificates, keys, etc.). Relative paths are resolved against the current working directory where the BanyanD process is started.">
 
-<meta itemprop="wordCount" content="1204">
+<meta itemprop="wordCount" content="1349">
 
 
 
@@ -482,6 +482,14 @@
 
     <li>
         
+            <a href="/docs/skywalking-banyandb/next/interacting/bydbctl/schema/trace">Trace</a>
+        
+    </li>
+
+    
+
+    <li>
+        
             <a href="/docs/skywalking-banyandb/next/interacting/bydbctl/schema/index-rule">IndexRule</a>
         
     </li>
@@ -533,6 +541,14 @@
     <li>
         
             <a href="/docs/skywalking-banyandb/next/interacting/bydbctl/query/stream">Stream</a>
+        
+    </li>
+
+    
+
+    <li>
+        
+            <a href="/docs/skywalking-banyandb/next/interacting/bydbctl/query/trace">Trace</a>
         
     </li>
 
@@ -1157,7 +1173,7 @@
   })()
 </script>
 
-                  <div class="commit-id">Commit Id: 9886638</div>
+                  <div class="commit-id">Commit Id: 5dedaa1</div>
                 
 
 
@@ -1261,6 +1277,12 @@ The same certificate/key pair can be reused for both external traffic and the in
 <li><code>--stream-max-fan-out-size bytes</code>: the upper bound of a single file size after merge of stream (default 8.00EiB)</li>
 <li><code>--element-index-flush-timeout duration</code>: The element index timeout of stream (default: 1s).</li>
 </ul>
+<p>The following flags are used to configure the trace storage engine:</p>
+<ul>
+<li><code>--trace-flush-timeout duration</code>: The memory data timeout of trace (default: 1s).</li>
+<li><code>--trace-root-path string</code>: The root path of the database (default: &ldquo;/tmp&rdquo;).</li>
+<li><code>--trace-max-fan-out-size bytes</code>: the upper bound of a single file size after merge of trace (default 8.00EiB)</li>
+</ul>
 <p>The following flags are used to configure the embedded etcd storage engine which is only used when running as a standalone server:</p>
 <ul>
 <li><code>--metadata-root-path string</code>: The root path of metadata (default: &ldquo;/tmp&rdquo;).</li>
@@ -1281,6 +1303,16 @@ The same certificate/key pair can be reused for both external traffic and the in
 <li><code>--pprof-listener-addr string</code>: Listen address for pprof (default: &ldquo;:6060&rdquo;).</li>
 <li><code>--dst-slow-query duration</code>: distributed slow query threshold, 0 means no slow query log. This is only used for the liaison server (default: 0).</li>
 <li><code>--slow-query duration</code>: slow query threshold, 0 means no slow query log. This is only used for the data and standalone server (default: 0).</li>
+</ul>
+<h3 id="schema-registry">Schema Registry</h3>
+<p>The following flags configure the property-based schema registry used for metadata synchronization between nodes:</p>
+<ul>
+<li><code>--schema-registry-mode string</code>: Schema registry mode: <code>etcd</code> for etcd-based storage, <code>property</code> for property-based storage (default: &ldquo;property&rdquo;).</li>
+<li><code>--schema-property-client-sync-interval duration</code>: Polling interval for property-based schema sync (default: 30s).</li>
+<li><code>--schema-property-client-health-check-interval duration</code>: Interval for periodic connection health checks to schema servers. Set to 0 to use the default interval (10s), or to a negative value to disable.</li>
+<li><code>--schema-property-client-max-recv-msg-size bytes</code>: Max gRPC receive message size for property schema client.</li>
+<li><code>--schema-property-client-tls</code>: Enable TLS for property schema client connections.</li>
+<li><code>--schema-property-client-ca-cert string</code>: CA certificate file to verify the property schema server.</li>
 </ul>
 <h3 id="other">Other</h3>
 <ul>
@@ -1403,6 +1435,7 @@ The same certificate/key pair can be reused for both external traffic and the in
             <li><a href="#tls">TLS</a></li>
             <li><a href="#data--storage">Data &amp; Storage</a></li>
             <li><a href="#observability">Observability</a></li>
+            <li><a href="#schema-registry">Schema Registry</a></li>
             <li><a href="#other">Other</a></li>
             <li><a href="#global-flags">Global Flags</a></li>
           </ul>
@@ -1525,6 +1558,14 @@ The same certificate/key pair can be reused for both external traffic and the in
 
     </div>
     
+
+
+
+
+
+
+
+
 
 
 
