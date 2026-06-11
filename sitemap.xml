@@ -5850,6 +5850,12 @@
   </url>
   
   <url>
+    <loc>/docs/main/next/en/setup/backend/backend-airflow-monitoring/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/docs/main/latest/en/setup/backend/backend-alarm/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -7093,13 +7099,13 @@
   </url>
   
   <url>
-    <loc>/docs/main/next/en/banyandb/dashboards-banyandb/</loc>
+    <loc>/docs/main/v10.3.0/en/banyandb/dashboards-banyandb/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>/docs/main/v10.3.0/en/banyandb/dashboards-banyandb/</loc>
+    <loc>/docs/main/next/en/banyandb/dashboards-banyandb/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -7719,6 +7725,12 @@
   
   <url>
     <loc>/docs/main/v9.7.0/en/setup/backend/backend-cluster/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/docs/skywalking-banyandb/next/operation/fodc/topology/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -14442,6 +14454,12 @@
   </url>
   
   <url>
+    <loc>/docs/skywalking-banyandb/next/operation/observability/logging/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/docs/skywalking-go/latest/en/advanced-features/manual-apis/toolkit-log/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -14964,6 +14982,12 @@
   </url>
   
   <url>
+    <loc>/docs/skywalking-banyandb/next/operation/observability/metrics/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/docs/skywalking-java/latest/en/setup/service-agent/java-agent/application-toolkit-micrometer/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -15061,6 +15085,12 @@
   
   <url>
     <loc>/docs/main/v10.3.0/en/setup/ai-pipeline/metrics-baseline-integration/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/docs/skywalking-banyandb/next/operation/observability/providers/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -15744,7 +15774,7 @@
   </url>
   
   <url>
-    <loc>/docs/skywalking-banyandb/next/operation/observability/</loc>
+    <loc>/docs/skywalking-banyandb/next/operation/observability/overview/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -17700,6 +17730,12 @@
   </url>
   
   <url>
+    <loc>/docs/skywalking-banyandb/next/operation/observability/profiling/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/docs/skywalking-rover/latest/en/setup/configuration/profiling/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -18223,6 +18259,12 @@
   
   <url>
     <loc>/docs/main/v9.7.0/en/api/query-protocol/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/docs/skywalking-banyandb/next/operation/observability/tracing/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -21529,6 +21571,12 @@
   </url>
   
   <url>
+    <loc>/docs/main/next/en/swip/swip-7/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/docs/main/latest/en/swip/swip-4/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -22004,6 +22052,12 @@
   
   <url>
     <loc>/docs/main/next/en/swip/swip-14/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/docs/main/next/en/swip/swip-15/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -23764,12 +23818,6 @@
   
   <url>
     <loc>/docs/main/v9.7.0/en/faq/v9-version-upgrade/</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/docs/skywalking-banyandb/next/observability/vec-query-tracing/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
