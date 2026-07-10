@@ -9093,6 +9093,12 @@
   </url>
   
   <url>
+    <loc>/docs/skywalking-banyandb/next/operation/plugins-debugging/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/docs/main/latest/en/concepts-and-designs/service-hierarchy-configuration/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -9718,6 +9724,12 @@
   
   <url>
     <loc>/docs/skywalking-satellite/v1.3.0/en/concepts-and-designs/project-goals/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/docs/skywalking-banyandb/next/operation/plugins-development/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
@@ -22947,6 +22959,12 @@
   
   <url>
     <loc>/docs/main/v9.7.0/en/setup/backend/trace-sampling/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/docs/skywalking-banyandb/next/operation/plugins/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
