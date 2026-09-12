@@ -34,7 +34,7 @@ Differences from Upstream This distro selects a fixed subset of modules/provider
 For the full upstream configuration reference, see the SkyWalking Configuration Vocabulary.
 Differences from Upstream This distro selects a fixed subset of modules/providers at build time. Modules and providers not listed below are not available — they are not compiled into the distro binary.">
 
-<meta itemprop="wordCount" content="1285">
+<meta itemprop="wordCount" content="1677">
 
 
 
@@ -395,7 +395,7 @@ Differences from Upstream This distro selects a fixed subset of modules/provider
   })()
 </script>
 
-                  <div class="commit-id">Commit Id: 7976813</div>
+                  <div class="commit-id">Commit Id: 5ea6df6</div>
                 
 
 
@@ -524,8 +524,15 @@ corresponding environment variable:</p>
 <td><code>SW_EXPORTER=default</code></td>
 <td>disabled</td>
 </tr>
+<tr>
+<td><code>ai-evaluation</code></td>
+<td><code>SW_AI_EVALUATION=default</code></td>
+<td>disabled</td>
+</tr>
 </tbody>
 </table>
+<p><code>ai-agent-conversation</code> is on by default and cannot be removed with <code>-</code> (the GraphQL query module
+requires it); <code>SW_AI_AGENT_CONVERSATION=none</code> turns it off.</p>
 <h2 id="module-configuration-reference">Module Configuration Reference</h2>
 <p>Below is the complete list of modules, their fixed providers, and available settings.
 Each setting shows its environment variable and default value.</p>
@@ -622,6 +629,21 @@ Each setting shows its environment variable and default value.</p>
 <td>httpMaxRequestHeaderSize</td>
 <td><code>SW_CORE_HTTP_MAX_REQUEST_HEADER_SIZE</code></td>
 <td><code>8192</code></td>
+</tr>
+<tr>
+<td>restSSLEnabled</td>
+<td><code>SW_CORE_REST_SSL_ENABLED</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>restSSLKeyPath</td>
+<td><code>SW_CORE_REST_SSL_KEY_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
+<td>restSSLCertChainPath</td>
+<td><code>SW_CORE_REST_SSL_CERT_CHAIN_PATH</code></td>
+<td><em>(empty)</em></td>
 </tr>
 <tr>
 <td>gRPCHost</td>
@@ -852,7 +874,7 @@ for details on those files.</p>
 <tr>
 <td>meterAnalyzerActiveFiles</td>
 <td><code>SW_METER_ANALYZER_ACTIVE_FILES</code></td>
-<td><code>datasource,threadpool,satellite,go-runtime,python-runtime,continuous-profiling,java-agent,go-agent,ruby-runtime</code></td>
+<td><code>datasource,threadpool,satellite,go-runtime,python-runtime,continuous-profiling,java-agent,go-agent,ruby-runtime,php-runtime,nodejs-runtime,gen-ai-model</code></td>
 </tr>
 <tr>
 <td>slowCacheReadThreshold</td>
@@ -881,12 +903,12 @@ for details on those files.</p>
 <tr>
 <td>lalFiles</td>
 <td><code>SW_LOG_LAL_FILES</code></td>
-<td><code>envoy-als,mesh-dp,mysql-slowsql,pgsql-slowsql,redis-slowsql,k8s-service,nginx,default</code></td>
+<td><code>envoy-als,mesh-dp,mysql-slowsql,pgsql-slowsql,redis-slowsql,k8s-service,nginx,envoy-ai-gateway,miniprogram,ai-agent,default</code></td>
 </tr>
 <tr>
 <td>malFiles</td>
 <td><code>SW_LOG_MAL_FILES</code></td>
-<td><code>nginx</code></td>
+<td><code>nginx,miniprogram-wechat,miniprogram-alipay</code></td>
 </tr>
 </tbody>
 </table>
@@ -894,6 +916,89 @@ for details on those files.</p>
 <h3 id="event-analyzer">event-analyzer</h3>
 <p><strong>Selector</strong>: <code>SW_EVENT_ANALYZER</code> (default: <code>default</code>)</p>
 <p>No additional settings.</p>
+<hr>
+<h3 id="ai-evaluation-disabled-by-default">ai-evaluation (disabled by default)</h3>
+<p><strong>Selector</strong>: <code>SW_AI_EVALUATION</code> (default: <code>-</code>)</p>
+<p>LLM-as-judge evaluation of sampled GenAI spans (SWIP-16). The judge endpoint, model, API key, system
+prompt and tasks come from <code>config/ai-evaluation.yml</code>; with an incomplete judge section the module
+stays inactive.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Environment Variable</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sampleRate</td>
+<td><code>SW_AI_EVALUATION_SAMPLE_RATE</code></td>
+<td><code>1000000</code></td>
+</tr>
+<tr>
+<td>bufferSize</td>
+<td><code>SW_AI_EVALUATION_BUFFER_SIZE</code></td>
+<td><code>100</code></td>
+</tr>
+<tr>
+<td>consumerThreads</td>
+<td><code>SW_AI_EVALUATION_CONSUMER_THREADS</code></td>
+<td><code>8</code></td>
+</tr>
+<tr>
+<td>maxContentLength</td>
+<td><code>SW_AI_EVALUATION_MAX_CONTENT_LENGTH</code></td>
+<td><code>16384</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="ai-agent-conversation">ai-agent-conversation</h3>
+<p><strong>Selector</strong>: <code>SW_AI_AGENT_CONVERSATION</code> (default: <code>default</code>; <code>none</code> turns it off)</p>
+<p>AI agent conversations landed by the AI Sessionizer as OTLP logs under the <code>AI_AGENT</code> layer
+(<code>lal/ai-agent.yaml</code>), folded into <code>asz.view</code> documents on read.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Environment Variable</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fileReadWindow</td>
+<td><code>SW_AI_AGENT_CONVERSATION_FILE_READ_WINDOW</code></td>
+<td><code>16</code></td>
+</tr>
+<tr>
+<td>roundReadWindow</td>
+<td><code>SW_AI_AGENT_CONVERSATION_ROUND_READ_WINDOW</code></td>
+<td><code>16</code></td>
+</tr>
+<tr>
+<td>maxListLimit</td>
+<td><code>SW_AI_AGENT_CONVERSATION_MAX_LIST_LIMIT</code></td>
+<td><code>10000</code></td>
+</tr>
+<tr>
+<td>viewRequestTimeout</td>
+<td><code>SW_AI_AGENT_CONVERSATION_VIEW_REQUEST_TIMEOUT</code></td>
+<td><code>120</code></td>
+</tr>
+<tr>
+<td>maxFileBytes</td>
+<td><code>SW_AI_AGENT_CONVERSATION_MAX_FILE_BYTES</code></td>
+<td><code>15728640</code></td>
+</tr>
+<tr>
+<td>maxResponseBytes</td>
+<td><code>SW_AI_AGENT_CONVERSATION_MAX_RESPONSE_BYTES</code></td>
+<td><code>104857600</code></td>
+</tr>
+</tbody>
+</table>
 <hr>
 <h3 id="receiver-sharing-server">receiver-sharing-server</h3>
 <p><strong>Selector</strong>: <code>SW_RECEIVER_SHARING_SERVER</code> (default: <code>default</code>)</p>
@@ -935,6 +1040,21 @@ for details on those files.</p>
 <td>httpMaxRequestHeaderSize</td>
 <td><code>SW_RECEIVER_SHARING_HTTP_MAX_REQUEST_HEADER_SIZE</code></td>
 <td><code>8192</code></td>
+</tr>
+<tr>
+<td>restSSLEnabled</td>
+<td><code>SW_RECEIVER_SHARING_REST_SSL_ENABLED</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>restSSLKeyPath</td>
+<td><code>SW_RECEIVER_SHARING_REST_SSL_KEY_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
+<td>restSSLCertChainPath</td>
+<td><code>SW_RECEIVER_SHARING_REST_SSL_CERT_CHAIN_PATH</code></td>
+<td><em>(empty)</em></td>
 </tr>
 <tr>
 <td>gRPCHost</td>
@@ -1323,7 +1443,7 @@ for details on those files.</p>
 <tr>
 <td>enabledOtelMetricsRules</td>
 <td><code>SW_OTEL_RECEIVER_ENABLED_OTEL_METRICS_RULES</code></td>
-<td><code>apisix,nginx/*,k8s/*,istio-controlplane,vm,mysql/*,postgresql/*,oap,aws-eks/*,windows,aws-s3/*,aws-dynamodb/*,aws-gateway/*,redis/*,elasticsearch/*,rabbitmq/*,mongodb/*,kafka/*,pulsar/*,bookkeeper/*,rocketmq/*,clickhouse/*,activemq/*,kong/*,flink/*,banyandb/*</code></td>
+<td><code>apisix,nginx/*,k8s/*,istio-controlplane,vm,mysql/*,postgresql/*,oap,aws-eks/*,windows,aws-s3/*,aws-dynamodb/*,aws-gateway/*,redis/*,elasticsearch/*,rabbitmq/*,mongodb/*,kafka/*,pulsar/*,bookkeeper/*,rocketmq/*,clickhouse/*,activemq/*,kong/*,flink/*,airflow/*,banyandb/*</code></td>
 </tr>
 </tbody>
 </table>
@@ -1384,6 +1504,21 @@ for details on those files.</p>
 <td>restAcceptQueueSize</td>
 <td><code>SW_RECEIVER_ZIPKIN_REST_QUEUE_SIZE</code></td>
 <td><code>0</code></td>
+</tr>
+<tr>
+<td>restSSLEnabled</td>
+<td><code>SW_RECEIVER_ZIPKIN_REST_SSL_ENABLED</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>restSSLKeyPath</td>
+<td><code>SW_RECEIVER_ZIPKIN_REST_SSL_KEY_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
+<td>restSSLCertChainPath</td>
+<td><code>SW_RECEIVER_ZIPKIN_REST_SSL_CERT_CHAIN_PATH</code></td>
+<td><em>(empty)</em></td>
 </tr>
 <tr>
 <td>enableKafkaCollector</td>
@@ -1523,6 +1658,21 @@ for details on those files.</p>
 <td><code>0</code></td>
 </tr>
 <tr>
+<td>restSSLEnabled</td>
+<td><code>SW_QUERY_ZIPKIN_REST_SSL_ENABLED</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>restSSLKeyPath</td>
+<td><code>SW_QUERY_ZIPKIN_REST_SSL_KEY_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
+<td>restSSLCertChainPath</td>
+<td><code>SW_QUERY_ZIPKIN_REST_SSL_CERT_CHAIN_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
 <td>lookback</td>
 <td><code>SW_QUERY_ZIPKIN_LOOKBACK</code></td>
 <td><code>86400000</code></td>
@@ -1580,6 +1730,21 @@ for details on those files.</p>
 <td>restAcceptQueueSize</td>
 <td><code>SW_PROMQL_REST_QUEUE_SIZE</code></td>
 <td><code>0</code></td>
+</tr>
+<tr>
+<td>restSSLEnabled</td>
+<td><code>SW_PROMQL_REST_SSL_ENABLED</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>restSSLKeyPath</td>
+<td><code>SW_PROMQL_REST_SSL_KEY_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
+<td>restSSLCertChainPath</td>
+<td><code>SW_PROMQL_REST_SSL_CERT_CHAIN_PATH</code></td>
+<td><em>(empty)</em></td>
 </tr>
 <tr>
 <td>buildInfoVersion</td>
@@ -1649,6 +1814,21 @@ for details on those files.</p>
 <td>restAcceptQueueSize</td>
 <td><code>SW_LOGQL_REST_QUEUE_SIZE</code></td>
 <td><code>0</code></td>
+</tr>
+<tr>
+<td>restSSLEnabled</td>
+<td><code>SW_LOGQL_REST_SSL_ENABLED</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>restSSLKeyPath</td>
+<td><code>SW_LOGQL_REST_SSL_KEY_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
+<td>restSSLCertChainPath</td>
+<td><code>SW_LOGQL_REST_SSL_CERT_CHAIN_PATH</code></td>
+<td><em>(empty)</em></td>
 </tr>
 </tbody>
 </table>
@@ -1812,8 +1992,122 @@ for details on those files.</p>
 </tbody>
 </table>
 <hr>
-<h3 id="status-query">status-query</h3>
-<p><strong>Selector</strong>: <code>SW_STATUS_QUERY</code> (default: <code>default</code>)</p>
+<h3 id="admin-server">admin-server</h3>
+<p><strong>Selector</strong>: <code>SW_ADMIN_SERVER</code> (default: <code>default</code>)</p>
+<p>Hosts the admin HTTP API (status, inspect, ui-management, dsl-debugging) on its own port, plus
+the read-only MAL/LAL rule catalog (<code>/runtime/rule/list|bundled</code>, <code>GET /runtime/rule</code>). Every
+runtime-rule mutation answers HTTP 501.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Environment Variable</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host</td>
+<td><code>SW_ADMIN_SERVER_HOST</code></td>
+<td><code>0.0.0.0</code></td>
+</tr>
+<tr>
+<td>port</td>
+<td><code>SW_ADMIN_SERVER_PORT</code></td>
+<td><code>17128</code></td>
+</tr>
+<tr>
+<td>contextPath</td>
+<td><code>SW_ADMIN_SERVER_CONTEXT_PATH</code></td>
+<td><code>/</code></td>
+</tr>
+<tr>
+<td>idleTimeOut</td>
+<td><code>SW_ADMIN_SERVER_IDLE_TIMEOUT</code></td>
+<td><code>30000</code></td>
+</tr>
+<tr>
+<td>acceptQueueSize</td>
+<td><code>SW_ADMIN_SERVER_QUEUE_SIZE</code></td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>httpMaxRequestHeaderSize</td>
+<td><code>SW_ADMIN_SERVER_HTTP_MAX_REQUEST_HEADER_SIZE</code></td>
+<td><code>8192</code></td>
+</tr>
+<tr>
+<td>restSSLEnabled</td>
+<td><code>SW_ADMIN_SERVER_REST_SSL_ENABLED</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>restSSLKeyPath</td>
+<td><code>SW_ADMIN_SERVER_REST_SSL_KEY_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
+<td>restSSLCertChainPath</td>
+<td><code>SW_ADMIN_SERVER_REST_SSL_CERT_CHAIN_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
+<td>gRPCHost</td>
+<td><code>SW_ADMIN_SERVER_GRPC_HOST</code></td>
+<td><code>0.0.0.0</code></td>
+</tr>
+<tr>
+<td>gRPCPort</td>
+<td><code>SW_ADMIN_SERVER_GRPC_PORT</code></td>
+<td><code>17129</code></td>
+</tr>
+<tr>
+<td>gRPCMaxConcurrentCallsPerConnection</td>
+<td><code>SW_ADMIN_SERVER_GRPC_MAX_CONCURRENT_CALL</code></td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>gRPCMaxMessageSize</td>
+<td><code>SW_ADMIN_SERVER_GRPC_MAX_MSG_SIZE</code></td>
+<td><code>52428800</code></td>
+</tr>
+<tr>
+<td>gRPCThreadPoolSize</td>
+<td><code>SW_ADMIN_SERVER_GRPC_THREAD_POOL_SIZE</code></td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>gRPCSslEnabled</td>
+<td><code>SW_ADMIN_SERVER_GRPC_SSL_ENABLED</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>gRPCSslKeyPath</td>
+<td><code>SW_ADMIN_SERVER_GRPC_SSL_KEY_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
+<td>gRPCSslCertChainPath</td>
+<td><code>SW_ADMIN_SERVER_GRPC_SSL_CERT_CHAIN_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
+<td>gRPCSslTrustedCAsPath</td>
+<td><code>SW_ADMIN_SERVER_GRPC_SSL_TRUSTED_CAS_PATH</code></td>
+<td><em>(empty)</em></td>
+</tr>
+<tr>
+<td>internalCommunicationTimeout</td>
+<td><code>SW_ADMIN_SERVER_INTERNAL_COMM_TIMEOUT</code></td>
+<td><code>5000</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="status">status</h3>
+<p><strong>Selector</strong>: <code>SW_STATUS</code> (default: <code>default</code>)</p>
+<p>Cluster nodes, alarm runtime status, TTL config and debugging query-trace endpoints, mounted on
+admin-server. Relocated from the 10.x <code>status-query</code> module; URIs and payloads are unchanged.</p>
 <table>
 <thead>
 <tr>
@@ -1826,10 +2120,41 @@ for details on those files.</p>
 <tr>
 <td>keywords4MaskingSecretsOfConfig</td>
 <td><code>SW_DEBUGGING_QUERY_KEYWORDS_FOR_MASKING_SECRETS</code></td>
-<td><code>user,password,token,accessKey,secretKey,authentication</code></td>
+<td><code>user,password,trustStorePass,keyStorePass,token,accessKey,secretKey,authentication</code></td>
 </tr>
 </tbody>
 </table>
+<hr>
+<h3 id="dsl-debugging">dsl-debugging</h3>
+<p><strong>Selector</strong>: <code>SW_DSL_DEBUGGING</code> (default: <code>default</code>)</p>
+<p>SWIP-13 DSL live debugger (<code>/dsl-debugging/*</code>) and the read-only OAL listing (<code>/runtime/oal/*</code>),
+mounted on admin-server. The debug probes are compiled into every rule class at build time, so
+the flag below only gates the debug API.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Environment Variable</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>injectionEnabled</td>
+<td><code>SW_DSL_DEBUGGING_INJECTION_ENABLED</code></td>
+<td><code>true</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="inspect">inspect</h3>
+<p><strong>Selector</strong>: <code>SW_INSPECT</code> (default: <code>default</code>)</p>
+<p>Admin-only metric catalog and per-metric entity enumeration under <code>/inspect/*</code> (SWIP-14). No settings.</p>
+<hr>
+<h3 id="ui-management">ui-management</h3>
+<p><strong>Selector</strong>: <code>SW_UI_MANAGEMENT</code> (default: <code>default</code>)</p>
+<p>Dashboard template add / change / disable / list REST surface under <code>/ui-management/*</code>, used by the
+Horizon UI. No settings.</p>
 <hr>
 <h3 id="configuration-discovery">configuration-discovery</h3>
 <p><strong>Selector</strong>: <code>SW_CONFIGURATION_DISCOVERY</code> (default: <code>default</code>)</p>
@@ -2132,6 +2457,8 @@ for details on those files.</p>
             <li><a href="#agent-analyzer">agent-analyzer</a></li>
             <li><a href="#log-analyzer">log-analyzer</a></li>
             <li><a href="#event-analyzer">event-analyzer</a></li>
+            <li><a href="#ai-evaluation-disabled-by-default">ai-evaluation (disabled by default)</a></li>
+            <li><a href="#ai-agent-conversation">ai-agent-conversation</a></li>
             <li><a href="#receiver-sharing-server">receiver-sharing-server</a></li>
             <li><a href="#receiver-register">receiver-register</a></li>
             <li><a href="#receiver-trace">receiver-trace</a></li>
@@ -2159,7 +2486,11 @@ for details on those files.</p>
             <li><a href="#configuration-1">configuration</a></li>
             <li><a href="#exporter-disabled-by-default">exporter (disabled by default)</a></li>
             <li><a href="#health-checker">health-checker</a></li>
-            <li><a href="#status-query">status-query</a></li>
+            <li><a href="#admin-server">admin-server</a></li>
+            <li><a href="#status">status</a></li>
+            <li><a href="#dsl-debugging">dsl-debugging</a></li>
+            <li><a href="#inspect">inspect</a></li>
+            <li><a href="#ui-management">ui-management</a></li>
             <li><a href="#configuration-discovery">configuration-discovery</a></li>
             <li><a href="#receiver-event">receiver-event</a></li>
             <li><a href="#receiver-ebpf">receiver-ebpf</a></li>
@@ -2285,6 +2616,8 @@ for details on those files.</p>
 
     </div>
     
+
+
 
 
 
